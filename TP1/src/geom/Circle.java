@@ -1,7 +1,15 @@
 package geom;
 
+/**
+ * A circle shape
+ * 
+ * @author BRANGER Mathias, CROUZET Matthieu, MACE Quentin.
+ *
+ */
 public class Circle extends Shape {
+	/** The radius of the circle. */
 	float radius;
+	
 	
 	Circle(){
 		super();

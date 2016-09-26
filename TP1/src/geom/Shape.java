@@ -18,7 +18,7 @@ public abstract class Shape {
 	protected float top;
 	/** The rightmost point. */
 	protected float right;
-	/** The lowermost point. */
+	/** The bottommost point. */
 	protected float bottom;
 	
 	

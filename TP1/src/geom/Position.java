@@ -20,8 +20,10 @@ public class Position {
 
 	/**
 	 * Position constructor. 
-	 * @param x The leftmost point.
-	 * @param y The topmost point.
+	 * @param x 
+	 * 				The leftmost point.
+	 * @param y 
+	 * 				The topmost point.
 	 */
 	public Position(float x, float y){
 		this.x = x;
