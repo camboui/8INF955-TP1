@@ -62,7 +62,7 @@ public class Position {
 	 * y setter.
 	 *
 	 * @param y
-	 *            The new x reference point position.
+	 *            The new y reference point position.
 	 */
 	public void setY(float y) {
 		this.y = y;

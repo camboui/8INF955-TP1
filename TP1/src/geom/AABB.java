@@ -9,11 +9,11 @@ public class AABB extends OBB {
 		super(p);
 	}
 	
-	AABB(float width, float height) throws Exception{
+	AABB(float width, float height) throws IllegalArgumentException{
 		super(width, height, 0);
 	}
 	
-	AABB(Position p, float width, float height) throws Exception{
+	AABB(Position p, float width, float height) throws IllegalArgumentException{
 		super(p,width, height, 0);
 	}
 }

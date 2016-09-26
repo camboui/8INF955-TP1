@@ -14,9 +14,10 @@ public class OBB extends Shape {
 		super(p);
 	}
 	
-	OBB(float width, float height, float angle) throws Exception{
+	OBB(float width, float height, float angle) throws IllegalArgumentException{
 		super();
-		if(width <= 0 || height <= 0) throw new Exception("width or height is negative or null");
+		if(width <= 0) throw new IllegalArgumentException("width is negative or null");
+		else if(height <= 0) throw new IllegalArgumentException("height is negative or null");
 		else {
 			this.width = width;
 			this.height = height;
@@ -24,9 +25,10 @@ public class OBB extends Shape {
 		}		
 	}
 	
-	OBB(Position p, float width, float height, float angle) throws Exception{
+	OBB(Position p, float width, float height, float angle) throws IllegalArgumentException{
 		super(p);
-		if(width <= 0 || height <= 0) throw new Exception("width or height is negative or null");
+		if(width <= 0) throw new IllegalArgumentException("width is negative or null");
+		else if(height <= 0) throw new IllegalArgumentException("height is negative or null");
 		else {
 			this.width = width;
 			this.height = height;
