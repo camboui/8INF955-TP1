@@ -1,5 +1,6 @@
 package geom;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class KDOP extends Shape {
@@ -30,6 +31,14 @@ public class KDOP extends Shape {
 
 	@Override
 	void moveTo(Position p) {
-		
+		float moveX, moveY;
+		moveX = p.getX() - this.p.getX();
+		moveY = p.getY() - this.p.getY();
+		this.p = p;
+		for (Iterator<Position> iterator = this.points.iterator(); iterator.hasNext();) {
+			Position position = (Position) iterator.next();
+			position.setX(position.getX()+moveX);
+			position.setY(position.getY()+moveY);
+		}
 	}
 }
