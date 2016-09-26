@@ -20,4 +20,10 @@ public class Circle extends Shape {
 		super(p);
 		this.radius = radius;
 	}
+
+	@Override
+	boolean isCollapsedTo(Shape s) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
