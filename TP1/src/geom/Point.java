@@ -14,4 +14,9 @@ public class Point extends Shape {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	void moveTo(Position p) {
+		this.p = p;
+	}
 }

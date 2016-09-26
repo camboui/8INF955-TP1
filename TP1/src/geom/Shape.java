@@ -29,4 +29,6 @@ public abstract class Shape {
 		return isCollapsed;
 	}
 	
+	abstract void moveTo(Position p);
+	
 }
