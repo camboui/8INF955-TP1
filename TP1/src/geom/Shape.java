@@ -35,15 +35,18 @@ public abstract class Shape {
 		this.p = p;
 	}
 	
-	abstract boolean isCollapsedTo(Shape s);
+	abstract boolean isCollideTo(Shape s);
 	
-	boolean isCollapsed(List<Shape> shapes){
-		boolean isCollapsed = false;
+	boolean isCollide(List<Shape> shapes){
+		boolean isCollide = false;
 		for (Iterator<Shape> iterator = shapes.iterator(); iterator.hasNext();) {
 			Shape shape = (Shape) iterator.next();
-			isCollapsed |= this.isCollapsedTo(shape);
+			isCollide |= this.isCollideTo(shape);
 		}
-		return isCollapsed;
+		return isCollide;
 	}
+
+	
+	abstract void moveTo(Position p);
 	
 }

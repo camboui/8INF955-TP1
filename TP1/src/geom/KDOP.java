@@ -15,15 +15,21 @@ public class KDOP extends Shape {
 	
 	KDOP(List<Position> points, Position p) throws Exception{
 		super(p);
-		if(points.isEmpty()) throw new Exception("Enpty list of points");
+		if(points.isEmpty()) throw new Exception("Empty list of points");
+		else if (points.get(0) != p) throw new Exception("First element of the list is different than the position p");
 		else {
 			this.points = points;
 		}
 	}
 
 	@Override
-	boolean isCollapsedTo(Shape s) {
+	boolean isCollideTo(Shape s) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	void moveTo(Position p) {
+		
 	}
 }
