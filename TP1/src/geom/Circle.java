@@ -22,7 +22,7 @@ public class Circle extends Shape {
 	}
 
 	@Override
-	boolean isCollapsedTo(Shape s) {
+	boolean isCollideTo(Shape s) {
 		// TODO Auto-generated method stub
 		return false;
 	}
