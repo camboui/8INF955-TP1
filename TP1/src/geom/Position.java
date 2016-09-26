@@ -7,9 +7,9 @@ package geom;
  */
 public class Position {
 	
-	/** The leftmost point. */
+	/** The x reference point position. */
 	private float x;
-	/** The topmost point. */
+	/** The y reference point position. */
 	private float y;
 	
 	/** Position constructor. */
@@ -21,9 +21,9 @@ public class Position {
 	/**
 	 * Position constructor. 
 	 * @param x 
-	 * 				The leftmost point.
+	 * 				The x reference point position.
 	 * @param y 
-	 * 				The topmost point.
+	 * 				The y reference point position.
 	 */
 	public Position(float x, float y){
 		this.x = x;
@@ -33,7 +33,7 @@ public class Position {
 	/**
 	 * x getters.
 	 *
-	 * @return The x.
+	 * @return The x reference point position.
 	 */
 	public float getX() {
 		return x;
@@ -43,7 +43,7 @@ public class Position {
 	 * x setter.
 	 *
 	 * @param x
-	 *            The new x name.
+	 *            The new x reference point position.
 	 */
 	public void setX(float x) {
 		this.x = x;
@@ -52,7 +52,7 @@ public class Position {
 	/**
 	 * y getters.
 	 *
-	 * @return The y.
+	 * @return The y reference point position.
 	 */
 	public float getY() {
 		return y;
@@ -62,7 +62,7 @@ public class Position {
 	 * y setter.
 	 *
 	 * @param y
-	 *            The new y name.
+	 *            The new x reference point position.
 	 */
 	public void setY(float y) {
 		this.y = y;
