@@ -9,7 +9,7 @@ public class Position {
 	
 	/** The leftmost point. */
 	private float x;
-	/** The leftmost point. */
+	/** The topmost point. */
 	private float y;
 	
 	/** Position constructor. */
@@ -18,7 +18,11 @@ public class Position {
 		this.y = 0;
 	}
 
-	
+	/**
+	 * Position constructor. 
+	 * @param x The leftmost point.
+	 * @param y The topmost point.
+	 */
 	public Position(float x, float y){
 		this.x = x;
 		this.y = y;
