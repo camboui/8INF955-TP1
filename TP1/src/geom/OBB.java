@@ -32,5 +32,11 @@ public class OBB extends Shape {
 			this.height = height;
 			this.angle = angle;
 		}	
+	}
+
+	@Override
+	boolean isCollapsedTo(Shape s) {
+		// TODO Auto-generated method stub
+		return false;
 	}	
 }

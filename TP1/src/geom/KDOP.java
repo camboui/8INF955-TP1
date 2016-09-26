@@ -20,4 +20,10 @@ public class KDOP extends Shape {
 			this.points = points;
 		}
 	}
+
+	@Override
+	boolean isCollapsedTo(Shape s) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
