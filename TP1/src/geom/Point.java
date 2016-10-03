@@ -9,7 +9,7 @@ package geom;
 public class Point extends Shape {
 
 	/** Point constructor with a default position of (0,0) . */
-	Point() {
+	public Point() {
 		super();
 	}
 
@@ -22,7 +22,7 @@ public class Point extends Shape {
 	 * @param y
 	 *            The wanted position for the y axis.
 	 */
-	Point(float x, float y) {
+	public Point(float x, float y) {
 		super(x, y);
 	}
 
@@ -39,13 +39,13 @@ public class Point extends Shape {
 	}
 
 	@Override
-	boolean isCollideTo(Shape s) {
+	public boolean isCollideTo(Shape s) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	void moveTo(Position position) {
+	public void moveTo(Position position) {
 		this.position = position;
 	}
 }

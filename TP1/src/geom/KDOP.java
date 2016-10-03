@@ -29,7 +29,7 @@ public class KDOP extends Shape {
 	 *             If the list of points is empty.
 	 */
 	// TODO 3 points minimum?
-	KDOP(List<Position> points) throws IllegalArgumentException {
+	public KDOP(List<Position> points) throws IllegalArgumentException {
 		super();
 		if (points.isEmpty())
 			throw new IllegalArgumentException("Empty list of points");
@@ -53,7 +53,7 @@ public class KDOP extends Shape {
 	 * 
 	 */
 	// TODO 3 points minimum?
-	KDOP(List<Position> points, Position position) throws IllegalArgumentException {
+	public KDOP(List<Position> points, Position position) throws IllegalArgumentException {
 		super(position);
 		if (points.isEmpty())
 			throw new IllegalArgumentException("Empty list of points");
@@ -65,13 +65,13 @@ public class KDOP extends Shape {
 	}
 
 	@Override
-	boolean isCollideTo(Shape shape) {
+	public boolean isCollideTo(Shape shape) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	void moveTo(Position position) {
+	public void moveTo(Position position) {
 		float moveX, moveY;
 		moveX = position.getX() - this.position.getX();
 		moveY = position.getY() - this.position.getY();

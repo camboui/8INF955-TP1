@@ -64,7 +64,7 @@ public abstract class Shape {
 	 * 
 	 * @return True if the two shapes collide, false if they don't.
 	 */
-	abstract boolean isCollideTo(Shape shape);
+	public abstract boolean isCollideTo(Shape shape);
 
 	// TODO J'vois pas trop l'utilité ce truc la @Quentin
 	/**
@@ -75,7 +75,7 @@ public abstract class Shape {
 	 * 
 	 * @return True of the shape collide with one on the list.
 	 */
-	boolean isCollide(List<Shape> shapes) {
+	public boolean isCollide(List<Shape> shapes) {
 		boolean isCollide = false;
 		for (Iterator<Shape> iterator = shapes.iterator(); iterator.hasNext();) {
 			Shape shape = (Shape) iterator.next();
@@ -90,6 +90,6 @@ public abstract class Shape {
 	 * @param position
 	 *            The new wanted position
 	 */
-	abstract void moveTo(Position position);
+	public abstract void moveTo(Position position);
 
 }

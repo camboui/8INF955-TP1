@@ -21,7 +21,7 @@ public class OBB extends Shape {
 	 * OBB constructor with a default width of 10, height of 10 and angle of 0
 	 * and a default position of (0,0).
 	 */
-	OBB() {
+	public OBB() {
 		super();
 		this.width = 10;
 		this.height = 10;
@@ -37,7 +37,7 @@ public class OBB extends Shape {
 	 * 
 	 * @see geom.Position
 	 */
-	OBB(Position position) {
+	public OBB(Position position) {
 		super(position);
 	}
 
@@ -57,7 +57,7 @@ public class OBB extends Shape {
 	 * @throws IllegalArgumentException
 	 *             If the width or the height are negative or null.
 	 */
-	OBB(float width, float height, float angle) throws IllegalArgumentException {
+	public OBB(float width, float height, float angle) throws IllegalArgumentException {
 		super();
 		if (width <= 0)
 			throw new IllegalArgumentException("width is negative or null: " + width);
@@ -88,7 +88,7 @@ public class OBB extends Shape {
 	 * @throws IllegalArgumentException
 	 *             If the width or the height are negative or null.
 	 */
-	OBB(Position position, float width, float height, float angle) throws IllegalArgumentException {
+	public OBB(Position position, float width, float height, float angle) throws IllegalArgumentException {
 		super(position);
 		if (width <= 0)
 			throw new IllegalArgumentException("width is negative or null: " + width);
@@ -102,13 +102,13 @@ public class OBB extends Shape {
 	}
 
 	@Override
-	boolean isCollideTo(Shape s) {
+	public boolean isCollideTo(Shape s) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	void moveTo(Position position) {
+	public void moveTo(Position position) {
 		this.position = position;
 	}
 }

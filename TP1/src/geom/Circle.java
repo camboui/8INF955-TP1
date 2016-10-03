@@ -15,7 +15,7 @@ public class Circle extends Shape {
 	 * 
 	 * @see geom.Position
 	 */
-	Circle() {
+	public Circle() {
 		super();
 		this.radius = 10;
 	}
@@ -31,7 +31,7 @@ public class Circle extends Shape {
 	 * 
 	 * @see geom.Position
 	 */
-	Circle(float radius) throws IllegalArgumentException {
+	public Circle(float radius) throws IllegalArgumentException {
 		super();
 		if (radius <= 0)
 			throw new IllegalArgumentException("radius is null or negative: " + radius);
@@ -54,7 +54,7 @@ public class Circle extends Shape {
 	 * 
 	 * @see geom.Position
 	 */
-	Circle(Position position, float radius) throws IllegalArgumentException {
+	public Circle(Position position, float radius) throws IllegalArgumentException {
 		super(position);
 		if (radius <= 0)
 			throw new IllegalArgumentException("radius is null or negative: " + radius);
@@ -80,7 +80,7 @@ public class Circle extends Shape {
 	 * 
 	 * @see geom.Position
 	 */
-	Circle(float x, float y, float radius) throws IllegalArgumentException {
+	public Circle(float x, float y, float radius) throws IllegalArgumentException {
 		super(x, y);
 		if (radius <= 0)
 			throw new IllegalArgumentException("radius is null or negative: " + radius);
@@ -90,13 +90,13 @@ public class Circle extends Shape {
 	}
 
 	@Override
-	boolean isCollideTo(Shape s) {
+	public boolean isCollideTo(Shape s) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	void moveTo(Position position) {
+	public void moveTo(Position position) {
 		this.position = position;
 	}
 }

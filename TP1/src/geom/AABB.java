@@ -13,7 +13,7 @@ public class AABB extends OBB {
 	 * 
 	 * @see geom.OBB
 	 */
-	AABB() {
+	public AABB() {
 		super();
 	}
 
@@ -26,7 +26,7 @@ public class AABB extends OBB {
 	 * 
 	 * @see geom.Position
 	 */
-	AABB(Position position) {
+	public AABB(Position position) {
 		super(position);
 	}
 
@@ -43,7 +43,7 @@ public class AABB extends OBB {
 	 * @throws IllegalArgumentException
 	 *             If the width or the height are negative or null.
 	 */
-	AABB(float width, float height) throws IllegalArgumentException {
+	public AABB(float width, float height) throws IllegalArgumentException {
 		super(width, height, 0);
 	}
 
@@ -62,7 +62,7 @@ public class AABB extends OBB {
 	 * @throws IllegalArgumentException
 	 *             If the width or the height are negative or null.
 	 */
-	AABB(Position position, float width, float height) throws IllegalArgumentException {
+	public AABB(Position position, float width, float height) throws IllegalArgumentException {
 		super(position, width, height, 0);
 	}
 }
