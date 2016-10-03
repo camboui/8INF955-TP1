@@ -1,12 +1,41 @@
 package geom;
 
+/**
+ * A point shape.
+ * 
+ * @author BRANGER Mathias, CROUZET Matthieu, MACE Quentin.
+ *
+ */
 public class Point extends Shape {
-	Point(){
+
+	/** Point constructor with a default position of (0,0) . */
+	Point() {
 		super();
 	}
-	
-	Point(float x, float y){
-		super(x,y);
+
+	/**
+	 * Point constructor.
+	 * 
+	 * @param x
+	 *            The wanted position for the x axis.
+	 * 
+	 * @param y
+	 *            The wanted position for the y axis.
+	 */
+	Point(float x, float y) {
+		super(x, y);
+	}
+
+	/**
+	 * Point constructor.
+	 * 
+	 * @param position
+	 *            The wanted position of the Shape.
+	 * 
+	 * @see geom.Position
+	 */
+	public Point(Position position) {
+		this.position = position;
 	}
 
 	@Override
@@ -16,7 +45,7 @@ public class Point extends Shape {
 	}
 
 	@Override
-	void moveTo(Position p) {
-		this.p = p;
+	void moveTo(Position position) {
+		this.position = position;
 	}
 }

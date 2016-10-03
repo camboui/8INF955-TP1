@@ -9,9 +9,14 @@ import java.util.List;
  * @author BRANGER Mathias, CROUZET Matthieu, MACE Quentin.
  */
 public abstract class Shape {
-	
-	protected Position p;
-	
+
+	/**
+	 * The position of the shape.
+	 * 
+	 * @see geom.Position
+	 */
+	protected Position position;
+
 	/** The leftmost point. */
 	protected float left;
 	/** The topmost point. */
@@ -20,24 +25,57 @@ public abstract class Shape {
 	protected float right;
 	/** The bottommost point. */
 	protected float bottom;
-	
-	
+
 	/** Shape constructor. */
-	public Shape(){
-		this.p = new Position();
+	public Shape() {
+		this.position = new Position();
 	}
-	
-	public Shape(float x, float y){
-		this.p = new Position(x,y);
+
+	/**
+	 * Shape constructor.
+	 * 
+	 * @param x
+	 *            The wanted position for the x axis.
+	 * 
+	 * @param y
+	 *            The wanted position for the y axis.
+	 */
+	public Shape(float x, float y) {
+		this.position = new Position(x, y);
 	}
-	
-	public Shape(Position p){
-		this.p = p;
+
+	/**
+	 * Shape constructor.
+	 * 
+	 * @param position
+	 *            The wanted position of the Shape.
+	 * 
+	 * @see geom.Position
+	 */
+	public Shape(Position position) {
+		this.position = position;
 	}
-	
-	abstract boolean isCollideTo(Shape s);
-	
-	boolean isCollide(List<Shape> shapes){
+
+	/**
+	 * Indicate if a shape is collide to another.
+	 * 
+	 * @param shape
+	 *            The other shape that should be tested for the collision.
+	 * 
+	 * @return True if the two shapes collide, false if they don't.
+	 */
+	abstract boolean isCollideTo(Shape shape);
+
+	// TODO J'vois pas trop l'utilité ce truc la @Quentin
+	/**
+	 * Indicate if a shape is collide to one shape in list of shapes.
+	 * 
+	 * @param shapes
+	 *            The list of shapes that should be tested for the collision.
+	 * 
+	 * @return True of the shape collide with one on the list.
+	 */
+	boolean isCollide(List<Shape> shapes) {
 		boolean isCollide = false;
 		for (Iterator<Shape> iterator = shapes.iterator(); iterator.hasNext();) {
 			Shape shape = (Shape) iterator.next();
@@ -46,7 +84,12 @@ public abstract class Shape {
 		return isCollide;
 	}
 
-	
-	abstract void moveTo(Position p);
-	
+	/**
+	 * Move the shape to another position.
+	 * 
+	 * @param position
+	 *            The new wanted position
+	 */
+	abstract void moveTo(Position position);
+
 }

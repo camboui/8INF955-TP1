@@ -1,39 +1,104 @@
 package geom;
 
+/**
+ * A oriented bounding box.
+ * 
+ * @author BRANGER Mathias, CROUZET Matthieu, MACE Quentin.
+ *
+ */
 public class OBB extends Shape {
-	float width, height, angle;
-	
-	OBB(){
+
+	/** The width of the box. */
+	protected float width;
+
+	/** The height of the box. */
+	protected float height;
+
+	/** The angle of the box. */
+	protected float angle;
+
+	/**
+	 * OBB constructor with a default width of 10, height of 10 and angle of 0
+	 * and a default position of (0,0).
+	 */
+	OBB() {
 		super();
 		this.width = 10;
 		this.height = 10;
 		this.angle = 0;
 	}
-	
-	OBB(Position p){
-		super(p);
+
+	/**
+	 * OBB constructor with a Position and a default width of 10, height of 10
+	 * and angle of 0.
+	 * 
+	 * @param position
+	 *            The wanted position of the OBB.
+	 * 
+	 * @see geom.Position
+	 */
+	OBB(Position position) {
+		super(position);
 	}
-	
-	OBB(float width, float height, float angle) throws IllegalArgumentException{
+
+	/**
+	 * OBB constructor with a width height and angle and a default position of
+	 * (0,0).
+	 * 
+	 * @param width
+	 *            The wanted with of the OBB.
+	 * 
+	 * @param height
+	 *            The wanted height of the OBB.
+	 * 
+	 * @param angle
+	 *            The wanted angle of the OBB.
+	 * 
+	 * @throws IllegalArgumentException
+	 *             If the width or the height are negative or null.
+	 */
+	OBB(float width, float height, float angle) throws IllegalArgumentException {
 		super();
-		if(width <= 0) throw new IllegalArgumentException("width is negative or null");
-		else if(height <= 0) throw new IllegalArgumentException("height is negative or null");
+		if (width <= 0)
+			throw new IllegalArgumentException("width is negative or null: " + width);
+		else if (height <= 0)
+			throw new IllegalArgumentException("height is negative or null: " + height);
 		else {
 			this.width = width;
 			this.height = height;
 			this.angle = angle;
-		}		
+		}
 	}
-	
-	OBB(Position p, float width, float height, float angle) throws IllegalArgumentException{
-		super(p);
-		if(width <= 0) throw new IllegalArgumentException("width is negative or null");
-		else if(height <= 0) throw new IllegalArgumentException("height is negative or null");
+
+	/**
+	 * OBB Constructor.
+	 * 
+	 * @param position
+	 *            The wanted position of the OBB.
+	 * 
+	 * @param width
+	 *            The wanted with of the OBB.
+	 * 
+	 * @param height
+	 *            The wanted height of the OBB.
+	 * 
+	 * @param angle
+	 *            The wanted angle of the OBB.
+	 * 
+	 * @throws IllegalArgumentException
+	 *             If the width or the height are negative or null.
+	 */
+	OBB(Position position, float width, float height, float angle) throws IllegalArgumentException {
+		super(position);
+		if (width <= 0)
+			throw new IllegalArgumentException("width is negative or null: " + width);
+		else if (height <= 0)
+			throw new IllegalArgumentException("height is negative or null: " + height);
 		else {
 			this.width = width;
 			this.height = height;
 			this.angle = angle;
-		}	
+		}
 	}
 
 	@Override
@@ -43,7 +108,7 @@ public class OBB extends Shape {
 	}
 
 	@Override
-	void moveTo(Position p) {
-		this.p = p;
-	}	
+	void moveTo(Position position) {
+		this.position = position;
+	}
 }

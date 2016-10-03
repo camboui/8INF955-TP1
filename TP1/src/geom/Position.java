@@ -1,35 +1,37 @@
 package geom;
 
-/** 
- * Representation of the position of a shape by it leftmost point and topmost point.
+/**
+ * Representation of the position of a shape by it leftmost point and topmost
+ * point.
  * 
  * @author BRANGER Mathias, CROUZET Matthieu, MACE Quentin.
  */
 public class Position {
-	
+
 	/** The x reference point position. */
 	private float x;
 	/** The y reference point position. */
 	private float y;
-	
+
 	/** Position constructor. */
-	public Position(){
+	public Position() {
 		this.x = 0;
 		this.y = 0;
 	}
 
 	/**
-	 * Position constructor. 
-	 * @param x 
-	 * 				The x reference point position.
-	 * @param y 
-	 * 				The y reference point position.
+	 * Position constructor.
+	 * 
+	 * @param x
+	 *            The x reference point position.
+	 * @param y
+	 *            The y reference point position.
 	 */
-	public Position(float x, float y){
+	public Position(float x, float y) {
 		this.x = x;
 		this.y = y;
 	}
-	
+
 	/**
 	 * x getters.
 	 *
@@ -67,6 +69,5 @@ public class Position {
 	public void setY(float y) {
 		this.y = y;
 	}
-	
-	
+
 }
