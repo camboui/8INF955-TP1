@@ -102,8 +102,23 @@ public class OBB extends Shape {
 	}
 
 	@Override
-	public boolean isCollideTo(Shape s) {
-		// TODO Auto-generated method stub
+	public boolean isCollideTo(Shape shape) {
+		if(shape instanceof Circle){
+				//TODO
+		}
+		else if(shape instanceof Point){
+			//TODO
+		}
+		else if(shape instanceof AABB){
+			//TODO
+		}
+		else if(shape instanceof OBB){
+			//TODO
+		}
+		else if(shape instanceof KDOP){
+			//TODO
+		}
+		//TODO
 		return false;
 	}
 

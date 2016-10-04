@@ -17,15 +17,6 @@ public abstract class Shape {
 	 */
 	protected Position position;
 
-	/** The leftmost point. */
-	protected float left;
-	/** The topmost point. */
-	protected float top;
-	/** The rightmost point. */
-	protected float right;
-	/** The bottommost point. */
-	protected float bottom;
-
 	/** Shape constructor. */
 	public Shape() {
 		this.position = new Position();
@@ -56,6 +47,7 @@ public abstract class Shape {
 		this.position = position;
 	}
 
+	// TODO Faudrait trouver un truc simple pour ca
 	/**
 	 * Indicate if a shape is collide to another.
 	 * 
@@ -122,82 +114,6 @@ public abstract class Shape {
 	 */
 	public void setPosition(float x, float y) {
 		this.position = new Position(x, y);
-	}
-
-	/**
-	 * leftmost point getter.
-	 *
-	 * @return The leftmost point.
-	 */
-	public float getLeft() {
-		return this.left;
-	}
-
-	/**
-	 * left setter.
-	 *
-	 * @param left
-	 *            The new leftmost point.
-	 */
-	public void setLeft(float left) {
-		this.left = left;
-	}
-
-	/**
-	 * topmost point getter.
-	 *
-	 * @return The topmost.
-	 */
-	public float getTop() {
-		return this.top;
-	}
-
-	/**
-	 * topmost setter.
-	 *
-	 * @param top
-	 *            The new topmost.
-	 */
-	public void setTop(float top) {
-		this.top = top;
-	}
-
-	/**
-	 * rightmost getter.
-	 *
-	 * @return The rightmost.
-	 */
-	public float getRight() {
-		return this.right;
-	}
-
-	/**
-	 * rightmost setter.
-	 *
-	 * @param right
-	 *            The new rightmost.
-	 */
-	public void setRight(float right) {
-		this.right = right;
-	}
-
-	/**
-	 * bottommost getter.
-	 *
-	 * @return The bottommost.
-	 */
-	public float getBottom() {
-		return this.bottom;
-	}
-
-	/**
-	 * bottommost setter.
-	 *
-	 * @param bottom
-	 *            The new bottommost.
-	 */
-	public void setBottom(float bottom) {
-		this.bottom = bottom;
 	}
 
 }
