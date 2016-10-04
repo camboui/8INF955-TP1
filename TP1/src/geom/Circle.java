@@ -91,35 +91,34 @@ public class Circle extends Shape {
 
 	@Override
 	public boolean isCollideTo(Shape shape) {
-		if(shape instanceof Circle){
-			Circle otherCircle = (Circle)shape;
-			
+		if (shape instanceof Circle) {
+			Circle otherCircle = (Circle) shape;
+
 			float radiusSum = this.getRadius() + otherCircle.getRadius();
 			float dx = Math.abs(otherCircle.getPosition().getX() - this.getPosition().getX());
 			float dy = Math.abs(otherCircle.getPosition().getY() - this.getPosition().getY());
-			
-			if(dx > radiusSum) return false;
-			if(dy > radiusSum) return false;
-			
-			return ((radiusSum*radiusSum) >= ((dx*dx) + dy*dy));
+
+			if (dx > radiusSum)
+				return false;
+			if (dy > radiusSum)
+				return false;
+
+			return ((radiusSum * radiusSum) >= ((dx * dx) + dy * dy));
+		} else if (shape instanceof Point) {
+			Point point = (Point) shape;
+			// (x-center_x)^2 + (y - center_y)^2 < radius^2
+			return ((point.getPosition().getX() - this.getPosition().getX() * point.getPosition().getX()
+					- this.getPosition().getX() + point.getPosition().getY()
+					- this.getPosition().getY() * point.getPosition().getY()
+					- this.getPosition().getY()) < this.getRadius() * this.getRadius());
+		} else if (shape instanceof AABB) {
+			// TODO Circle AABB
+		} else if (shape instanceof OBB) {
+			// TODO Circle OBB
+		} else if (shape instanceof KDOP) {
+			// TODO Circle KDOP
 		}
-		else if(shape instanceof Point){
-			Point point = (Point)shape;
-			//(x-center_x)^2 + (y - center_y)^2 < radius^2
-			return ((point.getPosition().getX()-this.getPosition().getX()*point.getPosition().getX()-this.getPosition().getX()
-					+ point.getPosition().getY()-this.getPosition().getY()*point.getPosition().getY()-this.getPosition().getY())
-					< this.getRadius()*this.getRadius());
-		}
-		else if(shape instanceof AABB){
-			//TODO
-		}
-		else if(shape instanceof OBB){
-			//TODO
-		}
-		else if(shape instanceof KDOP){
-			//TODO
-		}
-		//TODO
+		// TODO
 		return false;
 	}
 

@@ -40,22 +40,18 @@ public class Point extends Shape {
 
 	@Override
 	public boolean isCollideTo(Shape shape) {
-		if(shape instanceof Circle){
-				//TODO
+		if (shape instanceof Point) {
+			// TODO point point
+		} else if (shape instanceof Circle) {
+			// TODO point circle
+		} else if (shape instanceof AABB) {
+			// TODO point aabb
+		} else if (shape instanceof OBB) {
+			// TODO point obb
+		} else if (shape instanceof KDOP) {
+			// TODO point kdop
 		}
-		else if(shape instanceof Point){
-			//TODO
-		}
-		else if(shape instanceof AABB){
-			//TODO
-		}
-		else if(shape instanceof OBB){
-			//TODO
-		}
-		else if(shape instanceof KDOP){
-			//TODO
-		}
-		//TODO
+		// TODO
 		return false;
 	}
 

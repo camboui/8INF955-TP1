@@ -66,22 +66,19 @@ public class KDOP extends Shape {
 
 	@Override
 	public boolean isCollideTo(Shape shape) {
-		if(shape instanceof Circle){
-				//TODO
+		if (shape instanceof KDOP) {
+			// TODO kdoo kdop
+		} else if (shape instanceof Circle) {
+			// TODO kdop circle
+		} else if (shape instanceof Point) {
+			// TODO kdop point
+		} else if (shape instanceof AABB) {
+			// TODO kdop aabb
+		} else if (shape instanceof OBB) {
+			// TODO kdop obb
 		}
-		else if(shape instanceof Point){
-			//TODO
-		}
-		else if(shape instanceof AABB){
-			//TODO
-		}
-		else if(shape instanceof OBB){
-			//TODO
-		}
-		else if(shape instanceof KDOP){
-			//TODO
-		}
-		//TODO
+
+		// TODO
 		return false;
 	}
 

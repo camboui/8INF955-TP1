@@ -15,7 +15,7 @@ public class OBB extends Shape {
 	protected float height;
 
 	/** The angle of the box. */
-	protected float angle;
+	private float angle;
 
 	/**
 	 * OBB constructor with a default width of 10, height of 10 and angle of 0
@@ -103,22 +103,18 @@ public class OBB extends Shape {
 
 	@Override
 	public boolean isCollideTo(Shape shape) {
-		if(shape instanceof Circle){
-				//TODO
+		if (shape instanceof OBB) {
+			// TODO obb obb
+		} else if (shape instanceof Circle) {
+			// TODO obb circle
+		} else if (shape instanceof Point) {
+			// TODO obb point
+		} else if (shape instanceof AABB) {
+			// TODO obb aabb
+		} else if (shape instanceof KDOP) {
+			// TODO obb kdop
 		}
-		else if(shape instanceof Point){
-			//TODO
-		}
-		else if(shape instanceof AABB){
-			//TODO
-		}
-		else if(shape instanceof OBB){
-			//TODO
-		}
-		else if(shape instanceof KDOP){
-			//TODO
-		}
-		//TODO
+		// TODO
 		return false;
 	}
 
