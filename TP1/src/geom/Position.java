@@ -90,4 +90,11 @@ public class Position {
 		return (this.x == p.getX()) && (this.y == p.getY());
 	}
 
+	
+	public float distance(Position p){
+		return (float) Math.sqrt(
+				Math.pow(this.x-p.getX(), 2)
+				+ Math.pow(this.y-p.getY(), 2)				
+				);
+	}
 }

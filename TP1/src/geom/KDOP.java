@@ -94,4 +94,20 @@ public class KDOP extends Shape {
 			positionIt.setY(positionIt.getY() + moveY);
 		}
 	}
+	
+	public boolean isConvex(){
+		boolean isConvex = false;
+		for (Iterator<Position> iterator = this.points.iterator(); iterator.hasNext();) {
+			Position A = (Position) iterator.next();
+			Position B = (Position) iterator.next();
+			Position C = (Position) iterator.next();
+			
+		}
+		return isConvex;
+	}
+	
+	public boolean isConcave(){
+		return !this.isConvex();
+	}
+	
 }

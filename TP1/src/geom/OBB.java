@@ -14,7 +14,7 @@ public class OBB extends Shape {
 	/** The height of the box. */
 	protected float height;
 
-	/** The angle of the box(in rad). */
+	/** The angle of the box. */
 	private float angle;
 
 	/**
@@ -122,20 +122,65 @@ public class OBB extends Shape {
 	public void moveTo(Position position) {
 		this.position = position;
 	}
-	
-	
-	public float getWidth(){
-		return this.width;
-	}
-	
-	public float getHeight(){
-		return this.height;
-	}
-	
-	public float getAngle(){
-		return this.angle;
+
+	/**
+	 * width getter.
+	 *
+	 * @return The width.
+	 */
+	public float getWidth() {
+		return width;
 	}
 
+	/**
+	 * width setter.
+	 *
+	 * @param width
+	 *            The new width.
+	 */
+	public void setWidth(float width) {
+		this.width = width;
+	}
+
+	/**
+	 * height getter.
+	 *
+	 * @return The height.
+	 */
+	public float getHeight() {
+		return height;
+	}
+
+	/**
+	 * height setter.
+	 *
+	 * @param height
+	 *            The new height.
+	 */
+	public void setHeight(float height) {
+		this.height = height;
+	}
+
+	/**
+	 * angle getter.
+	 *
+	 * @return The angle.
+	 */
+	public float getAngle() {
+		return angle;
+	}
+
+	/**
+	 * angle setter.
+	 *
+	 * @param angle
+	 *            The new angle.
+	 */
+	public void setAngle(float angle) {
+		this.angle = angle;
+	}
+	
+	
 	public float getDiagLength() {
 		return (float) Math.sqrt(this.height*this.height + this.width*this.width);
 	}
@@ -143,5 +188,5 @@ public class OBB extends Shape {
 	public float getArea(){
 		return this.width*this.height;
 	}
-
+	
 }

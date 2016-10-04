@@ -132,9 +132,6 @@ public class Point extends Shape {
 	}
 	
 	public float distance(Point p){
-		return (float) Math.sqrt(
-				(this.position.getX()-p.getPosition().getX())*(this.position.getX()-p.getPosition().getX())
-				+(this.position.getY()-p.getPosition().getY())*(this.position.getY()-p.getPosition().getY())
-				);
+		return this.getPosition().distance(p.getPosition());
 	}
 }

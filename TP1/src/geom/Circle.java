@@ -1,5 +1,7 @@
 package geom;
 
+import javax.lang.model.element.UnknownElementException;
+
 /**
  * A circle shape.
  * 
@@ -112,14 +114,64 @@ public class Circle extends Shape {
 					- this.getPosition().getY() * point.getPosition().getY()
 					- this.getPosition().getY()) < this.getRadius() * this.getRadius());
 		} else if (shape instanceof AABB) {
-			// TODO Circle AABB
+			AABB aabb = (AABB) shape;
+			// TODO Cas simple d'eliminations
+			Position position;
+			// x > , y >
+			if (this.getPosition().getX() > aabb.getPosition().getX()
+					&& this.getPosition().getY() > aabb.getPosition().getY()) {
+				position = new Position(aabb.getPosition().getX() + aabb.getWidth() / 2,
+						aabb.getPosition().getY() + aabb.getHeight() / 2);
+			}
+			// x > , y <
+			else if (this.getPosition().getX() > aabb.getPosition().getX()
+					&& this.getPosition().getY() < aabb.getPosition().getY()) {
+				position = new Position(aabb.getPosition().getX() + aabb.getWidth() / 2,
+						aabb.getPosition().getY() - aabb.getHeight() / 2);
+			}
+			// x < , y >
+			else if (this.getPosition().getX() < aabb.getPosition().getX()
+					&& this.getPosition().getY() > aabb.getPosition().getY()) {
+				position = new Position(aabb.getPosition().getX() - aabb.getWidth() / 2,
+						aabb.getPosition().getY() + aabb.getHeight() / 2);
+			}
+			// x < , y <
+			else {
+				position = new Position(aabb.getPosition().getX() - aabb.getWidth() / 2,
+						aabb.getPosition().getY() - aabb.getHeight() / 2);
+			}
+
+			return (((position.getX() - this.getPosition().getX()) * (position.getX() - this.getPosition().getX()))
+					+ ((position.getY() - this.getPosition().getY())
+							* (position.getY() - this.getPosition().getY())) < (this.getRadius() * this.getRadius()));
 		} else if (shape instanceof OBB) {
-			// TODO Circle OBB
+			OBB obb = (OBB) shape;
+			Circle rotateCircle = new Circle(this.getPosition(), this.getRadius());
+
+			// TODO Delete
+			// obb.setPosition(0, 0);
+			// rotateCircle.setPosition(rotateCircle.getPosition().getX() -
+			// obb.getPosition().getX(),
+			/// rotateCircle.getPosition().getX() - obb.getPosition().getX());
+			obb.setPosition(
+					(float) (obb.getPosition().getX() * Math.cos(obb.getAngle())
+							+ obb.getPosition().getY() * Math.sin(obb.getAngle())),
+					(float) (-obb.getPosition().getX() * Math.sin(obb.getAngle())
+							+ obb.getPosition().getY() * Math.cos(obb.getAngle())));
+			
+			
+			rotateCircle.setPosition(
+					(float) (rotateCircle.getPosition().getX() * Math.cos(obb.getAngle())
+							+ rotateCircle.getPosition().getY() * Math.sin(obb.getAngle())),
+					(float) (-rotateCircle.getPosition().getX() * Math.sin(obb.getAngle())
+							+ rotateCircle.getPosition().getY() * Math.cos(obb.getAngle())));
+
+			rotateCircle.isCollideTo((AABB) obb);
+
 		} else if (shape instanceof KDOP) {
 			// TODO Circle KDOP
 		}
-		// TODO
-		return false;
+		throw new UnknownElementException(null, shape);
 	}
 
 	@Override
