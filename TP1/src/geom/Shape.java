@@ -92,4 +92,112 @@ public abstract class Shape {
 	 */
 	public abstract void moveTo(Position position);
 
+	/**
+	 * position getter.
+	 *
+	 * @return The position.
+	 */
+	public Position getPosition() {
+		return this.position;
+	}
+
+	/**
+	 * position setter.
+	 *
+	 * @param position
+	 *            The new position.
+	 */
+	public void setPosition(Position position) {
+		this.position = position;
+	}
+
+	/**
+	 * position setter.
+	 *
+	 * @param x
+	 *            The new wanted value for the x axis.
+	 * 
+	 * @param y
+	 *            The new wanted value for the y axis.
+	 */
+	public void setPosition(float x, float y) {
+		this.position = new Position(x, y);
+	}
+
+	/**
+	 * leftmost point getter.
+	 *
+	 * @return The leftmost point.
+	 */
+	public float getLeft() {
+		return this.left;
+	}
+
+	/**
+	 * left setter.
+	 *
+	 * @param left
+	 *            The new leftmost point.
+	 */
+	public void setLeft(float left) {
+		this.left = left;
+	}
+
+	/**
+	 * topmost point getter.
+	 *
+	 * @return The topmost.
+	 */
+	public float getTop() {
+		return this.top;
+	}
+
+	/**
+	 * topmost setter.
+	 *
+	 * @param top
+	 *            The new topmost.
+	 */
+	public void setTop(float top) {
+		this.top = top;
+	}
+
+	/**
+	 * rightmost getter.
+	 *
+	 * @return The rightmost.
+	 */
+	public float getRight() {
+		return this.right;
+	}
+
+	/**
+	 * rightmost setter.
+	 *
+	 * @param right
+	 *            The new rightmost.
+	 */
+	public void setRight(float right) {
+		this.right = right;
+	}
+
+	/**
+	 * bottommost getter.
+	 *
+	 * @return The bottommost.
+	 */
+	public float getBottom() {
+		return this.bottom;
+	}
+
+	/**
+	 * bottommost setter.
+	 *
+	 * @param bottom
+	 *            The new bottommost.
+	 */
+	public void setBottom(float bottom) {
+		this.bottom = bottom;
+	}
+
 }
