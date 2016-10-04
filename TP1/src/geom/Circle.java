@@ -153,7 +153,13 @@ public class Circle extends Shape {
 			// rotateCircle.setPosition(rotateCircle.getPosition().getX() -
 			// obb.getPosition().getX(),
 			/// rotateCircle.getPosition().getX() - obb.getPosition().getX());
-
+			obb.setPosition(
+					(float) (obb.getPosition().getX() * Math.cos(obb.getAngle())
+							+ obb.getPosition().getY() * Math.sin(obb.getAngle())),
+					(float) (-obb.getPosition().getX() * Math.sin(obb.getAngle())
+							+ obb.getPosition().getY() * Math.cos(obb.getAngle())));
+			
+			
 			rotateCircle.setPosition(
 					(float) (rotateCircle.getPosition().getX() * Math.cos(obb.getAngle())
 							+ rotateCircle.getPosition().getY() * Math.sin(obb.getAngle())),
