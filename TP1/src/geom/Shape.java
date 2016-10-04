@@ -58,7 +58,6 @@ public abstract class Shape {
 	 */
 	public abstract boolean isCollideTo(Shape shape);
 
-	// TODO J'vois pas trop l'utilité ce truc la @Quentin
 	/**
 	 * Indicate if a shape is collide to one shape in list of shapes.
 	 * 

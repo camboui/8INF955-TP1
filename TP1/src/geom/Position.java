@@ -31,6 +31,17 @@ public class Position {
 		this.x = x;
 		this.y = y;
 	}
+	
+	/**
+	 * Position copy constructor.
+	 * 
+	 * @param p
+	 *            The position to copy.
+	 */
+	public Position(Position p){
+		this.x = p.getX();
+		this.y = p.getY();
+	}
 
 	/**
 	 * x getters.
@@ -68,6 +79,15 @@ public class Position {
 	 */
 	public void setY(float y) {
 		this.y = y;
+	}
+	
+	/**
+	 * 
+	 * @param p
+	 * @return true if p has the same x and same y
+	 */
+	public boolean equals(Position p){
+		return (this.x == p.getX()) && (this.y == p.getY());
 	}
 
 }

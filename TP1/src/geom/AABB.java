@@ -65,4 +65,5 @@ public class AABB extends OBB {
 	public AABB(Position position, float width, float height) throws IllegalArgumentException {
 		super(position, width, height, 0);
 	}
+	
 }
