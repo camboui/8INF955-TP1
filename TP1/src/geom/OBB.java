@@ -122,4 +122,63 @@ public class OBB extends Shape {
 	public void moveTo(Position position) {
 		this.position = position;
 	}
+
+	/**
+	 * width getter.
+	 *
+	 * @return The width.
+	 */
+	public float getWidth() {
+		return width;
+	}
+
+	/**
+	 * width setter.
+	 *
+	 * @param width
+	 *            The new width.
+	 */
+	public void setWidth(float width) {
+		this.width = width;
+	}
+
+	/**
+	 * height getter.
+	 *
+	 * @return The height.
+	 */
+	public float getHeight() {
+		return height;
+	}
+
+	/**
+	 * height setter.
+	 *
+	 * @param height
+	 *            The new height.
+	 */
+	public void setHeight(float height) {
+		this.height = height;
+	}
+
+	/**
+	 * angle getter.
+	 *
+	 * @return The angle.
+	 */
+	public float getAngle() {
+		return angle;
+	}
+
+	/**
+	 * angle setter.
+	 *
+	 * @param angle
+	 *            The new angle.
+	 */
+	public void setAngle(float angle) {
+		this.angle = angle;
+	}
+	
+	
 }
