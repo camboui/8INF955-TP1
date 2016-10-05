@@ -179,14 +179,23 @@ public class OBB extends Shape {
 	public void setAngle(float angle) {
 		this.angle = angle;
 	}
-	
-	
+
+	/**
+	 * Return the diagonal length.
+	 * 
+	 * @return The diagonal length.
+	 */
 	public float getDiagLength() {
-		return (float) Math.sqrt(this.height*this.height + this.width*this.width);
+		return (float) Math.sqrt(this.height * this.height + this.width * this.width);
 	}
-	
-	public float getArea(){
-		return this.width*this.height;
+
+	/**
+	 * Return the area.
+	 * 
+	 * @return The area.
+	 */
+	public float getArea() {
+		return this.width * this.height;
 	}
-	
+
 }
