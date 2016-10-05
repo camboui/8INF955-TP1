@@ -46,18 +46,18 @@ public class OBBTest {
 	}
 
 	/**
-	 * Test method for {@link geom.OBB#OBB(float, float, float)}.
+	 * Test method for {@link geom.OBB#OBB(double, double, double)}.
 	 */
 	@Test
-	public void testOBBFloatFloatFloat() {
+	public void testOBBdoubledoubledouble() {
 		fail("Not yet implemented");
 	}
 
 	/**
-	 * Test method for {@link geom.OBB#OBB(geom.Position, float, float, float)}.
+	 * Test method for {@link geom.OBB#OBB(geom.Position, double, double, double)}.
 	 */
 	@Test
-	public void testOBBPositionFloatFloatFloat() {
+	public void testOBBPositiondoubledoubledouble() {
 		fail("Not yet implemented");
 	}
 

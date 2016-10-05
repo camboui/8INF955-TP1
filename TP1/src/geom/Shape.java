@@ -37,7 +37,7 @@ public abstract class Shape{
 	 * @param y
 	 *            The wanted position for the y axis.
 	 */
-	public Shape(float x, float y) {
+	public Shape(double x, double y) {
 		this.position = new Position(x, y);
 	}
 
@@ -64,7 +64,6 @@ public abstract class Shape{
 	 */
 	public abstract boolean isCollideTo(Shape shape);
 
-	// TODO J'vois pas trop l'utilité ce truc la @Quentin
 	/**
 	 * Indicate if a shape is collide to one shape in list of shapes.
 	 * 
@@ -118,7 +117,7 @@ public abstract class Shape{
 	 * @param y
 	 *            The new wanted value for the y axis.
 	 */
-	public void setPosition(float x, float y) {
+	public void setPosition(double x, double y) {
 		this.position = new Position(x, y);
 	}
 

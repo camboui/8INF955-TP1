@@ -12,13 +12,13 @@ import java.awt.Rectangle;
 public class OBB extends Shape {
 
 	/** The width of the box. */
-	protected float width;
+	protected double width;
 
 	/** The height of the box. */
-	protected float height;
+	protected double height;
 
 	/** The angle of the box. */
-	private float angle;
+	private double angle;
 
 	/**
 	 * OBB constructor with a default width of 10, height of 10 and angle of 0
@@ -60,7 +60,7 @@ public class OBB extends Shape {
 	 * @throws IllegalArgumentException
 	 *             If the width or the height are negative or null.
 	 */
-	public OBB(float width, float height, float angle) throws IllegalArgumentException {
+	public OBB(double width, double height, double angle) throws IllegalArgumentException {
 		super();
 		if (width <= 0)
 			throw new IllegalArgumentException("width is negative or null: " + width);
@@ -91,7 +91,7 @@ public class OBB extends Shape {
 	 * @throws IllegalArgumentException
 	 *             If the width or the height are negative or null.
 	 */
-	public OBB(Position position, float width, float height, float angle) throws IllegalArgumentException {
+	public OBB(Position position, double width, double height, double angle) throws IllegalArgumentException {
 		super(position);
 		if (width <= 0)
 			throw new IllegalArgumentException("width is negative or null: " + width);
@@ -131,7 +131,7 @@ public class OBB extends Shape {
 	 *
 	 * @return The width.
 	 */
-	public float getWidth() {
+	public double getWidth() {
 		return width;
 	}
 
@@ -141,7 +141,7 @@ public class OBB extends Shape {
 	 * @param width
 	 *            The new width.
 	 */
-	public void setWidth(float width) {
+	public void setWidth(double width) {
 		this.width = width;
 	}
 
@@ -150,7 +150,7 @@ public class OBB extends Shape {
 	 *
 	 * @return The height.
 	 */
-	public float getHeight() {
+	public double getHeight() {
 		return height;
 	}
 
@@ -160,7 +160,7 @@ public class OBB extends Shape {
 	 * @param height
 	 *            The new height.
 	 */
-	public void setHeight(float height) {
+	public void setHeight(double height) {
 		this.height = height;
 	}
 
@@ -169,7 +169,7 @@ public class OBB extends Shape {
 	 *
 	 * @return The angle.
 	 */
-	public float getAngle() {
+	public double getAngle() {
 		return angle;
 	}
 
@@ -179,8 +179,26 @@ public class OBB extends Shape {
 	 * @param angle
 	 *            The new angle.
 	 */
-	public void setAngle(float angle) {
+	public void setAngle(double angle) {
 		this.angle = angle;
+	}
+
+	/**
+	 * Return the diagonal length.
+	 * 
+	 * @return The diagonal length.
+	 */
+	public double getDiagLength() {
+		return Math.sqrt(this.height * this.height + this.width * this.width);
+	}
+
+	/**
+	 * Return the area.
+	 * 
+	 * @return The area.
+	 */
+	public double getArea() {
+		return this.width * this.height;
 	}
 
 	// TODO

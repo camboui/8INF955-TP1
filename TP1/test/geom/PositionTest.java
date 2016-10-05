@@ -18,15 +18,32 @@ public class PositionTest {
 	 */
 	@Test
 	public void testPosition() {
-		fail("Not yet implemented");
+		Position tester = new Position();
+		assertNotNull(tester);
+		assertEquals(0, tester.getX(), 0);
+		assertEquals(0, tester.getY(), 0);
 	}
 
 	/**
-	 * Test method for {@link geom.Position#Position(float, float)}.
+	 * Test method for {@link geom.Position#Position(double, double)}.
 	 */
 	@Test
-	public void testPositionFloatFloat() {
-		fail("Not yet implemented");
+	public void testPositiondoubledouble() {
+		Position tester = new Position(-1, 1);
+		assertNotNull(tester);
+		assertEquals(-1, tester.getX(), 0);
+		assertEquals(1, tester.getY(), 0);
+	}
+
+	/**
+	 * Test method for {@link geom.Position#Position(geom.Position)}.
+	 */
+	@Test
+	public void testPositionPosition() {
+		Position tester = new Position(new Position(-1, 1));
+		assertNotNull(tester);
+		assertEquals(-1, tester.getX(), 0);
+		assertEquals(1, tester.getY(), 0);
 	}
 
 	/**
@@ -34,15 +51,18 @@ public class PositionTest {
 	 */
 	@Test
 	public void testGetX() {
-		fail("Not yet implemented");
+		Position tester = new Position(-1, 1);
+		assertEquals(-1, tester.getX(), 0);
 	}
 
 	/**
-	 * Test method for {@link geom.Position#setX(float)}.
+	 * Test method for {@link geom.Position#setX(double)}.
 	 */
 	@Test
 	public void testSetX() {
-		fail("Not yet implemented");
+		Position tester = new Position(-1, 1);
+		tester.setX(-2);
+		assertEquals(-2, tester.getX(), 0);
 	}
 
 	/**
@@ -50,15 +70,45 @@ public class PositionTest {
 	 */
 	@Test
 	public void testGetY() {
-		fail("Not yet implemented");
+		Position tester = new Position(-1, 1);
+		assertEquals(1, tester.getY(), 0);
 	}
 
 	/**
-	 * Test method for {@link geom.Position#setY(float)}.
+	 * Test method for {@link geom.Position#setY(double)}.
 	 */
 	@Test
 	public void testSetY() {
-		fail("Not yet implemented");
+		Position tester = new Position(-1, 1);
+		tester.setX(2);
+		assertEquals(2, tester.getX(), 0);
+	}
+
+	/**
+	 * Test method for {@link geom.Position#equals(geom.Position)}.
+	 */
+	@Test
+	public void testEqualsPosition() {
+		Position tester = new Position(-1, 1);
+		assertTrue(tester.equals(new Position(-1, 1)));
+		assertFalse(tester.equals(new Position(0, 1)));
+		assertFalse(tester.equals(new Position(-1, 0)));
+	}
+
+	/**
+	 * Test method for {@link geom.Position#distance(geom.Position)}.
+	 */
+	@Test
+	public void testDistance() {
+		Position tester = new Position(0, 0);
+		assertEquals(1, tester.distance(new Position(1, 0)), 0);
+		assertEquals(1, tester.distance(new Position(-1, 0)), 0);
+		assertEquals(1, tester.distance(new Position(0, 1)), 0);
+		assertEquals(1, tester.distance(new Position(-1, 0)), 0);
+		assertEquals(Math.sqrt(2), tester.distance(new Position(-1, 1)), 0.000001);
+		assertEquals(Math.sqrt(2), tester.distance(new Position(-1, -1)), 0.000001);
+		assertEquals(Math.sqrt(2), tester.distance(new Position(1, 1)), 0.000001);
+		assertEquals(Math.sqrt(2), tester.distance(new Position(-1, -1)), 0.000001);
 	}
 
 }

@@ -30,18 +30,18 @@ public class AABBTest {
 	}
 
 	/**
-	 * Test method for {@link geom.AABB#AABB(float, float)}.
+	 * Test method for {@link geom.AABB#AABB(double, double)}.
 	 */
 	@Test
-	public void testAABBFloatFloat() {
+	public void testAABBdoubledouble() {
 		fail("Not yet implemented");
 	}
 
 	/**
-	 * Test method for {@link geom.AABB#AABB(geom.Position, float, float)}.
+	 * Test method for {@link geom.AABB#AABB(geom.Position, double, double)}.
 	 */
 	@Test
-	public void testAABBPositionFloatFloat() {
+	public void testAABBPositiondoubledouble() {
 		fail("Not yet implemented");
 	}
 

@@ -45,7 +45,7 @@ public class AABB extends OBB {
 	 * @throws IllegalArgumentException
 	 *             If the width or the height are negative or null.
 	 */
-	public AABB(float width, float height) throws IllegalArgumentException {
+	public AABB(double width, double height) throws IllegalArgumentException {
 		super(width, height, 0);
 	}
 
@@ -64,10 +64,11 @@ public class AABB extends OBB {
 	 * @throws IllegalArgumentException
 	 *             If the width or the height are negative or null.
 	 */
-	public AABB(Position position, float width, float height) throws IllegalArgumentException {
+	public AABB(Position position, double width, double height) throws IllegalArgumentException {
 		super(position, width, height, 0);
 	}
 	
+
 	@Override
 	public void draw(Graphics2D g) {
 		g.fillRect((int)getPosition().getX(), (int)getPosition().getY(), (int)getWidth(), (int)getHeight());

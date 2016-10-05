@@ -19,7 +19,7 @@ import graphics.Window;
  */
 public class Circle extends Shape {
 	/** The radius of the circle. */
-	protected float radius;
+	protected double radius;
 
 	/**
 	 * Circle constructor with a default position of (0,0) and a radius of 10.
@@ -42,7 +42,7 @@ public class Circle extends Shape {
 	 * 
 	 * @see geom.Position
 	 */
-	public Circle(float radius) throws IllegalArgumentException {
+	public Circle(double radius) throws IllegalArgumentException {
 		super();
 		if (radius <= 0)
 			throw new IllegalArgumentException("radius is null or negative: " + radius);
@@ -65,7 +65,7 @@ public class Circle extends Shape {
 	 * 
 	 * @see geom.Position
 	 */
-	public Circle(Position position, float radius) throws IllegalArgumentException {
+	public Circle(Position position, double radius) throws IllegalArgumentException {
 		super(position);
 		if (radius <= 0)
 			throw new IllegalArgumentException("radius is null or negative: " + radius);
@@ -91,7 +91,7 @@ public class Circle extends Shape {
 	 * 
 	 * @see geom.Position
 	 */
-	public Circle(float x, float y, float radius) throws IllegalArgumentException {
+	public Circle(double x, double y, double radius) throws IllegalArgumentException {
 		super(x, y);
 		if (radius <= 0)
 			throw new IllegalArgumentException("radius is null or negative: " + radius);
@@ -105,9 +105,9 @@ public class Circle extends Shape {
 		if (shape instanceof Circle) {
 			Circle otherCircle = (Circle) shape;
 
-			float radiusSum = this.getRadius() + otherCircle.getRadius();
-			float dx = Math.abs(otherCircle.getPosition().getX() - this.getPosition().getX());
-			float dy = Math.abs(otherCircle.getPosition().getY() - this.getPosition().getY());
+			double radiusSum = this.getRadius() + otherCircle.getRadius();
+			double dx = Math.abs(otherCircle.getPosition().getX() - this.getPosition().getX());
+			double dy = Math.abs(otherCircle.getPosition().getY() - this.getPosition().getY());
 
 			if (dx > radiusSum)
 				return false;
@@ -118,13 +118,15 @@ public class Circle extends Shape {
 		} else if (shape instanceof Point) {
 			Point point = (Point) shape;
 			// (x-center_x)^2 + (y - center_y)^2 < radius^2
-			return ((point.getPosition().getX() - this.getPosition().getX() * point.getPosition().getX()
-					- this.getPosition().getX() + point.getPosition().getY()
-					- this.getPosition().getY() * point.getPosition().getY()
-					- this.getPosition().getY()) < this.getRadius() * this.getRadius());
+			//System.out.println(point.getPosition().getX());
+			//System.out.println(point.getPosition().getY());
+			return (((point.getPosition().getX() - this.getPosition().getX()) * (point.getPosition().getX()
+					- this.getPosition().getX()) +( point.getPosition().getY()
+					- this.getPosition().getY()) * (point.getPosition().getY()
+					- this.getPosition().getY())) <= (this.getRadius() * this.getRadius()));
 		} else if (shape instanceof AABB) {
 			AABB aabb = (AABB) shape;
-			// TODO Cas simple d'eliminations
+			// TODO Cas simple d'eliminations + A refaire en prenant le point de reference en haut a gauche
 			Position position;
 			// x > , y >
 			if (this.getPosition().getX() > aabb.getPosition().getX()
@@ -154,6 +156,7 @@ public class Circle extends Shape {
 					+ ((position.getY() - this.getPosition().getY())
 							* (position.getY() - this.getPosition().getY())) < (this.getRadius() * this.getRadius()));
 		} else if (shape instanceof OBB) {
+			//TODO A refaire en prenant le point de reference en haut a gauche
 			OBB obb = (OBB) shape;
 			Circle rotateCircle = new Circle(this.getPosition(), this.getRadius());
 
@@ -163,16 +166,15 @@ public class Circle extends Shape {
 			// obb.getPosition().getX(),
 			/// rotateCircle.getPosition().getX() - obb.getPosition().getX());
 			obb.setPosition(
-					(float) (obb.getPosition().getX() * Math.cos(obb.getAngle())
+					(obb.getPosition().getX() * Math.cos(obb.getAngle())
 							+ obb.getPosition().getY() * Math.sin(obb.getAngle())),
-					(float) (-obb.getPosition().getX() * Math.sin(obb.getAngle())
+					(-obb.getPosition().getX() * Math.sin(obb.getAngle())
 							+ obb.getPosition().getY() * Math.cos(obb.getAngle())));
-			
-			
+
 			rotateCircle.setPosition(
-					(float) (rotateCircle.getPosition().getX() * Math.cos(obb.getAngle())
+					(rotateCircle.getPosition().getX() * Math.cos(obb.getAngle())
 							+ rotateCircle.getPosition().getY() * Math.sin(obb.getAngle())),
-					(float) (-rotateCircle.getPosition().getX() * Math.sin(obb.getAngle())
+					(-rotateCircle.getPosition().getX() * Math.sin(obb.getAngle())
 							+ rotateCircle.getPosition().getY() * Math.cos(obb.getAngle())));
 
 			rotateCircle.isCollideTo((AABB) obb);
@@ -193,7 +195,7 @@ public class Circle extends Shape {
 	 *
 	 * @return The radius.
 	 */
-	public float getRadius() {
+	public double getRadius() {
 		return this.radius;
 	}
 
@@ -203,7 +205,7 @@ public class Circle extends Shape {
 	 * @param radius
 	 *            The new radius.
 	 */
-	public void setRadius(float radius) {
+	public void setRadius(double radius) {
 		this.radius = radius;
 	}
 
