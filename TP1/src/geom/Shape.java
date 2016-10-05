@@ -1,14 +1,20 @@
 package geom;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.swing.JPanel;
+
+import graphics.Window;
 
 /**
  * Abstract class for the representation of 2D shapes.
  * 
  * @author BRANGER Mathias, CROUZET Matthieu, MACE Quentin.
  */
-public abstract class Shape {
+public abstract class Shape{
 
 	/**
 	 * The position of the shape.
@@ -115,5 +121,14 @@ public abstract class Shape {
 	public void setPosition(float x, float y) {
 		this.position = new Position(x, y);
 	}
+
+	/**
+	 * draw the shape in the window.
+	 * 
+	 * @param g
+	 *            The graphic window where we have to draw
+	 */
+	public abstract void draw(Graphics2D g);
+
 
 }

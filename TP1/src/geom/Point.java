@@ -1,5 +1,7 @@
 package geom;
 
+import java.awt.Graphics2D;
+
 /**
  * A point shape.
  * 
@@ -58,5 +60,11 @@ public class Point extends Shape {
 	@Override
 	public void moveTo(Position position) {
 		this.position = position;
+	}
+
+	@Override
+	public void draw(Graphics2D g) {
+		int size=2;
+		g.fillRect((int)getPosition().getX(), (int)getPosition().getY(), size, size);
 	}
 }
