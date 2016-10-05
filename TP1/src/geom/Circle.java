@@ -117,7 +117,7 @@ public class Circle extends Shape {
 					- this.getPosition().getY())) <= (this.getRadius() * this.getRadius()));
 		} else if (shape instanceof AABB) {
 			AABB aabb = (AABB) shape;
-			// TODO Cas simple d'eliminations
+			// TODO Cas simple d'eliminations + A refaire en prenant le point de reference en haut a gauche
 			Position position;
 			// x > , y >
 			if (this.getPosition().getX() > aabb.getPosition().getX()
@@ -147,6 +147,7 @@ public class Circle extends Shape {
 					+ ((position.getY() - this.getPosition().getY())
 							* (position.getY() - this.getPosition().getY())) < (this.getRadius() * this.getRadius()));
 		} else if (shape instanceof OBB) {
+			//TODO A refaire en prenant le point de reference en haut a gauche
 			OBB obb = (OBB) shape;
 			Circle rotateCircle = new Circle(this.getPosition(), this.getRadius());
 
