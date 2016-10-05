@@ -189,7 +189,51 @@ public class CircleTest {
 	 */
 	@Test
 	public void testIsCollideToAABB() {
-		fail("Not yet implemented");
+		Circle tester = new Circle(1,0,1);
+		assertTrue(tester.isCollideTo(new AABB(2,0,1,1)));
+		assertTrue(tester.isCollideTo(new AABB(2,1,1,1)));
+		assertTrue(tester.isCollideTo(new AABB(2,0,1,2)));
+		assertTrue(tester.isCollideTo(new AABB(1.5,0,1,2)));
+		
+		assertTrue(tester.isCollideTo(new AABB(1,2,1,1)));
+		assertTrue(tester.isCollideTo(new AABB(0,2,1,1)));
+		assertTrue(tester.isCollideTo(new AABB(0,2,2,1)));
+		assertTrue(tester.isCollideTo(new AABB(0,1.5,2,1)));
+		
+		assertTrue(tester.isCollideTo(new AABB(1,1,1,1)));
+		assertTrue(tester.isCollideTo(new AABB(0,1,1,1)));
+		assertTrue(tester.isCollideTo(new AABB(0,1,2,1)));
+		assertTrue(tester.isCollideTo(new AABB(0,0.5,2,1)));
+		
+		assertTrue(tester.isCollideTo(new AABB(-1,1,1,1)));
+		assertTrue(tester.isCollideTo(new AABB(-1,0,1,1)));
+		assertTrue(tester.isCollideTo(new AABB(-1,0,1,2)));
+		assertTrue(tester.isCollideTo(new AABB(-0.5,0,1,2)));
+		
+		assertTrue(tester.isCollideTo(new AABB(0,1,2,2)));
+		assertTrue(tester.isCollideTo(new AABB(0.5,0.5,1,1)));
+		assertTrue(tester.isCollideTo(new AABB(-1,2,4,4)));
+		
+		assertFalse(tester.isCollideTo(new AABB(2.1,1,2,2)));
+		assertFalse(tester.isCollideTo(new AABB(0,2,2,0.9)));
+		assertFalse(tester.isCollideTo(new AABB(-1,1,0.9,2)));
+		assertFalse(tester.isCollideTo(new AABB(-1.1,2,2,2)));
+		
+		assertFalse(tester.isCollideTo(new AABB(1.87,1.5,2,1)));
+		assertFalse(tester.isCollideTo(new AABB(1.87,-0.5,2,1)));
+		assertFalse(tester.isCollideTo(new AABB(0,1.5,0.13,1)));
+		assertFalse(tester.isCollideTo(new AABB(0,-0.5,0.13,1)));
+		
+		assertFalse(tester.isCollideTo(new AABB(1.71,1.71,2,1)));
+		assertFalse(tester.isCollideTo(new AABB(1.71,-0.71,2,1)));
+		assertFalse(tester.isCollideTo(new AABB(0,1.71,0.29,1)));
+		assertFalse(tester.isCollideTo(new AABB(0,-0.71,0.29,1)));
+		
+		assertFalse(tester.isCollideTo(new AABB(1.51,1.87,2,1)));
+		assertFalse(tester.isCollideTo(new AABB(1.51,-0.87,2,1)));
+		assertFalse(tester.isCollideTo(new AABB(0,1.87,0.49,1)));
+		assertFalse(tester.isCollideTo(new AABB(0,-0.87,0.49,1)));
+		
 	}
 	
 	/**
