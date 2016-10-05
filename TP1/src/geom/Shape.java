@@ -9,7 +9,7 @@ import java.util.List;
  * 
  * @author BRANGER Mathias, CROUZET Matthieu, MACE Quentin.
  */
-public abstract class Shape{
+public abstract class Shape {
 
 	/**
 	 * The position of the shape.
@@ -18,9 +18,15 @@ public abstract class Shape{
 	 */
 	protected Position position;
 
+	/**
+	 * Weather or not the shape is in collision with something
+	 */
+	protected boolean isColliding;
+
 	/** Shape constructor. */
 	public Shape() {
 		this.position = new Position();
+		this.isColliding = false;
 	}
 
 	/**
@@ -34,6 +40,7 @@ public abstract class Shape{
 	 */
 	public Shape(double x, double y) {
 		this.position = new Position(x, y);
+		this.isColliding = false;
 	}
 
 	/**
@@ -46,6 +53,7 @@ public abstract class Shape{
 	 */
 	public Shape(Position position) {
 		this.position = position;
+		this.isColliding = false;
 	}
 
 	// TODO Faudrait trouver un truc simple pour ca
@@ -73,6 +81,7 @@ public abstract class Shape{
 			Shape shape = (Shape) iterator.next();
 			isCollide |= this.isCollideTo(shape);
 		}
+		isColliding=isCollide;
 		return isCollide;
 	}
 
@@ -84,6 +93,16 @@ public abstract class Shape{
 	 */
 	public abstract void moveTo(Position position);
 
+	
+	/**
+	 * isColliding getter.
+	 *
+	 * @return The boolean for collision.
+	 */
+	public boolean getIsColliding() {
+		return this.isColliding;
+	}
+	
 	/**
 	 * position getter.
 	 *
@@ -123,6 +142,5 @@ public abstract class Shape{
 	 *            The graphic window where we have to draw
 	 */
 	public abstract void draw(Graphics2D g);
-
 
 }
