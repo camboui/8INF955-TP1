@@ -1,5 +1,7 @@
 package geom;
 
+import javax.lang.model.element.UnknownElementException;
+
 /**
  * A point shape.
  * 
@@ -50,24 +52,27 @@ public class Point extends Shape {
 
 	@Override
 	public boolean isCollideTo(Shape shape) {
-		boolean isCollide = false;
 		if (shape instanceof Point) {
 			Point p = (Point) shape;
-			isCollide = this.equals(p);
+			return this.equals(p);
 		} else if (shape instanceof Circle) {
 			Circle c = (Circle) shape;
-			isCollide = this.isInside(c);
+			return this.isInside(c);
 		} else if (shape instanceof AABB) {
 			AABB aabb = (AABB) shape;
-			isCollide = this.isInside(aabb);
+			return this.isInside(aabb);
 		} else if (shape instanceof OBB) {
 			OBB obb = (OBB) shape;
-			isCollide = this.isInside(obb);
+			return this.isInside(obb);
 		} else if (shape instanceof KDOP) {
-			// TODO point kdop
+			KDOP kdop = (KDOP) shape;
+			if (kdop.isConvex()) {
+				return this.isInsideConvexPolygon(kdop);
+			} else {
+				// TODO kdop concave
+			}
 		}
-		// TODO
-		return isCollide;
+		throw new UnknownElementException(null, shape);
 	}
 
 	@Override
@@ -110,7 +115,7 @@ public class Point extends Shape {
 	 * @param abcd
 	 *            The wanted OBB to be tested on.
 	 * 
-	 * @return true if the point is in the circle.
+	 * @return true if the point is in the OBB.
 	 * 
 	 * @see geom.OBB
 	 */
@@ -156,4 +161,34 @@ public class Point extends Shape {
 	public float distance(Point point) {
 		return this.getPosition().distance(point.getPosition());
 	}
+
+	/**
+	 * Test method to know if a point is inside a OBB.
+	 * 
+	 * @param kdop
+	 *            The wanted kdop to be tested on.
+	 * 
+	 * @return true if the point is in the kdop.
+	 * 
+	 * @see geom.OBB
+	 */
+	public boolean isInsideConvexPolygon(KDOP kdop) {
+		float sum = 0;
+		float areaPolygonConvex = 0;
+		Point O = new Point(kdop.getPoints().get(0));
+		Point A = new Point(kdop.getPoints().get(kdop.getPoints().size() - 1));
+		Point B = new Point(kdop.getPoints().get(0));
+		for (int i = 0; i < kdop.getPoints().size() - 1; i++) {
+			A = B;
+			B.setPosition(kdop.getPoints().get(i + 1));
+			areaPolygonConvex += (float) (O.distance(A) * O.distance(B) / 2.0);
+			sum += (float) (this.distance(A) * this.distance(B) / 2.0);
+		}
+		/*
+		 * if the sum of triangles areas is equal to the polygon's area then the
+		 * point is inside the rectangle
+		 */
+		return sum == areaPolygonConvex;
+	}
+
 }
