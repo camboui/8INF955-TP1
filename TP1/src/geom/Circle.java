@@ -109,10 +109,12 @@ public class Circle extends Shape {
 		} else if (shape instanceof Point) {
 			Point point = (Point) shape;
 			// (x-center_x)^2 + (y - center_y)^2 < radius^2
-			return ((point.getPosition().getX() - this.getPosition().getX() * point.getPosition().getX()
-					- this.getPosition().getX() + point.getPosition().getY()
-					- this.getPosition().getY() * point.getPosition().getY()
-					- this.getPosition().getY()) < this.getRadius() * this.getRadius());
+			//System.out.println(point.getPosition().getX());
+			//System.out.println(point.getPosition().getY());
+			return (((point.getPosition().getX() - this.getPosition().getX()) * (point.getPosition().getX()
+					- this.getPosition().getX()) +( point.getPosition().getY()
+					- this.getPosition().getY()) * (point.getPosition().getY()
+					- this.getPosition().getY())) <= (this.getRadius() * this.getRadius()));
 		} else if (shape instanceof AABB) {
 			AABB aabb = (AABB) shape;
 			// TODO Cas simple d'eliminations
