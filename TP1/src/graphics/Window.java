@@ -1,6 +1,8 @@
 package graphics;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -23,12 +25,12 @@ public class Window extends JFrame {
 	 *            the height of the window in pixels
 	 */
 	public Window(int width, int height) {
-
 		setTitle("TP1");
-		setSize(width, height);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
+		setSize(width+getInsets().left+getInsets().right, height+getInsets().top+getInsets().bottom);
+
 	}
 
 	/**
@@ -40,6 +42,11 @@ public class Window extends JFrame {
 	public void drawAll(List<Shape> shapes) {
 
 		JPanel panel = new JPanel() {
+	        @Override
+	        public Dimension getPreferredSize() {
+	            return new Dimension(500, 500);
+	        }
+	        
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
 				Graphics2D g2d = (Graphics2D) g;
@@ -58,7 +65,6 @@ public class Window extends JFrame {
 				}
 			};
 		};
-		panel.setVisible(true);
 		add(panel);
 		setVisible(true);
 	}
