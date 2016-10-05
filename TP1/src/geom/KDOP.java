@@ -96,18 +96,51 @@ public class KDOP extends Shape {
 	}
 	
 	public boolean isConvex(){
-		boolean isConvex = false;
-		for (Iterator<Position> iterator = this.points.iterator(); iterator.hasNext();) {
-			Position A = (Position) iterator.next();
-			Position B = (Position) iterator.next();
-			Position C = (Position) iterator.next();
-			
+		//Cas particulier 
+		Position A = this.points.get(this.points.size()-1); //Dernier point
+		Position B = this.points.get(0); //Premier point
+		Position C = this.points.get(1); //Deuxieme point
+		for (int i=0; i < this.points.size()-2; i++ ) {
+			if(getAngle(A, B, C) > Math.PI) return false;
+			A = B;
+			B = C;
+			C = this.points.get(i+1);
 		}
-		return isConvex;
+		//Cas Particulier
+		A = this.points.get(this.points.size()-2); //Avant-dernier point
+		B = this.points.get(this.points.size()-1); //Dernier point
+		C = this.points.get(0); //Premier point
+		return !(getAngle(A, B, C) > Math.PI);
 	}
 	
+	private float getAngle(Position a, Position b, Position c) {
+		float bax = a.getX() - b.getX();
+		float bay = a.getY() - b.getY();
+		float bcx = c.getX() - b.getX();
+		float bcy = c.getY() - b.getY();
+		return (float) Math.acos((bax*bcx+bay*bcy)/(Math.sqrt(Math.pow(bax, 2) + Math.pow(bay, 2)) * Math.sqrt(Math.pow(bcx, 2) + Math.pow(bcy, 2))));
+	}
+
 	public boolean isConcave(){
 		return !this.isConvex();
 	}
+	
+	public List<Position> getPoints(){
+		return this.points;
+	}
+	/*
+	public float getAreaPolygonConvex(){
+		return 0;
+	}
+	
+	public float getAreaPolygonConcave(){
+		return 0;
+	}
+	
+	public float getArea(){
+		if(this.isConvex()) return this.getAreaPolygonConvex();
+		return this.getAreaPolygonConcave();
+	}
+	*/
 	
 }
