@@ -118,15 +118,17 @@ public class Circle extends Shape {
 		} else if (shape instanceof Point) {
 			Point point = (Point) shape;
 			// (x-center_x)^2 + (y - center_y)^2 < radius^2
-			//System.out.println(point.getPosition().getX());
-			//System.out.println(point.getPosition().getY());
-			return (((point.getPosition().getX() - this.getPosition().getX()) * (point.getPosition().getX()
-					- this.getPosition().getX()) +( point.getPosition().getY()
-					- this.getPosition().getY()) * (point.getPosition().getY()
-					- this.getPosition().getY())) <= (this.getRadius() * this.getRadius()));
+			// System.out.println(point.getPosition().getX());
+			// System.out.println(point.getPosition().getY());
+			return (((point.getPosition().getX() - this.getPosition().getX())
+					* (point.getPosition().getX() - this.getPosition().getX())
+					+ (point.getPosition().getY() - this.getPosition().getY())
+							* (point.getPosition().getY() - this.getPosition().getY())) <= (this.getRadius()
+									* this.getRadius()));
 		} else if (shape instanceof AABB) {
 			AABB aabb = (AABB) shape;
-			// TODO Cas simple d'eliminations + A refaire en prenant le point de reference en haut a gauche
+			// TODO Cas simple d'eliminations + A refaire en prenant le point de
+			// reference en haut a gauche
 			Position position;
 			// x > , y >
 			if (this.getPosition().getX() > aabb.getPosition().getX()
@@ -156,7 +158,7 @@ public class Circle extends Shape {
 					+ ((position.getY() - this.getPosition().getY())
 							* (position.getY() - this.getPosition().getY())) < (this.getRadius() * this.getRadius()));
 		} else if (shape instanceof OBB) {
-			//TODO A refaire en prenant le point de reference en haut a gauche
+			// TODO A refaire en prenant le point de reference en haut a gauche
 			OBB obb = (OBB) shape;
 			Circle rotateCircle = new Circle(this.getPosition(), this.getRadius());
 
@@ -211,7 +213,8 @@ public class Circle extends Shape {
 
 	@Override
 	public void draw(Graphics2D g) {
-		g.fillOval((int)(getPosition().getX()-getRadius()/2), (int)(getPosition().getY()-getRadius()/2), (int)getRadius(), (int)getRadius());
+		int r = (int) getRadius();
+		g.fillOval((int) (getPosition().getX() - r), (int) (getPosition().getY() - r), r * 2, r * 2);
 
 	}
 
