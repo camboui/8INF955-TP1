@@ -162,7 +162,26 @@ public class CircleTest {
 	 */
 	@Test
 	public void testIsCollideToCircle() {
-		fail("Not yet implemented");
+		Circle tester = new Circle(1,0,1);
+		assertTrue(tester.isCollideTo(new Circle(3,0,1)));
+		assertTrue(tester.isCollideTo(new Circle(1,0,1)));
+		assertTrue(tester.isCollideTo(new Circle(1,2,1)));
+		assertTrue(tester.isCollideTo(new Circle(1,-2,1)));
+		
+		assertTrue(tester.isCollideTo(new Circle(1,0,1)));
+		assertTrue(tester.isCollideTo(new Circle(1,0,0.5)));
+		assertTrue(tester.isCollideTo(new Circle(1,0,2)));
+		
+		assertTrue(tester.isCollideTo(new Circle(2,0,1)));
+		assertTrue(tester.isCollideTo(new Circle(1,1,1)));
+		
+		assertFalse(tester.isCollideTo(new Circle(2,1,0.4)));
+		assertFalse(tester.isCollideTo(new Circle(0,1,0.4)));
+		assertFalse(tester.isCollideTo(new Circle(2,-1,0.4)));
+		assertFalse(tester.isCollideTo(new Circle(0,1,0.4)));
+		
+		assertFalse(tester.isCollideTo(new Circle(3,2,1.8)));
+		
 	}
 	
 	/**
@@ -177,7 +196,7 @@ public class CircleTest {
 	 * Test method for {@link geom.Circle#isCollideTo(geom.Shape)}.
 	 */
 	@Test
-	public void testIsCollideToKDOP() {
+	public void testIsCollideToOBB() {
 		fail("Not yet implemented");
 	}
 	
@@ -185,7 +204,7 @@ public class CircleTest {
 	 * Test method for {@link geom.Circle#isCollideTo(geom.Shape)}.
 	 */
 	@Test
-	public void testIsCollideToOBB() {
+	public void testIsCollideToKDOP() {
 		fail("Not yet implemented");
 	}
 	
