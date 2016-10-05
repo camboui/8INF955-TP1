@@ -1,5 +1,8 @@
 package geom;
 
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+
 /**
  * A oriented bounding box.
  * 
@@ -234,4 +237,17 @@ public class OBB extends Shape {
 		return this.width * this.height;
 	}
 
+	// TODO
+	/**
+	 * 
+	 * @return the KDOP corresponding to this OBB
+	 */
+	public KDOP toKDOP() {
+		return null;
+	}
+
+	@Override
+	public void draw(Graphics2D g) {
+		toKDOP().draw(g);
+	}
 }

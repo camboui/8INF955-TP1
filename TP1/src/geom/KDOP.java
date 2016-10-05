@@ -1,5 +1,8 @@
 package geom;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.geom.GeneralPath;
 import java.util.Iterator;
 import java.util.List;
 
@@ -165,4 +168,24 @@ public class KDOP extends Shape {
 	 * this.getAreaPolygonConvex(); return this.getAreaPolygonConcave(); }
 	 */
 
+	@Override
+	public void draw(Graphics2D g) {
+		// draw GeneralPath (polygon)
+
+		if (points.size() > 0) {
+			Iterator<Position> iterator = this.points.iterator();
+			Position positionIt = (Position) iterator.next();
+			
+			GeneralPath polygon = new GeneralPath(GeneralPath.WIND_EVEN_ODD, points.size());
+			polygon.moveTo(positionIt.getX(), positionIt.getY());
+
+			while (iterator.hasNext()) {
+				positionIt = (Position) iterator.next();
+				polygon.lineTo(positionIt.getX(), positionIt.getY());
+			}
+
+			polygon.closePath();
+			g.fill(polygon);
+		}
+	}
 }

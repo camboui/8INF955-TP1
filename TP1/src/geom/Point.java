@@ -1,6 +1,8 @@
 package geom;
 
+import java.awt.Graphics2D;
 import javax.lang.model.element.UnknownElementException;
+
 
 /**
  * A point shape.
@@ -191,4 +193,9 @@ public class Point extends Shape {
 		return sum == areaPolygonConvex;
 	}
 
+	@Override
+	public void draw(Graphics2D g) {
+		int size=2;
+		g.fillRect((int)getPosition().getX(), (int)getPosition().getY(), size, size);
+	}
 }
