@@ -13,42 +13,38 @@ public class Main {
 		double start;
 		double end;
 		double delay;
-		// Definir le framerate
+		// set framerate
 		double fps = 1000.0 / 30.0;
 		Window w = new Window(500, 500);
 
 		List<Shape> shapes = new ArrayList<Shape>();
-		//shapes.add(new OBB(new Position(250, 250), 100, 20,90));
+		// shapes.add(new OBB(new Position(250, 250), 100, 20,90));
 		shapes.add(new Circle(100, 100, 50));
 		shapes.add(new Point(0, 0));
 		shapes.add(new Circle(300, 100, 100));
 		shapes.add(new AABB(new Position(10, 10), 100, 20));
-		
+
 		List<Position> points = new ArrayList<Position>();
-		points.add(new Position(300,300));
-		points.add(new Position(350,300));
-		points.add(new Position(340,340));
-		points.add(new Position(250,300));
-		points.add(new Position(210,230));
+		points.add(new Position(300, 300));
+		points.add(new Position(350, 300));
+		points.add(new Position(340, 340));
+		points.add(new Position(250, 300));
+		points.add(new Position(210, 230));
 		KDOP kdop = new KDOP(points);
 		shapes.add(kdop);
 
-		// tant que fenêtre non fermée
+		// while window is open
 		while (w.isActive()) {
-			// start = prendre le temps actuel
 			start = System.currentTimeMillis();
 
-			// appliquer la logique
-			// afficher
+			// do logic
+			//TODO
+
 			w.drawAll(shapes);
-
-			// end = prendre le temp actuel
 			end = System.currentTimeMillis();
-
-			// delay = fps - (end - start)
 			delay = fps - (end - start);
 
-			// pause(delay)
+			// sleep for stabilized 30 fps
 			try {
 				TimeUnit.MILLISECONDS.sleep((long) delay);
 			} catch (InterruptedException e) {
@@ -56,7 +52,6 @@ public class Main {
 				e.printStackTrace();
 			}
 		}
-
 	}
 
 }
