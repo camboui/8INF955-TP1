@@ -44,14 +44,16 @@ public class Window extends JFrame {
 				super.paintComponent(g);
 				Graphics2D g2d = (Graphics2D) g;
 
-				g2d.setPaint(new Color(0, 0, 0));
-
 				RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
 						RenderingHints.VALUE_ANTIALIAS_ON);
 				rh.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 				g2d.setRenderingHints(rh);
 
 				for (Shape current : shapes) {
+					if (current.getIsColliding())
+						g2d.setPaint(new Color(1.0f, 0, 0));
+					else
+						g2d.setPaint(new Color(0, 0, 0));
 					current.draw(g2d);
 				}
 			};

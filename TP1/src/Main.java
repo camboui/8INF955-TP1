@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -18,27 +19,36 @@ public class Main {
 		Window w = new Window(500, 500);
 
 		List<Shape> shapes = new ArrayList<Shape>();
-		// shapes.add(new OBB(new Position(250, 250), 100, 20,90));
-		shapes.add(new Circle(100, 100, 50));
-		shapes.add(new Point(0, 0));
-		shapes.add(new Circle(300, 100, 100));
-		shapes.add(new AABB(new Position(10, 10), 100, 20));
 
-		List<Position> points = new ArrayList<Position>();
-		points.add(new Position(300, 300));
-		points.add(new Position(350, 300));
-		points.add(new Position(340, 340));
-		points.add(new Position(250, 300));
-		points.add(new Position(210, 230));
-		KDOP kdop = new KDOP(points);
-		shapes.add(kdop);
+		OBB obb = new OBB(new Position(150, 250), 100, 20, Math.PI / 3.0);
+		// shapes.add(obb);
+
+		shapes.add(new Circle(100, 100, 50));
+		shapes.add(new Point(50, 50));
+		// shapes.add(new Circle(300, 100, 100));
+		// shapes.add(new AABB(new Position(10, 10), 100, 20));
+		// shapes.add(new AABB(new Position(10, 10), 10, 200));
+		// shapes.add(new AABB(new Position(100, 200), 100, 20));
+
+		// List<Position> points = new ArrayList<Position>();
+		// points.add(new Position(300, 300));
+		// points.add(new Position(350, 300));
+		// points.add(new Position(340, 340));
+		// points.add(new Position(250, 300));
+		// points.add(new Position(210, 230));
+		// KDOP kdop = new KDOP(points);
+		// shapes.add(kdop);
+
+		ApplyLogic(shapes);
 
 		// while window is open
 		while (w.isActive()) {
 			start = System.currentTimeMillis();
 
 			// do logic
-			//TODO
+			// ApplyLogic(shapes);
+
+			obb.setAngle(obb.getAngle() + 0.1f);
 
 			w.drawAll(shapes);
 			end = System.currentTimeMillis();
@@ -51,6 +61,18 @@ public class Main {
 				System.out.println("Can't sleep :" + e.getMessage());
 				e.printStackTrace();
 			}
+		}
+	}
+
+	public static void ApplyLogic(List<Shape> shapes) {
+		for (Shape current : shapes) {
+			List<Shape> temp = new ArrayList<Shape>(shapes);
+			temp.remove(current);
+
+			for (Shape shape : temp) {
+				System.out.println("will compare " + current.getClass().getName() + " with " + shape.getClass().getName());
+			}
+			System.out.println(current.isCollide(temp));
 		}
 	}
 
