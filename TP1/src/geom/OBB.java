@@ -108,19 +108,7 @@ public class OBB extends Shape {
 
 	@Override
 	public boolean isCollideTo(Shape shape) {
-		if (shape instanceof OBB) {
-			// TODO obb obb
-		} else if (shape instanceof Circle) {
-			// TODO obb circle
-		} else if (shape instanceof Point) {
-			// TODO obb point
-		} else if (shape instanceof AABB) {
-			// TODO obb aabb
-		} else if (shape instanceof KDOP) {
-			// TODO obb kdop
-		}
-		// TODO
-		return false;
+		return toKDOP().isCollideTo(shape);
 	}
 
 	@Override
@@ -202,7 +190,8 @@ public class OBB extends Shape {
 	public double getArea() {
 		return this.width * this.height;
 	}
-
+	
+	
 	/**
 	 * 
 	 * @return the KDOP corresponding to this OBB
