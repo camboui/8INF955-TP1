@@ -107,4 +107,23 @@ public class Position {
 	public double distance(Position position) {
 		return Math.sqrt(Math.pow(this.x - position.getX(), 2) + Math.pow(this.y - position.getY(), 2));
 	}
+
+	/**
+	 * 
+	 * @param originRot
+	 *            The origin point of the rotation
+	 * @param angle
+	 *            The angle of the rotation
+	 * @return the rotated point according to originRot
+	 */
+	public Position rotation(Position originRot, double angle) {
+		Position ret = new Position();
+		// X' = (X - Xc) * cos(A) - (Y - Yc) * sin(A) + Xc
+		ret.setX(
+				(x - originRot.getX()) * Math.cos(angle) - (y - originRot.getY()) * Math.sin(angle) + originRot.getX());
+		// Y' = (Y - Yc) * cos(A) + (X - Xc) * sin(A) + Yc
+		ret.setY(
+				(y - originRot.getY()) * Math.cos(angle) + (x - originRot.getX()) * Math.sin(angle) + originRot.getY());
+		return ret;
+	}
 }

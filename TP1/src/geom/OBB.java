@@ -2,6 +2,8 @@ package geom;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A oriented bounding box.
@@ -201,13 +203,21 @@ public class OBB extends Shape {
 		return this.width * this.height;
 	}
 
-	// TODO
 	/**
 	 * 
 	 * @return the KDOP corresponding to this OBB
 	 */
 	public KDOP toKDOP() {
-		return null;
+		List<Position> points = new ArrayList<Position>();
+		
+		Position center = new Position(getPosition().getX()+getWidth()/2,getPosition().getY()+getHeight()/2);
+		
+		points.add(new Position(getPosition().rotation(center, getAngle())));
+		points.add(new Position(getPosition().getX()+getWidth(),getPosition().getY()).rotation(center, getAngle()));
+		points.add(new Position(getPosition().getX()+getWidth(),getPosition().getY()+getHeight()).rotation(center, getAngle()));
+		points.add(new Position(getPosition().getX(),getPosition().getY()+getHeight()).rotation(center, getAngle()));
+		
+		return new KDOP(points);
 	}
 
 	@Override

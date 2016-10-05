@@ -211,7 +211,7 @@ public class Circle extends Shape {
 
 	@Override
 	public void draw(Graphics2D g) {
-		g.fillOval((int)getPosition().getX(), (int)getPosition().getY(), (int)getRadius(), (int)getRadius());
+		g.fillOval((int)(getPosition().getX()-getRadius()/2), (int)(getPosition().getY()-getRadius()/2), (int)getRadius(), (int)getRadius());
 
 	}
 
