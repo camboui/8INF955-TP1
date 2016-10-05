@@ -87,9 +87,45 @@ public class OBB extends Shape {
 	 * 
 	 * @throws IllegalArgumentException
 	 *             If the width or the height are negative or null.
+	 * 
+	 * @see geom.Position
 	 */
 	public OBB(Position position, double width, double height, double angle) throws IllegalArgumentException {
 		super(position);
+		if (width <= 0)
+			throw new IllegalArgumentException("width is negative or null: " + width);
+		else if (height <= 0)
+			throw new IllegalArgumentException("height is negative or null: " + height);
+		else {
+			this.width = width;
+			this.height = height;
+			this.angle = angle;
+		}
+	}
+
+	/**
+	 * OBB Constructor.
+	 * 
+	 * @param x
+	 *            The wanted position of the x axis.
+	 * 
+	 * @param y
+	 *            The wanted position for this y axis.
+	 * 
+	 * @param width
+	 *            The wanted with of the OBB.
+	 * 
+	 * @param height
+	 *            The wanted height of the OBB.
+	 * 
+	 * @param angle
+	 *            The wanted angle of the OBB.
+	 * 
+	 * @throws IllegalArgumentException
+	 *             If the width or the height are negative or null.
+	 */
+	public OBB(double x, double y, double width, double height, double angle) throws IllegalArgumentException {
+		super(x, y);
 		if (width <= 0)
 			throw new IllegalArgumentException("width is negative or null: " + width);
 		else if (height <= 0)

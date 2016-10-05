@@ -66,4 +66,26 @@ public class AABB extends OBB {
 		super(position, width, height, 0);
 	}
 
+	/**
+	 * OBB Constructor.
+	 * 
+	 * @param x
+	 *            The wanted position of the x axis.
+	 * 
+	 * @param y
+	 *            The wanted position of the y axis.
+	 * 
+	 * @param width
+	 *            The wanted with of the OBB.
+	 * 
+	 * @param height
+	 *            The wanted height of the OBB.
+	 * 
+	 * @throws IllegalArgumentException
+	 *             If the width or the height are negative or null.
+	 */
+	public AABB(double x, double y, double width, double height) throws IllegalArgumentException {
+		super(x, y, width, height, 0);
+	}
+
 }
