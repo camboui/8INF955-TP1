@@ -1,7 +1,6 @@
 package geom;
 
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 
 /**
  * A oriented bounding box.

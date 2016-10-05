@@ -1,15 +1,9 @@
 package geom;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.GeneralPath;
 
 import javax.lang.model.element.UnknownElementException;
 
-import graphics.Window;
 
 /**
  * A circle shape.

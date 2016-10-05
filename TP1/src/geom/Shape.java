@@ -1,13 +1,8 @@
 package geom;
 
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.swing.JPanel;
-
-import graphics.Window;
 
 /**
  * Abstract class for the representation of 2D shapes.
