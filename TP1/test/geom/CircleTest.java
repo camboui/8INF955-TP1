@@ -129,15 +129,32 @@ public class CircleTest {
 	 */
 	@Test
 	public void testIsCollideToPoint() {
-		Circle tester = new Circle(1,1,1);
+		Circle tester = new Circle(1,0,1);
 		assertTrue(tester.isCollideTo(new Point(2,0)));
 		assertTrue(tester.isCollideTo(new Point(0,0)));
 		assertTrue(tester.isCollideTo(new Point(1,1)));
 		assertTrue(tester.isCollideTo(new Point(1,-1)));
+		assertTrue(tester.isCollideTo(new Point(1.5,0.5)));
+		assertTrue(tester.isCollideTo(new Point(1.5,-0.5)));
+		assertTrue(tester.isCollideTo(new Point(0.5,0.5)));
+		assertTrue(tester.isCollideTo(new Point(0.5,-0.5)));
+		assertTrue(tester.isCollideTo(new Point(1,0)));
 		assertTrue(tester.isCollideTo(new Point(1.5,0)));
-		assertTrue(tester.isCollideTo(new Point(2,0)));
-		assertTrue(tester.isCollideTo(new Point(2,0)));
-		assertTrue(tester.isCollideTo(new Point(2,0)));
+		
+		assertFalse(tester.isCollideTo(new Point(1.71,0.71)));
+		assertFalse(tester.isCollideTo(new Point(0.29,0.71)));
+		assertFalse(tester.isCollideTo(new Point(1.71,-0.71)));
+		assertFalse(tester.isCollideTo(new Point(0.29,-0.71)));
+		
+		assertFalse(tester.isCollideTo(new Point(1.87,0.5)));
+		assertFalse(tester.isCollideTo(new Point(0.13,0.5)));
+		assertFalse(tester.isCollideTo(new Point(1.87,-0.5)));
+		assertFalse(tester.isCollideTo(new Point(0.13,-0.5)));
+		
+		assertFalse(tester.isCollideTo(new Point(1.51,0.87)));
+		assertFalse(tester.isCollideTo(new Point(0.49,0.87)));
+		assertFalse(tester.isCollideTo(new Point(1.51,-0.87)));
+		assertFalse(tester.isCollideTo(new Point(0.49,-0.87)));
 	}
 	
 	/**
