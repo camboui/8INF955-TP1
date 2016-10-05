@@ -31,16 +31,16 @@ public class Position {
 		this.x = x;
 		this.y = y;
 	}
-	
+
 	/**
 	 * Position copy constructor.
 	 * 
-	 * @param p
+	 * @param position
 	 *            The position to copy.
 	 */
-	public Position(Position p){
-		this.x = p.getX();
-		this.y = p.getY();
+	public Position(Position position) {
+		this.x = position.getX();
+		this.y = position.getY();
 	}
 
 	/**
@@ -80,21 +80,31 @@ public class Position {
 	public void setY(float y) {
 		this.y = y;
 	}
-	
+
 	/**
+	 * Equals method.
 	 * 
-	 * @param p
+	 * @param position
+	 *            The position to be tested on.
+	 * 
 	 * @return true if p has the same x and same y
+	 * 
+	 * @see geom.Position
 	 */
-	public boolean equals(Position p){
-		return (this.x == p.getX()) && (this.y == p.getY());
+	public boolean equals(Position position) {
+		return (this.x == position.getX()) && (this.y == position.getY());
 	}
 
-	
-	public float distance(Position p){
-		return (float) Math.sqrt(
-				Math.pow(this.x-p.getX(), 2)
-				+ Math.pow(this.y-p.getY(), 2)				
-				);
+	/**
+	 * Calculate the distance between two positions.
+	 * 
+	 * @param position
+	 *            The wanted position for the operation
+	 * 
+	 * @return The distance between two positions
+	 * 
+	 */
+	public float distance(Position position) {
+		return (float) Math.sqrt(Math.pow(this.x - position.getX(), 2) + Math.pow(this.y - position.getY(), 2));
 	}
 }
