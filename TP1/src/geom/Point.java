@@ -24,7 +24,7 @@ public class Point extends Shape {
 	 * @param y
 	 *            The wanted position for the y axis.
 	 */
-	public Point(float x, float y) {
+	public Point(double x, double y) {
 		super(x, y);
 	}
 
@@ -126,21 +126,21 @@ public class Point extends Shape {
 		 * P is the current point
 		 */
 		Point A = new Point(abcd.getPosition());
-		Point B = new Point((float) (abcd.getPosition().getX() + abcd.getHeight() * Math.cos(abcd.getAngle())),
-				(float) (abcd.getPosition().getY() + abcd.getHeight() * Math.sin(abcd.getAngle())));
+		Point B = new Point((abcd.getPosition().getX() + abcd.getHeight() * Math.cos(abcd.getAngle())),
+				(abcd.getPosition().getY() + abcd.getHeight() * Math.sin(abcd.getAngle())));
 		Point C = new Point(
-				(float) (abcd.getPosition().getX() + abcd.getDiagLength() * Math.cos(abcd.getAngle() + Math.PI / 2.0)),
-				(float) (abcd.getPosition().getY() + abcd.getDiagLength() * Math.sin(abcd.getAngle() + Math.PI / 2.0)));
-		Point D = new Point((float) (abcd.getPosition().getX() + abcd.getWidth() * Math.cos(abcd.getAngle())),
-				(float) (abcd.getPosition().getY() + abcd.getWidth() * Math.sin(abcd.getAngle())));
+				(abcd.getPosition().getX() + abcd.getDiagLength() * Math.cos(abcd.getAngle() + Math.PI / 2.0)),
+				(abcd.getPosition().getY() + abcd.getDiagLength() * Math.sin(abcd.getAngle() + Math.PI / 2.0)));
+		Point D = new Point((abcd.getPosition().getX() + abcd.getWidth() * Math.cos(abcd.getAngle())),
+				(abcd.getPosition().getY() + abcd.getWidth() * Math.sin(abcd.getAngle())));
 		/* Triangles areas */
-		float areaAPD = (float) (this.distance(A) * this.distance(D) / 2.0);
-		float areaDPC = (float) (this.distance(D) * this.distance(C) / 2.0);
-		float areaCPB = (float) (this.distance(C) * this.distance(B) / 2.0);
-		float areaBPA = (float) (this.distance(B) * this.distance(A) / 2.0);
-		float sum = areaAPD + areaDPC + areaCPB + areaBPA;
+		double areaAPD = (this.distance(A) * this.distance(D) / 2.0);
+		double areaDPC = (this.distance(D) * this.distance(C) / 2.0);
+		double areaCPB = (this.distance(C) * this.distance(B) / 2.0);
+		double areaBPA = (this.distance(B) * this.distance(A) / 2.0);
+		double sum = areaAPD + areaDPC + areaCPB + areaBPA;
 		/* Rectangle area */
-		float areaABCD = abcd.getArea();
+		double areaABCD = abcd.getArea();
 
 		/*
 		 * if the sum of triangles areas is equal to the rectangle area then the
@@ -158,7 +158,7 @@ public class Point extends Shape {
 	 * @return The distance between two points.
 	 * 
 	 */
-	public float distance(Point point) {
+	public double distance(Point point) {
 		return this.getPosition().distance(point.getPosition());
 	}
 
@@ -173,16 +173,16 @@ public class Point extends Shape {
 	 * @see geom.OBB
 	 */
 	public boolean isInsideConvexPolygon(KDOP kdop) {
-		float sum = 0;
-		float areaPolygonConvex = 0;
+		double sum = 0;
+		double areaPolygonConvex = 0;
 		Point O = new Point(kdop.getPoints().get(0));
 		Point A = new Point(kdop.getPoints().get(kdop.getPoints().size() - 1));
 		Point B = new Point(kdop.getPoints().get(0));
 		for (int i = 0; i < kdop.getPoints().size() - 1; i++) {
 			A = B;
 			B.setPosition(kdop.getPoints().get(i + 1));
-			areaPolygonConvex += (float) (O.distance(A) * O.distance(B) / 2.0);
-			sum += (float) (this.distance(A) * this.distance(B) / 2.0);
+			areaPolygonConvex += (O.distance(A) * O.distance(B) / 2.0);
+			sum += (this.distance(A) * this.distance(B) / 2.0);
 		}
 		/*
 		 * if the sum of triangles areas is equal to the polygon's area then the

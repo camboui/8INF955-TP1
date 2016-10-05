@@ -84,7 +84,7 @@ public class KDOP extends Shape {
 
 	@Override
 	public void moveTo(Position position) {
-		float moveX, moveY;
+		double moveX, moveY;
 		moveX = position.getX() - this.position.getX();
 		moveY = position.getY() - this.position.getY();
 		this.position = position;
@@ -130,12 +130,12 @@ public class KDOP extends Shape {
 	 *            The last point.
 	 * @return The angle between a,b,c.
 	 */
-	private float getAngle(Position a, Position b, Position c) {
-		float bax = a.getX() - b.getX();
-		float bay = a.getY() - b.getY();
-		float bcx = c.getX() - b.getX();
-		float bcy = c.getY() - b.getY();
-		return (float) Math.acos((bax * bcx + bay * bcy)
+	private double getAngle(Position a, Position b, Position c) {
+		double bax = a.getX() - b.getX();
+		double bay = a.getY() - b.getY();
+		double bcx = c.getX() - b.getX();
+		double bcy = c.getY() - b.getY();
+		return Math.acos((bax * bcx + bay * bcy)
 				/ (Math.sqrt(Math.pow(bax, 2) + Math.pow(bay, 2)) * Math.sqrt(Math.pow(bcx, 2) + Math.pow(bcy, 2))));
 	}
 
@@ -157,11 +157,11 @@ public class KDOP extends Shape {
 		return this.points;
 	}
 	/*
-	 * public float getAreaPolygonConvex(){ return 0; }
+	 * public double getdoubleolygonConvex(){ return 0; }
 	 * 
-	 * public float getAreaPolygonConcave(){ return 0; }
+	 * public double getAreaPolygonConcave(){ return 0; }
 	 * 
-	 * public float getArea(){ if(this.isConvex()) return
+	 * public double getArea(){ if(this.isConvex()) return
 	 * this.getAreaPolygonConvex(); return this.getAreaPolygonConcave(); }
 	 */
 

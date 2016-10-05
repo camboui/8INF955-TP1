@@ -38,10 +38,10 @@ public class PointTest {
 	}
 
 	/**
-	 * Test method for {@link geom.Point#Point(float, float)}.
+	 * Test method for {@link geom.Point#Point(double, double)}.
 	 */
 	@Test
-	public void testPointFloatFloat() {
+	public void testPointdoubledouble() {
 		fail("Not yet implemented");
 	}
 

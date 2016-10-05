@@ -14,59 +14,173 @@ import org.junit.Test;
 public class CircleTest {
 
 	/**
+	 * Test method for {@link geom.Circle#Circle()}.
+	 */
+	@Test
+	public void testCircle() {
+		Circle tester = new Circle();
+		assertNotNull(tester);
+		assertEquals(0, tester.getPosition().getX(), 0);
+		assertEquals(0, tester.getPosition().getY(), 0);
+		assertEquals(10, tester.getRadius(), 0);
+	}
+
+	/**
+	 * Test method for {@link geom.Circle#Circle(double)}.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testCircledoubleNullException() {
+		new Circle(0);
+	}
+	
+	/**
+	 * Test method for {@link geom.Circle#Circle(double)}.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testCircledoubleNegativeException() {
+		new Circle(-1);
+	}
+
+	/**
+	 * Test method for {@link geom.Circle#Circle(double)}.
+	 */
+	@Test
+	public void testCircledouble() {
+		Circle tester = new Circle(5);
+		assertEquals(0, tester.getPosition().getX(), 0);
+		assertEquals(0, tester.getPosition().getY(), 0);
+		assertEquals(5, tester.getRadius(), 0);
+	}
+	
+	/**
+	 * Test method for {@link geom.Circle#Circle(geom.Position, double)}.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testCirclePositionNulldoubleException() {
+		new Circle(new Position(1,1),0);
+	}
+	
+	/**
+	 * Test method for {@link geom.Circle#Circle(geom.Position, double)}.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testCirclePositionNegativedoubleException() {
+		new Circle(new Position(1,1),-1);
+	}
+	
+	/**
+	 * Test method for {@link geom.Circle#Circle(geom.Position, double)}.
+	 */
+	@Test
+	public void testCirclePositiondouble() {
+		Circle tester = new Circle(new Position(-1,1),5);
+		assertEquals(-1, tester.getPosition().getX(), 0);
+		assertEquals(1, tester.getPosition().getY(), 0);
+		assertEquals(5, tester.getRadius(), 0);
+	}
+
+	/**
+	 * Test method for {@link geom.Circle#Circle(double, double, double)}.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testCircledoubledoubleNulldoubleException() {
+		new Circle(1,1,0);
+	}
+
+	/**
+	 * Test method for {@link geom.Circle#Circle(double, double, double)}.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testCircledoubledoubleNegativedoubleException() {
+		new Circle(1,1,-1);
+	}
+	
+	/**
+	 * Test method for {@link geom.Circle#Circle(double, double, double)}.
+	 */
+	@Test
+	public void testCircledoubledoubledouble() {
+		Circle tester = new Circle(-1,1,5);
+		assertEquals(-1, tester.getPosition().getX(), 0);
+		assertEquals(1, tester.getPosition().getY(), 0);
+		assertEquals(5, tester.getRadius(), 0);
+	}
+	/**
+	 * Test method for {@link geom.Circle#getRadius()}.
+	 */
+	@Test
+	public void testGetRadius() {
+		Circle tester = new Circle(-1,1,5);
+		assertEquals(5,tester.getRadius(),0);
+	}
+
+	/**
+	 * Test method for {@link geom.Circle#setRadius(double)}.
+	 */
+	@Test
+	public void testSetRadius() {
+		Circle tester = new Circle(-1,1,5);
+		tester.setRadius(6);
+		assertEquals(6,tester.getRadius(),0);
+	}
+
+	/**
 	 * Test method for {@link geom.Circle#isCollideTo(geom.Shape)}.
 	 */
 	@Test
-	public void testIsCollideTo() {
+	public void testIsCollideToPoint() {
+		Circle tester = new Circle(1,1,1);
+		assertTrue(tester.isCollideTo(new Point(2,0)));
+		assertTrue(tester.isCollideTo(new Point(0,0)));
+		assertTrue(tester.isCollideTo(new Point(1,1)));
+		assertTrue(tester.isCollideTo(new Point(1,-1)));
+		assertTrue(tester.isCollideTo(new Point(1.5,0)));
+		assertTrue(tester.isCollideTo(new Point(2,0)));
+		assertTrue(tester.isCollideTo(new Point(2,0)));
+		assertTrue(tester.isCollideTo(new Point(2,0)));
+	}
+	
+	/**
+	 * Test method for {@link geom.Circle#isCollideTo(geom.Shape)}.
+	 */
+	@Test
+	public void testIsCollideToCircle() {
 		fail("Not yet implemented");
 	}
-
+	
+	/**
+	 * Test method for {@link geom.Circle#isCollideTo(geom.Shape)}.
+	 */
+	@Test
+	public void testIsCollideToAABB() {
+		fail("Not yet implemented");
+	}
+	
+	/**
+	 * Test method for {@link geom.Circle#isCollideTo(geom.Shape)}.
+	 */
+	@Test
+	public void testIsCollideToKDOP() {
+		fail("Not yet implemented");
+	}
+	
+	/**
+	 * Test method for {@link geom.Circle#isCollideTo(geom.Shape)}.
+	 */
+	@Test
+	public void testIsCollideToOBB() {
+		fail("Not yet implemented");
+	}
+	
 	/**
 	 * Test method for {@link geom.Circle#moveTo(geom.Position)}.
 	 */
 	@Test
 	public void testMoveTo() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link geom.Circle#Circle()}.
-	 */
-	@Test
-	public void testCircle() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link geom.Circle#Circle(float)}.
-	 */
-	@Test
-	public void testCircleFloat() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link geom.Circle#Circle(geom.Position, float)}.
-	 */
-	@Test
-	public void testCirclePositionFloat() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link geom.Circle#Circle(float, float, float)}.
-	 */
-	@Test
-	public void testCircleFloatFloatFloat() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link geom.Shape#isCollide(java.util.List)}.
-	 */
-	@Test
-	public void testIsCollide() {
-		fail("Not yet implemented");
+		Circle tester = new Circle();
+		tester.moveTo(new Position(2,3));
+		assertEquals(2,tester.getPosition().getX(),0);
+		assertEquals(3,tester.getPosition().getY(),0);
 	}
 
 }

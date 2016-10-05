@@ -25,10 +25,10 @@ public class PositionTest {
 	}
 
 	/**
-	 * Test method for {@link geom.Position#Position(float, float)}.
+	 * Test method for {@link geom.Position#Position(double, double)}.
 	 */
 	@Test
-	public void testPositionFloatFloat() {
+	public void testPositiondoubledouble() {
 		Position tester = new Position(-1, 1);
 		assertNotNull(tester);
 		assertEquals(-1, tester.getX(), 0);
@@ -56,7 +56,7 @@ public class PositionTest {
 	}
 
 	/**
-	 * Test method for {@link geom.Position#setX(float)}.
+	 * Test method for {@link geom.Position#setX(double)}.
 	 */
 	@Test
 	public void testSetX() {
@@ -75,7 +75,7 @@ public class PositionTest {
 	}
 
 	/**
-	 * Test method for {@link geom.Position#setY(float)}.
+	 * Test method for {@link geom.Position#setY(double)}.
 	 */
 	@Test
 	public void testSetY() {
@@ -90,9 +90,9 @@ public class PositionTest {
 	@Test
 	public void testEqualsPosition() {
 		Position tester = new Position(-1, 1);
-		assertTrue(tester.equals(new Position(-1,1)));
-		assertFalse(tester.equals(new Position(0,1)));
-		assertFalse(tester.equals(new Position(-1,0)));
+		assertTrue(tester.equals(new Position(-1, 1)));
+		assertFalse(tester.equals(new Position(0, 1)));
+		assertFalse(tester.equals(new Position(-1, 0)));
 	}
 
 	/**
@@ -100,15 +100,15 @@ public class PositionTest {
 	 */
 	@Test
 	public void testDistance() {
-		Position tester = new Position(0,0);
-		assertEquals(1,tester.distance(new Position(1,0)),0);
-		assertEquals(1,tester.distance(new Position(-1,0)),0);
-		assertEquals(1,tester.distance(new Position(0,1)),0);
-		assertEquals(1,tester.distance(new Position(-1,0)),0);
-		assertEquals(Math.sqrt(2),tester.distance(new Position(-1,1)),0.000001);
-		assertEquals(Math.sqrt(2),tester.distance(new Position(-1,-1)),0.000001);
-		assertEquals(Math.sqrt(2),tester.distance(new Position(1,1)),0.000001);
-		assertEquals(Math.sqrt(2),tester.distance(new Position(-1,-1)),0.000001);
+		Position tester = new Position(0, 0);
+		assertEquals(1, tester.distance(new Position(1, 0)), 0);
+		assertEquals(1, tester.distance(new Position(-1, 0)), 0);
+		assertEquals(1, tester.distance(new Position(0, 1)), 0);
+		assertEquals(1, tester.distance(new Position(-1, 0)), 0);
+		assertEquals(Math.sqrt(2), tester.distance(new Position(-1, 1)), 0.000001);
+		assertEquals(Math.sqrt(2), tester.distance(new Position(-1, -1)), 0.000001);
+		assertEquals(Math.sqrt(2), tester.distance(new Position(1, 1)), 0.000001);
+		assertEquals(Math.sqrt(2), tester.distance(new Position(-1, -1)), 0.000001);
 	}
 
 }

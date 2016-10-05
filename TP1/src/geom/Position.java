@@ -9,9 +9,9 @@ package geom;
 public class Position {
 
 	/** The x reference point position. */
-	private float x;
+	private double x;
 	/** The y reference point position. */
-	private float y;
+	private double y;
 
 	/** Position constructor. */
 	public Position() {
@@ -27,7 +27,7 @@ public class Position {
 	 * @param y
 	 *            The y reference point position.
 	 */
-	public Position(float x, float y) {
+	public Position(double x, double y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -48,7 +48,7 @@ public class Position {
 	 *
 	 * @return The x reference point position.
 	 */
-	public float getX() {
+	public double getX() {
 		return x;
 	}
 
@@ -58,7 +58,7 @@ public class Position {
 	 * @param x
 	 *            The new x reference point position.
 	 */
-	public void setX(float x) {
+	public void setX(double x) {
 		this.x = x;
 	}
 
@@ -67,7 +67,7 @@ public class Position {
 	 *
 	 * @return The y reference point position.
 	 */
-	public float getY() {
+	public double getY() {
 		return y;
 	}
 
@@ -77,7 +77,7 @@ public class Position {
 	 * @param y
 	 *            The new y reference point position.
 	 */
-	public void setY(float y) {
+	public void setY(double y) {
 		this.y = y;
 	}
 
@@ -104,7 +104,7 @@ public class Position {
 	 * @return The distance between two positions
 	 * 
 	 */
-	public float distance(Position position) {
-		return (float) Math.sqrt(Math.pow(this.x - position.getX(), 2) + Math.pow(this.y - position.getY(), 2));
+	public double distance(Position position) {
+		return Math.sqrt(Math.pow(this.x - position.getX(), 2) + Math.pow(this.y - position.getY(), 2));
 	}
 }

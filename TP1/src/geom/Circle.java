@@ -10,7 +10,7 @@ import javax.lang.model.element.UnknownElementException;
  */
 public class Circle extends Shape {
 	/** The radius of the circle. */
-	protected float radius;
+	protected double radius;
 
 	/**
 	 * Circle constructor with a default position of (0,0) and a radius of 10.
@@ -33,7 +33,7 @@ public class Circle extends Shape {
 	 * 
 	 * @see geom.Position
 	 */
-	public Circle(float radius) throws IllegalArgumentException {
+	public Circle(double radius) throws IllegalArgumentException {
 		super();
 		if (radius <= 0)
 			throw new IllegalArgumentException("radius is null or negative: " + radius);
@@ -56,7 +56,7 @@ public class Circle extends Shape {
 	 * 
 	 * @see geom.Position
 	 */
-	public Circle(Position position, float radius) throws IllegalArgumentException {
+	public Circle(Position position, double radius) throws IllegalArgumentException {
 		super(position);
 		if (radius <= 0)
 			throw new IllegalArgumentException("radius is null or negative: " + radius);
@@ -82,7 +82,7 @@ public class Circle extends Shape {
 	 * 
 	 * @see geom.Position
 	 */
-	public Circle(float x, float y, float radius) throws IllegalArgumentException {
+	public Circle(double x, double y, double radius) throws IllegalArgumentException {
 		super(x, y);
 		if (radius <= 0)
 			throw new IllegalArgumentException("radius is null or negative: " + radius);
@@ -96,9 +96,9 @@ public class Circle extends Shape {
 		if (shape instanceof Circle) {
 			Circle otherCircle = (Circle) shape;
 
-			float radiusSum = this.getRadius() + otherCircle.getRadius();
-			float dx = Math.abs(otherCircle.getPosition().getX() - this.getPosition().getX());
-			float dy = Math.abs(otherCircle.getPosition().getY() - this.getPosition().getY());
+			double radiusSum = this.getRadius() + otherCircle.getRadius();
+			double dx = Math.abs(otherCircle.getPosition().getX() - this.getPosition().getX());
+			double dy = Math.abs(otherCircle.getPosition().getY() - this.getPosition().getY());
 
 			if (dx > radiusSum)
 				return false;
@@ -154,15 +154,15 @@ public class Circle extends Shape {
 			// obb.getPosition().getX(),
 			/// rotateCircle.getPosition().getX() - obb.getPosition().getX());
 			obb.setPosition(
-					(float) (obb.getPosition().getX() * Math.cos(obb.getAngle())
+					(obb.getPosition().getX() * Math.cos(obb.getAngle())
 							+ obb.getPosition().getY() * Math.sin(obb.getAngle())),
-					(float) (-obb.getPosition().getX() * Math.sin(obb.getAngle())
+					(-obb.getPosition().getX() * Math.sin(obb.getAngle())
 							+ obb.getPosition().getY() * Math.cos(obb.getAngle())));
 
 			rotateCircle.setPosition(
-					(float) (rotateCircle.getPosition().getX() * Math.cos(obb.getAngle())
+					(rotateCircle.getPosition().getX() * Math.cos(obb.getAngle())
 							+ rotateCircle.getPosition().getY() * Math.sin(obb.getAngle())),
-					(float) (-rotateCircle.getPosition().getX() * Math.sin(obb.getAngle())
+					(-rotateCircle.getPosition().getX() * Math.sin(obb.getAngle())
 							+ rotateCircle.getPosition().getY() * Math.cos(obb.getAngle())));
 
 			rotateCircle.isCollideTo((AABB) obb);
@@ -183,7 +183,7 @@ public class Circle extends Shape {
 	 *
 	 * @return The radius.
 	 */
-	public float getRadius() {
+	public double getRadius() {
 		return this.radius;
 	}
 
@@ -193,7 +193,7 @@ public class Circle extends Shape {
 	 * @param radius
 	 *            The new radius.
 	 */
-	public void setRadius(float radius) {
+	public void setRadius(double radius) {
 		this.radius = radius;
 	}
 
