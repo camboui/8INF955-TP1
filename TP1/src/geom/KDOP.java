@@ -138,7 +138,7 @@ public class KDOP extends Shape {
 					List<KDOP> otherPolygons = this.toConvexKDOP();
 					for (KDOP kdop1 : thisPolygons) {
 						for (KDOP kdop2 : otherPolygons) {
-							if (kdop1.kdop_kdop(kdop2) == true)
+							if (kdop1.kdop_kdop(kdop2))
 								return true;
 						}
 					}
@@ -146,14 +146,14 @@ public class KDOP extends Shape {
 				} else if (!thisConvex && otherConvex) {
 					List<KDOP> thisPolygons = this.toConvexKDOP();
 					for (KDOP kdop1 : thisPolygons) {
-						if (kdop.kdop_kdop(kdop) == true)
+						if (kdop.kdop_kdop(kdop))
 							return true;
 					}
 					return false;
 				} else if (thisConvex && !otherConvex) {
 					List<KDOP> otherPolygons = this.toConvexKDOP();
 					for (KDOP kdop1 : otherPolygons) {
-						if (kdop_kdop(kdop1) == true)
+						if (kdop_kdop(kdop1))
 							return true;
 					}
 					return false;
