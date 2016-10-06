@@ -30,7 +30,6 @@ public class Window extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		setSize(width+getInsets().left+getInsets().right, height+getInsets().top+getInsets().bottom);
-
 	}
 
 	/**

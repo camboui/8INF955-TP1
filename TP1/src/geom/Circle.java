@@ -177,6 +177,8 @@ public class Circle extends Shape {
 
 		} else if (shape instanceof KDOP) {
 			// TODO Circle KDOP
+			KDOP kdop = (KDOP) shape;
+			return kdop.pointInside(getPosition()) || kdop.minDistance(getPosition()) < getRadius();
 		}
 		throw new UnknownElementException(null, shape);
 	}
