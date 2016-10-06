@@ -72,13 +72,13 @@ public class KDOP extends Shape {
 	 * @return true if the point p is inside the polygon
 	 */
 	public boolean pointInside(Position p) {
-		int nvert = this.getPoints().size();
+		int n = this.getPoints().size();
 		int i, j;
 		boolean b = false;
 
-		for (i = 0, j = nvert - 1; i < nvert; j = i++) {
+		for (i = 0, j = n - 1; i < n; j = i++) {
 			if (((getPoints().get(i).getY() > p.getY()) != (getPoints().get(j).getY() > p.getY()))
-					&& (p.getX() < (getPoints().get(j).getX() - getPoints().get(i).getX())
+					&& (p.getX() <= (getPoints().get(j).getX() - getPoints().get(i).getX())
 							* (p.getY() - getPoints().get(i).getY())
 							/ (getPoints().get(j).getY() - getPoints().get(i).getY()) + getPoints().get(i).getX()))
 				b = !b;
@@ -112,7 +112,7 @@ public class KDOP extends Shape {
 	public boolean isCollideTo(Shape shape) {
 		if (shape instanceof Circle) {
 			Circle c = (Circle) shape;
-			return pointInside(c.getPosition()) || minDistance(c.getPosition()) < c.getRadius();
+			return pointInside(c.getPosition()) || minDistance(c.getPosition()) <= c.getRadius();
 		} else if (shape instanceof Point) {
 			Point p = (Point) shape;
 			return pointInside(p.getPosition());

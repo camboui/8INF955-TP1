@@ -3,7 +3,6 @@ package geom;
 import java.awt.Graphics2D;
 import javax.lang.model.element.UnknownElementException;
 
-
 /**
  * A point shape.
  * 
@@ -62,17 +61,20 @@ public class Point extends Shape {
 			return this.isInside(c);
 		} else if (shape instanceof AABB) {
 			AABB aabb = (AABB) shape;
-			return this.isInside(aabb);
+			// return this.isInside(aabb);
+			return aabb.toKDOP().pointInside(getPosition());
 		} else if (shape instanceof OBB) {
 			OBB obb = (OBB) shape;
-			return this.isInside(obb);
+			// return this.isInside(obb);
+			return obb.toKDOP().pointInside(getPosition());
 		} else if (shape instanceof KDOP) {
 			KDOP kdop = (KDOP) shape;
-			if (kdop.isConvex()) {
-				return this.isInsideConvexPolygon(kdop);
-			} else {
-				// TODO kdop concave
-			}
+			// if (kdop.isConvex()) {
+			// return this.isInsideConvexPolygon(kdop);
+			// } else {
+			// // TODO kdop concave
+			// }
+			return kdop.pointInside(getPosition());
 		}
 		throw new UnknownElementException(null, shape);
 	}
@@ -104,13 +106,14 @@ public class Point extends Shape {
 	 * 
 	 * @see geom.Circle
 	 */
-	//Math.sqrt((x1-x0)*(x1-x0) + (y1-y0)*(y1-y0)) < r
+	// Math.sqrt((x1-x0)*(x1-x0) + (y1-y0)*(y1-y0)) < r
 	public boolean isInside(Circle circle) {
 
-		return (((this.getPosition().getX() - circle.getPosition().getX()) * (this.getPosition().getX()
-				- circle.getPosition().getX()) + (this.getPosition().getY()
-				- circle.getPosition().getY()) * (this.getPosition().getY()
-				- circle.getPosition().getY())) < (circle.getRadius() * circle.getRadius()));
+		return (((this.getPosition().getX() - circle.getPosition().getX())
+				* (this.getPosition().getX() - circle.getPosition().getX())
+				+ (this.getPosition().getY() - circle.getPosition().getY())
+						* (this.getPosition().getY() - circle.getPosition().getY())) < (circle.getRadius()
+								* circle.getRadius()));
 	}
 
 	/**
@@ -197,7 +200,7 @@ public class Point extends Shape {
 
 	@Override
 	public void draw(Graphics2D g) {
-		int size=2;
-		g.fillRect((int)getPosition().getX(), (int)getPosition().getY(), size, size);
+		int size = 2;
+		g.fillRect((int) getPosition().getX(), (int) getPosition().getY(), size, size);
 	}
 }

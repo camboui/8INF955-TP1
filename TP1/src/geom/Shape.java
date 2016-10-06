@@ -4,6 +4,8 @@ import java.awt.Graphics2D;
 import java.util.Iterator;
 import java.util.List;
 
+import game.GameObject;
+
 /**
  * Abstract class for the representation of 2D shapes.
  * 
@@ -80,6 +82,16 @@ public abstract class Shape {
 		for (Iterator<Shape> iterator = shapes.iterator(); iterator.hasNext();) {
 			Shape shape = (Shape) iterator.next();
 			isCollide |= this.isCollideTo(shape);
+		}
+		isColliding=isCollide;
+		return isCollide;
+	}
+	
+	public boolean isCollideGo(List<GameObject> go) {
+		boolean isCollide = false;
+		for (Iterator<GameObject> iterator = go.iterator(); iterator.hasNext();) {
+			GameObject gameObject = (GameObject) iterator.next();
+			isCollide |= this.isCollideTo(gameObject.getShape());
 		}
 		isColliding=isCollide;
 		return isCollide;

@@ -1,8 +1,6 @@
 package graphics;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -11,10 +9,12 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import geom.Circle;
-import geom.Shape;
+import game.GameObject;
+
 
 public class Window extends JFrame {
+
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Creates a new window
@@ -29,7 +29,7 @@ public class Window extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-		setSize(width+getInsets().left+getInsets().right, height+getInsets().top+getInsets().bottom);
+		setSize(width + getInsets().left + getInsets().right, height + getInsets().top + getInsets().bottom);
 	}
 
 	/**
@@ -38,14 +38,11 @@ public class Window extends JFrame {
 	 * @param shapes
 	 *            list of shapes to draw
 	 */
-	public void drawAll(List<Shape> shapes) {
+	public void drawAll(List<GameObject>... go) {
 
 		JPanel panel = new JPanel() {
-	        @Override
-	        public Dimension getPreferredSize() {
-	            return new Dimension(500, 500);
-	        }
-	        
+			private static final long serialVersionUID = 1L;
+
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
 				Graphics2D g2d = (Graphics2D) g;
@@ -55,12 +52,16 @@ public class Window extends JFrame {
 				rh.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 				g2d.setRenderingHints(rh);
 
-				for (Shape current : shapes) {
-					if (current.getIsColliding())
-						g2d.setPaint(new Color(1.0f, 0, 0));
-					else
-						g2d.setPaint(new Color(0, 0, 0));
-					current.draw(g2d);
+				for (int i = 0; i < go.length; i++) {
+					List<GameObject> currentList = go[i];
+
+					for (GameObject current : currentList) {
+						if (current.getShape().getIsColliding())
+							g2d.setPaint(new Color(1.0f, 0, 0));
+						else
+							g2d.setPaint(new Color(0, 0, 0));
+						current.getShape().draw(g2d);
+					}
 				}
 			};
 		};
