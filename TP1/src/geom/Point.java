@@ -110,7 +110,7 @@ public class Point extends Shape {
 		return (((this.getPosition().getX() - circle.getPosition().getX()) * (this.getPosition().getX()
 				- circle.getPosition().getX()) + (this.getPosition().getY()
 				- circle.getPosition().getY()) * (this.getPosition().getY()
-				- circle.getPosition().getY())) < (circle.getRadius() * circle.getRadius()));
+				- circle.getPosition().getY())) <= (circle.getRadius() * circle.getRadius()));
 	}
 
 	/**
