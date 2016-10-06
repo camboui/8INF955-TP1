@@ -54,7 +54,7 @@ public class KDOP extends Shape {
 	 *
 	 * 
 	 */
-	// TODO 3 points minimum?
+	// TODO 3 points minimum? Heuuuu? Il sert a quoi position ici appart foutre la merde?
 	public KDOP(List<Position> points, Position position) throws IllegalArgumentException {
 		super(position);
 		if (points.isEmpty())
@@ -66,18 +66,71 @@ public class KDOP extends Shape {
 		}
 	}
 
+	/**
+	 * 
+	 * @param p
+	 * @return true if the point p is inside the polygon
+	 */
+	public boolean pointInside(Position p) {
+		int n = this.getPoints().size();
+		int i, j;
+		boolean b = false;
+
+		for (i = 0, j = n - 1; i < n; j = i++) {
+			if (((getPoints().get(i).getY() > p.getY()) != (getPoints().get(j).getY() > p.getY()))
+					&& (p.getX() <= (getPoints().get(j).getX() - getPoints().get(i).getX())
+							* (p.getY() - getPoints().get(i).getY())
+							/ (getPoints().get(j).getY() - getPoints().get(i).getY()) + getPoints().get(i).getX()))
+				b = !b;
+		}
+		return b;
+	}
+
+	/**
+	 * 
+	 * @param target
+	 * @return the minimum distance between a point and the polygon edge
+	 */
+	public float minDistance(Position target) {
+		double current, min = Float.POSITIVE_INFINITY;
+		for (int i = 0; i < points.size() - 1; i++) {
+			current = target.minDistanceToLine(points.get(i), points.get(i + 1));
+			if (current < min) {
+				min = current;
+			}
+		}
+		current = target.minDistanceToLine(points.get(0), points.get(points.size() - 1));
+		if (current < min) {
+			min = current;
+		}
+
+		return (float) min;
+	}
+	
+
 	@Override
 	public boolean isCollideTo(Shape shape) {
-		if (shape instanceof KDOP) {
-			// TODO kdoo kdop
-		} else if (shape instanceof Circle) {
-			// TODO kdop circle
+		if (shape instanceof Circle) {
+			Circle c = (Circle) shape;
+			return pointInside(c.getPosition()) || minDistance(c.getPosition()) <= c.getRadius();
 		} else if (shape instanceof Point) {
-			// TODO kdop point
-		} else if (shape instanceof AABB) {
-			// TODO kdop aabb
-		} else if (shape instanceof OBB) {
-			// TODO kdop obb
+			Point p = (Point) shape;
+			return pointInside(p.getPosition());
+		} else {
+			KDOP kdop = null;
+			if (shape instanceof OBB || shape instanceof AABB) {
+				kdop = ((OBB) shape).toKDOP();
+			} else {
+				kdop = (KDOP) shape;
+			}
+
+			if (kdop != null) {
+				// TODO transform into convex polygons
+				// TODO apply SAT algorithm
+				// https://en.wikipedia.org/wiki/Hyperplane_separation_theorem
+
+			}
+
 		}
 
 		// TODO
@@ -174,7 +227,7 @@ public class KDOP extends Shape {
 		if (points.size() > 0) {
 			Iterator<Position> iterator = this.points.iterator();
 			Position positionIt = (Position) iterator.next();
-			
+
 			GeneralPath polygon = new GeneralPath(GeneralPath.WIND_EVEN_ODD, points.size());
 			polygon.moveTo(positionIt.getX(), positionIt.getY());
 

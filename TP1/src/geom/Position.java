@@ -110,6 +110,27 @@ public class Position {
 
 	/**
 	 * 
+	 * @param a
+	 * @param b
+	 * @return the minimum distance between this point and [AB]
+	 */
+	public double minDistanceToLine(Position a, Position b) {
+		double px = b.getX() - a.getX();
+		double py = b.getY() - a.getY();
+		double r = ((getX() - a.getX()) * px + (getY() - a.getY()) * py) / ((px * px) + (py * py));
+		if (r > 1) {
+			r = 1;
+		} else if (r < 0) {
+			r = 0;
+		}
+		double projX = a.getX() + r * px;
+		double projY = a.getY() + r * py;
+
+		return distance(new Position(projX, projY));
+	}
+
+	/**
+	 * 
 	 * @param originRot
 	 *            The origin point of the rotation
 	 * @param angle

@@ -2,6 +2,9 @@ package geom;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 /**
@@ -59,32 +62,33 @@ public class PointTest {
 	 */
 	@Test
 	public void testIsCollideToCircle() {
+		Circle tester = new Circle(1, 0, 1);
 
-		assertTrue(new Point(2, 0).isCollideTo(new Circle(1, 0, 1)));
-		assertTrue(new Point(0, 0).isCollideTo(new Circle(1, 0, 1)));
-		assertTrue(new Point(1, 1).isCollideTo(new Circle(1, 0, 1)));
-		assertTrue(new Point(1, -1).isCollideTo(new Circle(1, 0, 1)));
-		assertTrue(new Point(1.5, 0.5).isCollideTo(new Circle(1, 0, 1)));
-		assertTrue(new Point(1.5, -0.5).isCollideTo(new Circle(1, 0, 1)));
-		assertTrue(new Point(0.5, 0.5).isCollideTo(new Circle(1, 0, 1)));
-		assertTrue(new Point(0.5, -0.5).isCollideTo(new Circle(1, 0, 1)));
-		assertTrue(new Point(1, 0).isCollideTo(new Circle(1, 0, 1)));
-		assertTrue(new Point(1.5, 0).isCollideTo(new Circle(1, 0, 1)));
+		assertTrue(new Point(2, 0).isCollideTo(tester));
+		assertTrue(new Point(0, 0).isCollideTo(tester));
+		assertTrue(new Point(1, 1).isCollideTo(tester));
+		assertTrue(new Point(1, -1).isCollideTo(tester));
+		assertTrue(new Point(1.5, 0.5).isCollideTo(tester));
+		assertTrue(new Point(1.5, -0.5).isCollideTo(tester));
+		assertTrue(new Point(0.5, 0.5).isCollideTo(tester));
+		assertTrue(new Point(0.5, -0.5).isCollideTo(tester));
+		assertTrue(new Point(1, 0).isCollideTo(tester));
+		assertTrue(new Point(1.5, 0).isCollideTo(tester));
 
-		assertFalse(new Point(1.71, 0.71).isCollideTo(new Circle(1, 0, 1)));
-		assertFalse(new Point(0.29, 0.71).isCollideTo(new Circle(1, 0, 1)));
-		assertFalse(new Point(1.71, -0.71).isCollideTo(new Circle(1, 0, 1)));
-		assertFalse(new Point(0.29, -0.71).isCollideTo(new Circle(1, 0, 1)));
+		assertFalse(new Point(1.71, 0.71).isCollideTo(tester));
+		assertFalse(new Point(0.29, 0.71).isCollideTo(tester));
+		assertFalse(new Point(1.71, -0.71).isCollideTo(tester));
+		assertFalse(new Point(0.29, -0.71).isCollideTo(tester));
 
-		assertFalse(new Point(1.87, 0.5).isCollideTo(new Circle(1, 0, 1)));
-		assertFalse(new Point(0.13, 0.5).isCollideTo(new Circle(1, 0, 1)));
-		assertFalse(new Point(1.87, -0.5).isCollideTo(new Circle(1, 0, 1)));
-		assertFalse(new Point(0.13, -0.5).isCollideTo(new Circle(1, 0, 1)));
+		assertFalse(new Point(1.87, 0.5).isCollideTo(tester));
+		assertFalse(new Point(0.13, 0.5).isCollideTo(tester));
+		assertFalse(new Point(1.87, -0.5).isCollideTo(tester));
+		assertFalse(new Point(0.13, -0.5).isCollideTo(tester));
 
-		assertFalse(new Point(1.51, 0.87).isCollideTo(new Circle(1, 0, 1)));
-		assertFalse(new Point(0.49, 0.87).isCollideTo(new Circle(1, 0, 1)));
-		assertFalse(new Point(1.51, -0.87).isCollideTo(new Circle(1, 0, 1)));
-		assertFalse(new Point(0.49, -0.87).isCollideTo(new Circle(1, 0, 1)));
+		assertFalse(new Point(1.51, 0.87).isCollideTo(tester));
+		assertFalse(new Point(0.49, 0.87).isCollideTo(tester));
+		assertFalse(new Point(1.51, -0.87).isCollideTo(tester));
+		assertFalse(new Point(0.49, -0.87).isCollideTo(tester));
 	}
 
 	/**
@@ -93,30 +97,32 @@ public class PointTest {
 	@Test
 	public void testIsCollideToAABB() {
 
-		assertTrue(new Point(1, 1).isCollideTo(new AABB(1, 1, 3, 2)));
-		assertTrue(new Point(4, 1).isCollideTo(new AABB(1, 1, 3, 2)));
-		assertTrue(new Point(1, -1).isCollideTo(new AABB(1, 1, 3, 2)));
-		assertTrue(new Point(4, -1).isCollideTo(new AABB(1, 1, 3, 2)));
+		AABB tester = new AABB(1, 1, 3, 2);
 
-		assertTrue(new Point(2, 1).isCollideTo(new AABB(1, 1, 3, 2)));
-		assertTrue(new Point(1, 0).isCollideTo(new AABB(1, 1, 3, 2)));
-		assertTrue(new Point(4, 0).isCollideTo(new AABB(1, 1, 3, 2)));
-		assertTrue(new Point(2, -1).isCollideTo(new AABB(1, 1, 3, 2)));
+		assertTrue(new Point(1, 1).isCollideTo(tester));
+		assertTrue(new Point(4, 1).isCollideTo(tester));
+		assertTrue(new Point(1, -1).isCollideTo(tester));
+		assertTrue(new Point(4, -1).isCollideTo(tester));
 
-		assertTrue(new Point(2, 0).isCollideTo(new AABB(1, 1, 3, 2)));
-		assertTrue(new Point(3, 0).isCollideTo(new AABB(1, 1, 3, 2)));
-		assertTrue(new Point(2, 0.5).isCollideTo(new AABB(1, 1, 3, 2)));
-		assertTrue(new Point(3, -0.5).isCollideTo(new AABB(1, 1, 3, 2)));
+		assertTrue(new Point(2, 1).isCollideTo(tester));
+		assertTrue(new Point(1, 0).isCollideTo(tester));
+		assertTrue(new Point(4, 0).isCollideTo(tester));
+		assertTrue(new Point(2, -1).isCollideTo(tester));
 
-		assertFalse(new Point(0, 0).isCollideTo(new AABB(1, 1, 3, 2)));
-		assertFalse(new Point(1, 2).isCollideTo(new AABB(1, 1, 3, 2)));
-		assertFalse(new Point(1, -2).isCollideTo(new AABB(1, 1, 3, 2)));
-		assertFalse(new Point(4, 2).isCollideTo(new AABB(1, 1, 3, 2)));
-		assertFalse(new Point(4, -2).isCollideTo(new AABB(1, 1, 3, 2)));
-		assertFalse(new Point(0, 1).isCollideTo(new AABB(1, 1, 3, 2)));
-		assertFalse(new Point(0, -1).isCollideTo(new AABB(1, 1, 3, 2)));
-		assertFalse(new Point(5, 1).isCollideTo(new AABB(1, 1, 3, 2)));
-		assertFalse(new Point(5, -1).isCollideTo(new AABB(1, 1, 3, 2)));
+		assertTrue(new Point(2, 0).isCollideTo(tester));
+		assertTrue(new Point(3, 0).isCollideTo(tester));
+		assertTrue(new Point(2, 0.5).isCollideTo(tester));
+		assertTrue(new Point(3, -0.5).isCollideTo(tester));
+
+		assertFalse(new Point(0, 0).isCollideTo(tester));
+		assertFalse(new Point(1, 2).isCollideTo(tester));
+		assertFalse(new Point(1, -2).isCollideTo(tester));
+		assertFalse(new Point(4, 2).isCollideTo(tester));
+		assertFalse(new Point(4, -2).isCollideTo(tester));
+		assertFalse(new Point(0, 1).isCollideTo(tester));
+		assertFalse(new Point(0, -1).isCollideTo(tester));
+		assertFalse(new Point(5, 1).isCollideTo(tester));
+		assertFalse(new Point(5, -1).isCollideTo(tester));
 	}
 
 	/**
@@ -124,7 +130,42 @@ public class PointTest {
 	 */
 	@Test
 	public void testIsCollideToOBB() {
-		fail("Not yet implemented");
+
+		OBB tester = new OBB(1, 1, 3, 2, 0);
+
+		assertTrue(new Point(1, 1).isCollideTo(tester));
+		assertTrue(new Point(4, 1).isCollideTo(tester));
+		assertTrue(new Point(1, -1).isCollideTo(tester));
+		assertTrue(new Point(4, -1).isCollideTo(tester));
+
+		assertTrue(new Point(2, 1).isCollideTo(tester));
+		assertTrue(new Point(1, 0).isCollideTo(tester));
+		assertTrue(new Point(4, 0).isCollideTo(tester));
+		assertTrue(new Point(2, -1).isCollideTo(tester));
+
+		assertTrue(new Point(2, 0).isCollideTo(tester));
+		assertTrue(new Point(3, 0).isCollideTo(tester));
+		assertTrue(new Point(2, 0.5).isCollideTo(tester));
+		assertTrue(new Point(3, -0.5).isCollideTo(tester));
+
+		assertFalse(new Point(0, 0).isCollideTo(tester));
+		assertFalse(new Point(1, 2).isCollideTo(tester));
+		assertFalse(new Point(1, -2).isCollideTo(tester));
+		assertFalse(new Point(4, 2).isCollideTo(tester));
+		assertFalse(new Point(4, -2).isCollideTo(tester));
+		assertFalse(new Point(0, 1).isCollideTo(tester));
+		assertFalse(new Point(0, -1).isCollideTo(tester));
+		assertFalse(new Point(5, 1).isCollideTo(tester));
+		assertFalse(new Point(5, -1).isCollideTo(tester));
+
+		// TODO Faire plus de cas ...
+		assertTrue(new Point(2, 2).isCollideTo(new OBB(1, 1, 2, 1, Math.PI / 4)));
+		assertTrue(new Point(Math.cos(Math.PI / 4) * 2, Math.sin(Math.PI / 4) / 2)
+				.isCollideTo(new OBB(1, 1, 2, 1, Math.PI / 4)));
+
+		assertFalse(new Point(1, 0).isCollideTo(new OBB(1, 1, 2, 1, Math.PI / 4)));
+		assertFalse(new Point(3, 1).isCollideTo(new OBB(1, 1, 2, 1, Math.PI / 4)));
+		assertFalse(new Point(1, 2).isCollideTo(new OBB(1, 1, 2, 1, Math.PI / 4)));
 	}
 
 	/**
@@ -132,7 +173,32 @@ public class PointTest {
 	 */
 	@Test
 	public void testIsCollideToKDOP() {
-		fail("Not yet implemented");
+		List<Position> positionList = new ArrayList<Position>();
+		positionList.add(new Position(0, 0));
+		positionList.add(new Position(0, 1));
+		positionList.add(new Position(0, 2));
+		positionList.add(new Position(1, 2));
+		positionList.add(new Position(2, 2));
+		positionList.add(new Position(1, 1));
+		positionList.add(new Position(2, 0));
+		positionList.add(new Position(1, 0));
+
+		KDOP tester = new KDOP(positionList);
+
+		assertTrue(new Point(0, 0).isCollideTo(tester));
+		assertTrue(new Point(0, 0.5).isCollideTo(tester));
+		assertTrue(new Point(0, 1.5).isCollideTo(tester));
+		assertTrue(new Point(0, 2).isCollideTo(tester));
+		assertTrue(new Point(0.5, 2).isCollideTo(tester));
+		assertTrue(new Point(1.5, 2).isCollideTo(tester));
+		assertTrue(new Point(2, 2).isCollideTo(tester));
+		assertTrue(new Point(1, 1).isCollideTo(tester));
+		assertTrue(new Point(2, 0).isCollideTo(tester));
+		assertTrue(new Point(1, 0).isCollideTo(tester));
+
+		assertFalse(new Point(1.5, 1).isCollideTo(tester));
+		assertTrue(new Point(2, 1).isCollideTo(tester));
+
 	}
 
 	/**
@@ -147,35 +213,37 @@ public class PointTest {
 	}
 
 	/**
-	 * Test method for {@link geom.Point#draw(java.awt.Graphics2D)}.
-	 */
-	@Test
-	public void testDraw() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link geom.Point#Point(geom.Point)}.
-	 */
-	@Test
-	public void testPointPoint() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link geom.Point#equals(geom.Point)}.
-	 */
-	@Test
-	public void testEqualsPoint() {
-		fail("Not yet implemented");
-	}
-
-	/**
 	 * Test method for {@link geom.Point#isInside(geom.Circle)}.
 	 */
 	@Test
 	public void testIsInsideCircle() {
-		fail("Not yet implemented");
+		Circle tester = new Circle(1, 0, 1);
+
+		assertTrue(new Point(2, 0).isInside(tester));
+		assertTrue(new Point(0, 0).isInside(tester));
+		assertTrue(new Point(1, 1).isInside(tester));
+		assertTrue(new Point(1, -1).isInside(tester));
+		assertTrue(new Point(1.5, 0.5).isInside(tester));
+		assertTrue(new Point(1.5, -0.5).isInside(tester));
+		assertTrue(new Point(0.5, 0.5).isInside(tester));
+		assertTrue(new Point(0.5, -0.5).isInside(tester));
+		assertTrue(new Point(1, 0).isInside(tester));
+		assertTrue(new Point(1.5, 0).isInside(tester));
+
+		assertFalse(new Point(1.71, 0.71).isInside(tester));
+		assertFalse(new Point(0.29, 0.71).isInside(tester));
+		assertFalse(new Point(1.71, -0.71).isInside(tester));
+		assertFalse(new Point(0.29, -0.71).isInside(tester));
+
+		assertFalse(new Point(1.87, 0.5).isInside(tester));
+		assertFalse(new Point(0.13, 0.5).isInside(tester));
+		assertFalse(new Point(1.87, -0.5).isInside(tester));
+		assertFalse(new Point(0.13, -0.5).isInside(tester));
+
+		assertFalse(new Point(1.51, 0.87).isInside(tester));
+		assertFalse(new Point(0.49, 0.87).isInside(tester));
+		assertFalse(new Point(1.51, -0.87).isInside(tester));
+		assertFalse(new Point(0.49, -0.87).isInside(tester));
 	}
 
 	/**
@@ -183,7 +251,42 @@ public class PointTest {
 	 */
 	@Test
 	public void testIsInsideOBB() {
-		fail("Not yet implemented");
+
+		OBB tester = new OBB(1, 1, 3, 2, 0);
+
+		assertTrue(new Point(1, 1).isInside(tester));
+		assertTrue(new Point(4, 1).isInside(tester));
+		assertTrue(new Point(1, -1).isInside(tester));
+		assertTrue(new Point(4, -1).isInside(tester));
+
+		assertTrue(new Point(2, 1).isInside(tester));
+		assertTrue(new Point(1, 0).isInside(tester));
+		assertTrue(new Point(4, 0).isInside(tester));
+		assertTrue(new Point(2, -1).isInside(tester));
+
+		assertTrue(new Point(2, 0).isInside(tester));
+		assertTrue(new Point(3, 0).isInside(tester));
+		assertTrue(new Point(2, 0.5).isInside(tester));
+		assertTrue(new Point(3, -0.5).isInside(tester));
+
+		assertFalse(new Point(0, 0).isInside(tester));
+		assertFalse(new Point(1, 2).isInside(tester));
+		assertFalse(new Point(1, -2).isInside(tester));
+		assertFalse(new Point(4, 2).isInside(tester));
+		assertFalse(new Point(4, -2).isInside(tester));
+		assertFalse(new Point(0, 1).isInside(tester));
+		assertFalse(new Point(0, -1).isInside(tester));
+		assertFalse(new Point(5, 1).isInside(tester));
+		assertFalse(new Point(5, -1).isInside(tester));
+
+		// TODO Faire plus de cas ...
+		assertTrue(new Point(2, 2).isInside(new OBB(1, 1, 2, 1, Math.PI / 4)));
+		assertTrue(new Point(Math.cos(Math.PI / 4) * 2, Math.sin(Math.PI / 4) / 2)
+				.isCollideTo(new OBB(1, 1, 2, 1, Math.PI / 4)));
+
+		assertFalse(new Point(1, 0).isInside(new OBB(1, 1, 2, 1, Math.PI / 4)));
+		assertFalse(new Point(3, 1).isInside(new OBB(1, 1, 2, 1, Math.PI / 4)));
+		assertFalse(new Point(1, 2).isInside(new OBB(1, 1, 2, 1, Math.PI / 4)));
 	}
 
 	/**
@@ -191,15 +294,11 @@ public class PointTest {
 	 */
 	@Test
 	public void testDistance() {
-		fail("Not yet implemented");
-	}
 
-	/**
-	 * Test method for {@link geom.Point#isInsideConvexPolygon(geom.KDOP)}.
-	 */
-	@Test
-	public void testIsInsideConvexPolygon() {
-		fail("Not yet implemented");
+		Point tester = new Point(1, 1);
+
+		assertEquals(1, tester.distance(new Point(2, 1)), 0);
+		assertEquals(Math.sqrt(2), tester.distance(new Point(2, 2)), 0);
 	}
 
 }
