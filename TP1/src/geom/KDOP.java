@@ -2,6 +2,7 @@ package geom;
 
 import java.awt.Graphics2D;
 import java.awt.geom.GeneralPath;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -106,7 +107,6 @@ public class KDOP extends Shape {
 
 		return (float) min;
 	}
-	
 
 	@Override
 	public boolean isCollideTo(Shape shape) {
@@ -118,23 +118,157 @@ public class KDOP extends Shape {
 			return pointInside(p.getPosition());
 		} else {
 			KDOP kdop = null;
-			if (shape instanceof OBB || shape instanceof AABB) {
+			if (shape instanceof OBB) {
 				kdop = ((OBB) shape).toKDOP();
+			} else if (shape instanceof AABB) {
+				kdop = ((AABB) shape).toKDOP();
 			} else {
 				kdop = (KDOP) shape;
 			}
 
 			if (kdop != null) {
-				// TODO transform into convex polygons
-				// TODO apply SAT algorithm
 				// https://en.wikipedia.org/wiki/Hyperplane_separation_theorem
+				boolean thisConvex = isConvex();
+				boolean otherConvex = kdop.isConvex();
+				if (thisConvex && otherConvex) {
+					return kdop_kdop(kdop);
+				} else if (!thisConvex && !otherConvex) {
+					List<KDOP> thisPolygons = this.toConvexKDOP();
 
+					List<KDOP> otherPolygons = this.toConvexKDOP();
+					for (KDOP kdop1 : thisPolygons) {
+						for (KDOP kdop2 : otherPolygons) {
+							if (kdop1.kdop_kdop(kdop2) == true)
+								return true;
+						}
+					}
+					return false;
+				} else if (!thisConvex && otherConvex) {
+					List<KDOP> thisPolygons = this.toConvexKDOP();
+					for (KDOP kdop1 : thisPolygons) {
+						if (kdop.kdop_kdop(kdop) == true)
+							return true;
+					}
+					return false;
+				} else if (thisConvex && !otherConvex) {
+					List<KDOP> otherPolygons = this.toConvexKDOP();
+					for (KDOP kdop1 : otherPolygons) {
+						if (kdop_kdop(kdop1) == true)
+							return true;
+					}
+					return false;
+				}
 			}
-
 		}
-
-		// TODO
 		return false;
+	}
+
+	public List<KDOP> toConvexKDOP() {
+		//TODO
+		return new ArrayList<KDOP>();
+	}
+
+	public Position[] getAxes() {
+
+		Position[] axes = new Position[this.getPoints().size()];
+		// loop over the vertices
+		for (int i = 0; i < axes.length; i++) {
+			// get the current vertex
+			Position p1 = this.getPoints().get(i);
+			// get the next vertex
+			Position p2 = this.getPoints().get(i + 1 == axes.length ? 0 : i + 1);
+
+			// subtract the two to get the edge vector
+			// TODO SOUSTRACTION de vecteur ?
+			Position edge = new Position(p1.getX() - p2.getX(), p1.getY() - p2.getY());
+			// get either perpendicular vector
+			Position normal = new Position(edge.getY(), -edge.getX());
+			// the perp method is just (x, y) => (-y, x) or (y, -x)
+			axes[i] = normal;
+		}
+		return axes;
+	}
+
+	public double dot(Position p1, Position p2) {
+		return p1.getX() * p2.getX() + p1.getY() * p2.getY();
+	}
+
+	public Position project(Position axis) {
+		double min = dot(axis, this.getPoints().get(0));
+		double max = min;
+		for (int i = 1; i < this.getPoints().size(); i++) {
+			// NOTE: the axis must be normalized to get accurate projections
+			double p = dot(axis, this.getPoints().get(i));
+			if (p < min) {
+				min = p;
+			} else if (p > max) {
+				max = p;
+			}
+		}
+		Position proj = new Position(min, max);
+		return proj;
+	}
+
+	public boolean doesOverlap(Position p1, Position p2) {
+		return (p1.getY() > p2.getX() || p1.getX() > p2.getY());
+
+	}
+
+	public double getOverlap(Position p1, Position p2) {
+		return (p1.getY() < p2.getY()) ? p1.getY() - p2.getX() : p2.getY() - p1.getX();
+	}
+
+	public boolean kdop_kdop(KDOP kdop) {
+		double overlap = Double.POSITIVE_INFINITY;
+		Position smallest = null;
+		Position[] axes1 = kdop.getAxes();
+		Position[] axes2 = getAxes();
+		// loop over the axes1
+		for (int i = 0; i < axes1.length; i++) {
+			Position axis = axes1[i];
+			// project both shapes onto the axis
+			Position p1 = this.project(axis);
+			Position p2 = kdop.project(axis);
+			// do the projections overlap?
+			if (!doesOverlap(p1, p2)) {
+				// then we can guarantee that the shapes do not overlap
+				return false;
+			} else {
+				// get the overlap
+				double o = getOverlap(p1, p2);
+				// check for minimum
+				if (o < overlap) {
+					// then set this one as the smallest
+					overlap = o;
+					smallest = axis;
+				}
+			}
+		}
+		// loop over the axes2
+		for (int i = 0; i < axes2.length; i++) {
+			Position axis = axes2[i];
+			// project both shapes onto the axis
+			Position p1 = this.project(axis);
+			Position p2 = kdop.project(axis);
+			// do the projections overlap?
+			if (!doesOverlap(p1, p2)) {
+				// then we can guarantee that the shapes do not overlap
+				return false;
+			} else {
+				// get the overlap
+				double o = getOverlap(p1, p2);
+				// check for minimum
+				if (o < overlap) {
+					// then set this one as the smallest
+					overlap = o;
+					smallest = axis;
+				}
+			}
+		}
+		// MTV mtv = new MTV(smallest, overlap);
+		// if we get here then we know that every axis had overlap on it
+		// so we can guarantee an intersection
+		return true;
 	}
 
 	@Override
@@ -157,21 +291,20 @@ public class KDOP extends Shape {
 	 */
 	public boolean isConvex() {
 		// Cas particulier
-		Position A = this.points.get(this.points.size() - 1); // Dernier point
-		Position B = this.points.get(0); // Premier point
-		Position C = this.points.get(1); // Deuxieme point
+		Position A, B, C;
 		for (int i = 0; i < this.points.size() - 2; i++) {
-			if (getAngle(A, B, C) > Math.PI)
+			A = this.points.get(i); // Dernier point
+			B = this.points.get(i + 1); // Premier point
+			C = this.points.get(i + 2); // Deuxieme point
+
+			if (getAngle(A, B, C) > 180)
 				return false;
-			A = B;
-			B = C;
-			C = this.points.get(i + 1);
 		}
 		// Cas Particulier
 		A = this.points.get(this.points.size() - 2); // Avant-dernier point
 		B = this.points.get(this.points.size() - 1); // Dernier point
 		C = this.points.get(0); // Premier point
-		return !(getAngle(A, B, C) > Math.PI);
+		return !(getAngle(A, B, C) > 180);
 	}
 
 	/**
@@ -185,13 +318,13 @@ public class KDOP extends Shape {
 	 *            The last point.
 	 * @return The angle between a,b,c.
 	 */
+
 	private double getAngle(Position a, Position b, Position c) {
 		double bax = a.getX() - b.getX();
 		double bay = a.getY() - b.getY();
 		double bcx = c.getX() - b.getX();
 		double bcy = c.getY() - b.getY();
-		return Math.acos((bax * bcx + bay * bcy)
-				/ (Math.sqrt(Math.pow(bax, 2) + Math.pow(bay, 2)) * Math.sqrt(Math.pow(bcx, 2) + Math.pow(bcy, 2))));
+		return (bax * bcx + bay * bcy);
 	}
 
 	/**

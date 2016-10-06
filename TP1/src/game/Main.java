@@ -46,7 +46,7 @@ public class Main {
 		Circle c = new Circle(300, 190, 70);
 		entities.add(new GameObject(c, 1, 1));
 
-		OBB obb = new OBB(new Position(20, 20), 40, 90, Math.PI / 3);
+		OBB obb = new OBB(new Position(40, 20), 40, 90, Math.PI / 3);
 		entities.add(new GameObject(obb, 1.2f, -1));
 
 		AABB aabb = new AABB(350, 400, 80, 45);
