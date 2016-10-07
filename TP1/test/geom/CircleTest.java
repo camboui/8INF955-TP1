@@ -291,9 +291,7 @@ public class CircleTest {
 		positionList.add(new Position(0, 1));
 		positionList.add(new Position(1, 2));
 		positionList.add(new Position(2, 2));
-		positionList.add(new Position(2, 1));
 		positionList.add(new Position(3, 1));
-		positionList.add(new Position(2, 0));
 		positionList.add(new Position(2, -1));
 		positionList.add(new Position(1, -2));
 		positionList.add(new Position(0, -1));
