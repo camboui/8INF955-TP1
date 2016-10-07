@@ -46,10 +46,34 @@ public class KDOPTest {
 	}
 
 	/**
-	 * Test method for {@link geom.Shape#isCollide(java.util.List)}.
+	 * Test method for {@link geom.KDOP#pointInside(geom.Position)}.
 	 */
 	@Test
-	public void testIsCollide() {
+	public void testPointInside() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link geom.KDOP#minDistance(geom.Position)}.
+	 */
+	@Test
+	public void testMinDistance() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link geom.KDOP#crossProduct(geom.Position, geom.Position, geom.Position)}.
+	 */
+	@Test
+	public void testCrossProduct() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link geom.KDOP#getPoints()}.
+	 */
+	@Test
+	public void testGetPoints() {
 		fail("Not yet implemented");
 	}
 

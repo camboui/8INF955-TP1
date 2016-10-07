@@ -140,7 +140,7 @@ public class KDOP extends Shape {
 		return false;
 	}
 
-	public Position[] getAxes() {
+	private Position[] getAxes() {
 
 		Position[] axes = new Position[this.getPoints().size()];
 		// loop over the vertices
@@ -161,11 +161,11 @@ public class KDOP extends Shape {
 		return axes;
 	}
 
-	public double dot(Position p1, Position p2) {
+	private double dot(Position p1, Position p2) {
 		return p1.getX() * p2.getX() + p1.getY() * p2.getY();
 	}
 
-	public Position project(Position axis) {
+	private Position project(Position axis) {
 		double min = dot(axis, this.getPoints().get(0));
 		double max = min;
 		for (int i = 1; i < this.getPoints().size(); i++) {
@@ -181,16 +181,16 @@ public class KDOP extends Shape {
 		return proj;
 	}
 
-	public boolean doesOverlap(Position p1, Position p2) {
+	private boolean doesOverlap(Position p1, Position p2) {
 		return (p1.getY() >= p2.getX() || p1.getX() >= p2.getY());
 
 	}
 
-	public double getOverlap(Position p1, Position p2) {
+	private double getOverlap(Position p1, Position p2) {
 		return (p1.getY() <= p2.getY()) ? p1.getY() - p2.getX() : p2.getY() - p1.getX();
 	}
 
-	public boolean kdop_kdop(KDOP kdop) {
+	private boolean kdop_kdop(KDOP kdop) {
 		double overlap = Double.POSITIVE_INFINITY;
 		Position smallest = null;
 		Position[] axes1 = kdop.getAxes();
@@ -258,7 +258,7 @@ public class KDOP extends Shape {
 	 * 
 	 * @return true if the KDOP is convex, false if not.
 	 */
-	public boolean isConvex() {
+	private boolean isConvex() {
 		Position A = this.points.get(this.points.size() - 1);
 		Position B = this.points.get(0);
 		Position C = this.points.get(1);
@@ -303,17 +303,8 @@ public class KDOP extends Shape {
 	 * 
 	 * @return The cross product between vector ab and bc.
 	 */
-	public double crossProduct(Position a, Position b, Position c) {
+	public static double crossProduct(Position a, Position b, Position c) {
 		return (b.getX() - a.getX()) * (c.getY() - b.getY()) - (b.getY() - a.getY()) * (c.getX() - b.getX());
-	}
-
-	/**
-	 * Method to know if a KDOP is concave.
-	 * 
-	 * @return true if the KDOP is concave, false if not.
-	 */
-	public boolean isConcave() {
-		return !this.isConvex();
 	}
 
 	/**
