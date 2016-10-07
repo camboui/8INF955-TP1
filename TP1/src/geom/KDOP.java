@@ -182,12 +182,12 @@ public class KDOP extends Shape {
 	}
 
 	public boolean doesOverlap(Position p1, Position p2) {
-		return (p1.getY() > p2.getX() || p1.getX() > p2.getY());
+		return (p1.getY() >= p2.getX() || p1.getX() >= p2.getY());
 
 	}
 
 	public double getOverlap(Position p1, Position p2) {
-		return (p1.getY() < p2.getY()) ? p1.getY() - p2.getX() : p2.getY() - p1.getX();
+		return (p1.getY() <= p2.getY()) ? p1.getY() - p2.getX() : p2.getY() - p1.getX();
 	}
 
 	public boolean kdop_kdop(KDOP kdop) {
@@ -259,12 +259,13 @@ public class KDOP extends Shape {
 	 * @return true if the KDOP is convex, false if not.
 	 */
 	public boolean isConvex() {
-		// Cas particulier
-		Position A = this.points.get(this.points.size() - 1); // Dernier point
-		Position B = this.points.get(0); // Premier point
-		Position C = this.points.get(1); // Deuxieme point
+		Position A = this.points.get(this.points.size() - 1);
+		Position B = this.points.get(0);
+		Position C = this.points.get(1);
 
-		boolean isClockWise = (crossProduct(A,B,C)) >= 0;
+		double cp = crossProduct(A, B, C);
+		boolean decided = (cp != 0);
+		boolean isPositiv = (cp > 0);
 
 		for (int i = 0; i < this.points.size() - 2; i++) {
 
@@ -272,14 +273,20 @@ public class KDOP extends Shape {
 			B = this.points.get(i + 1);
 			C = this.points.get(i + 2);
 
-			if (crossProduct(A,B,C) >= 0 != isClockWise)
+			cp = crossProduct(A, B, C);
+			if (!decided && cp > 0) {
+				isPositiv = (cp > 0);
+				decided = true;
+			}
+
+			if (cp != 0 && cp > 0 != isPositiv)
 				return false;
 		}
-		A = this.points.get(this.points.size() - 2); // Dernier point
-		B = this.points.get(this.points.size() - 1); // Premier point
-		C = this.points.get(0); // Deuxieme point
-
-		return (crossProduct(A,B,C) >= 0) == isClockWise;
+		A = this.points.get(this.points.size() - 2);
+		B = this.points.get(this.points.size() - 1);
+		C = this.points.get(0);
+		cp = crossProduct(A, B, C);
+		return (cp != 0 || (cp > 0) == isPositiv);
 	}
 
 	/**
@@ -287,7 +294,7 @@ public class KDOP extends Shape {
 	 * @param a
 	 * @param b
 	 * @param c
-	 * @return calculates the cross product between vector ab and bc 
+	 * @return calculates the cross product between vector ab and bc
 	 */
 	public double crossProduct(Position a, Position b, Position c) {
 		return (b.getX() - a.getX()) * (c.getY() - b.getY()) - (b.getY() - a.getY()) * (c.getX() - b.getX());
