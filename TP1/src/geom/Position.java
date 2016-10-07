@@ -111,7 +111,9 @@ public class Position {
 	/**
 	 * 
 	 * @param a
+	 *            The first position
 	 * @param b
+	 *            The second position
 	 * @return the minimum distance between this point and [AB]
 	 */
 	public double minDistanceToLine(Position a, Position b) {

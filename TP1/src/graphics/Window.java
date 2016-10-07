@@ -11,9 +11,17 @@ import javax.swing.JPanel;
 
 import game.GameObject;
 
-
+/**
+ * Window to display the shapes.
+ * 
+ * @author BRANGER Mathias, CROUZET Matthieu, MACE Quentin.
+ *
+ */
 public class Window extends JFrame {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -35,7 +43,7 @@ public class Window extends JFrame {
 	/**
 	 * Draw all the shapes in parameter
 	 * 
-	 * @param shapes
+	 * @param go
 	 *            list of shapes to draw
 	 */
 	public void drawAll(List<GameObject>... go) {

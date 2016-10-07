@@ -54,7 +54,8 @@ public class KDOP extends Shape {
 	 *
 	 * 
 	 */
-	// TODO 3 points minimum? Heuuuu? Il sert a quoi position ici appart foutre la merde?
+	// TODO 3 points minimum? Heuuuu? Il sert a quoi position ici appart foutre
+	// la merde?
 	public KDOP(List<Position> points, Position position) throws IllegalArgumentException {
 		super(position);
 		if (points.isEmpty())
@@ -68,18 +69,20 @@ public class KDOP extends Shape {
 
 	/**
 	 * 
-	 * @param p
+	 * @param position
+	 *            The wanted position to be tested.
+	 *            
 	 * @return true if the point p is inside the polygon
 	 */
-	public boolean pointInside(Position p) {
+	public boolean pointInside(Position position) {
 		int n = this.getPoints().size();
 		int i, j;
 		boolean b = false;
 
 		for (i = 0, j = n - 1; i < n; j = i++) {
-			if (((getPoints().get(i).getY() > p.getY()) != (getPoints().get(j).getY() > p.getY()))
-					&& (p.getX() <= (getPoints().get(j).getX() - getPoints().get(i).getX())
-							* (p.getY() - getPoints().get(i).getY())
+			if (((getPoints().get(i).getY() > position.getY()) != (getPoints().get(j).getY() > position.getY()))
+					&& (position.getX() <= (getPoints().get(j).getX() - getPoints().get(i).getX())
+							* (position.getY() - getPoints().get(i).getY())
 							/ (getPoints().get(j).getY() - getPoints().get(i).getY()) + getPoints().get(i).getX()))
 				b = !b;
 		}
@@ -89,6 +92,8 @@ public class KDOP extends Shape {
 	/**
 	 * 
 	 * @param target
+	 *            The wanted position to be tested.
+	 *            
 	 * @return the minimum distance between a point and the polygon edge
 	 */
 	public float minDistance(Position target) {
@@ -106,7 +111,6 @@ public class KDOP extends Shape {
 
 		return (float) min;
 	}
-	
 
 	@Override
 	public boolean isCollideTo(Shape shape) {
