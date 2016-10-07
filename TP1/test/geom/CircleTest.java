@@ -2,6 +2,9 @@ package geom;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 /**
@@ -181,39 +184,37 @@ public class CircleTest {
 		assertFalse(tester.isCollideTo(new Circle(0, 1, 0.4)));
 
 		assertFalse(tester.isCollideTo(new Circle(3, 2, 1.8)));
-
 	}
 
 	/**
 	 * Test method for {@link geom.Circle#isCollideTo(geom.Shape)}.
 	 */
 	@Test
-	// TODO TOUT REFAIREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEUUUUUUUUUUUUH
 	public void testIsCollideToAABB() {
 		Circle tester = new Circle(1, 0, 1);
 		assertTrue(tester.isCollideTo(new AABB(2, 0, 1, 1)));
-		assertTrue(tester.isCollideTo(new AABB(2, 1, 1, 1)));
-		assertTrue(tester.isCollideTo(new AABB(2, 0, 1, 2)));
+		assertTrue(tester.isCollideTo(new AABB(2, -1, 1, 1)));
+		assertTrue(tester.isCollideTo(new AABB(2, -1, 1, 2)));
 		assertTrue(tester.isCollideTo(new AABB(1.5, 0, 1, 2)));
 
-		assertTrue(tester.isCollideTo(new AABB(1, 2, 1, 1)));
-		assertTrue(tester.isCollideTo(new AABB(0, 2, 1, 1)));
-		assertTrue(tester.isCollideTo(new AABB(0, 2, 2, 1)));
-		assertTrue(tester.isCollideTo(new AABB(0, 1.5, 2, 1)));
+		assertTrue(tester.isCollideTo(new AABB(1, 1, 1, 1)));
+		assertTrue(tester.isCollideTo(new AABB(0, 1, 1, 1)));
+		assertTrue(tester.isCollideTo(new AABB(1, 1, 1, 1)));
+		assertTrue(tester.isCollideTo(new AABB(0.5, 1, 2, 1)));
 
 		assertTrue(tester.isCollideTo(new AABB(1, 1, 1, 1)));
 		assertTrue(tester.isCollideTo(new AABB(0, 1, 1, 1)));
 		assertTrue(tester.isCollideTo(new AABB(0, 1, 2, 1)));
 		assertTrue(tester.isCollideTo(new AABB(0, 0.5, 2, 1)));
 
-		assertTrue(tester.isCollideTo(new AABB(-1, 1, 1, 1)));
+		assertTrue(tester.isCollideTo(new AABB(-1, -1, 1, 1)));
 		assertTrue(tester.isCollideTo(new AABB(-1, 0, 1, 1)));
 		assertTrue(tester.isCollideTo(new AABB(-1, 0, 1, 2)));
 		assertTrue(tester.isCollideTo(new AABB(-0.5, 0, 1, 2)));
 
 		assertTrue(tester.isCollideTo(new AABB(0, 1, 2, 2)));
 		assertTrue(tester.isCollideTo(new AABB(0.5, 0.5, 1, 1)));
-		assertTrue(tester.isCollideTo(new AABB(-1, 2, 4, 4)));
+		assertTrue(tester.isCollideTo(new AABB(-1, -2, 4, 4)));
 
 		assertFalse(tester.isCollideTo(new AABB(2.1, 1, 2, 2)));
 		assertFalse(tester.isCollideTo(new AABB(0, 2, 2, 0.9)));
@@ -221,19 +222,15 @@ public class CircleTest {
 		assertFalse(tester.isCollideTo(new AABB(-1.1, 2, 2, 2)));
 
 		assertFalse(tester.isCollideTo(new AABB(1.87, 1.5, 2, 1)));
-		assertFalse(tester.isCollideTo(new AABB(1.87, -0.5, 2, 1)));
+		assertFalse(tester.isCollideTo(new AABB(1.87, 0.5, 2, 1)));
 		assertFalse(tester.isCollideTo(new AABB(0, 1.5, 0.13, 1)));
-		assertFalse(tester.isCollideTo(new AABB(0, -0.5, 0.13, 1)));
+		assertFalse(tester.isCollideTo(new AABB(0, 0.5, 0.13, 1)));
 
 		assertFalse(tester.isCollideTo(new AABB(1.71, 1.71, 2, 1)));
-		assertFalse(tester.isCollideTo(new AABB(1.71, -0.71, 2, 1)));
-		assertFalse(tester.isCollideTo(new AABB(0, 1.71, 0.29, 1)));
-		assertFalse(tester.isCollideTo(new AABB(0, -0.71, 0.29, 1)));
+		assertFalse(tester.isCollideTo(new AABB(0, 0.71, 0.29, 1)));
 
 		assertFalse(tester.isCollideTo(new AABB(1.51, 1.87, 2, 1)));
-		assertFalse(tester.isCollideTo(new AABB(1.51, -0.87, 2, 1)));
-		assertFalse(tester.isCollideTo(new AABB(0, 1.87, 0.49, 1)));
-		assertFalse(tester.isCollideTo(new AABB(0, -0.87, 0.49, 1)));
+		assertFalse(tester.isCollideTo(new AABB(0, 0.87, 0.49, 1)));
 
 	}
 
@@ -242,7 +239,46 @@ public class CircleTest {
 	 */
 	@Test
 	public void testIsCollideToOBB() {
-		fail("Not yet implemented");
+		Circle tester = new Circle(1, 0, 1);
+		assertTrue(tester.isCollideTo(new OBB(2, 0, 1, 1, 0)));
+		assertTrue(tester.isCollideTo(new OBB(2, -1, 1, 1, 0)));
+		assertTrue(tester.isCollideTo(new OBB(2, -1, 1, 2, 0)));
+		assertTrue(tester.isCollideTo(new OBB(1.5, 0, 1, 2, 0)));
+
+		assertTrue(tester.isCollideTo(new OBB(1, 1, 1, 1, 0)));
+		assertTrue(tester.isCollideTo(new OBB(0, 1, 1, 1, 0)));
+		assertTrue(tester.isCollideTo(new OBB(1, 1, 1, 1, 0)));
+		assertTrue(tester.isCollideTo(new OBB(0.5, 1, 2, 1, 0)));
+
+		assertTrue(tester.isCollideTo(new OBB(1, 1, 1, 1, 0)));
+		assertTrue(tester.isCollideTo(new OBB(0, 1, 1, 1, 0)));
+		assertTrue(tester.isCollideTo(new OBB(0, 1, 2, 1, 0)));
+		assertTrue(tester.isCollideTo(new OBB(0, 0.5, 2, 1, 0)));
+
+		assertTrue(tester.isCollideTo(new OBB(-1, -1, 1, 1, 0)));
+		assertTrue(tester.isCollideTo(new OBB(-1, 0, 1, 1, 0)));
+		assertTrue(tester.isCollideTo(new OBB(-1, 0, 1, 2, 0)));
+		assertTrue(tester.isCollideTo(new OBB(-0.5, 0, 1, 2, 0)));
+
+		assertTrue(tester.isCollideTo(new OBB(0, 1, 2, 2, 0)));
+		assertTrue(tester.isCollideTo(new OBB(0.5, 0.5, 1, 1, 0)));
+		assertTrue(tester.isCollideTo(new OBB(-1, -2, 4, 4, 0)));
+
+		assertFalse(tester.isCollideTo(new OBB(2.1, 1, 2, 2, 0)));
+		assertFalse(tester.isCollideTo(new OBB(0, 2, 2, 0.9, 0)));
+		assertFalse(tester.isCollideTo(new OBB(-1, 1, 0.9, 2, 0)));
+		assertFalse(tester.isCollideTo(new OBB(-1.1, 2, 2, 2, 0)));
+
+		assertFalse(tester.isCollideTo(new OBB(1.87, 1.5, 2, 1, 0)));
+		assertFalse(tester.isCollideTo(new OBB(1.87, 0.5, 2, 1, 0)));
+		assertFalse(tester.isCollideTo(new OBB(0, 1.5, 0.13, 1, 0)));
+		assertFalse(tester.isCollideTo(new OBB(0, 0.5, 0.13, 1, 0)));
+
+		assertFalse(tester.isCollideTo(new OBB(1.71, 1.71, 2, 1, 0)));
+		assertFalse(tester.isCollideTo(new OBB(0, 0.71, 0.29, 1, 0)));
+
+		assertFalse(tester.isCollideTo(new OBB(1.51, 1.87, 2, 1, 0)));
+		assertFalse(tester.isCollideTo(new OBB(0, 0.87, 0.49, 1, 0)));
 	}
 
 	/**
@@ -250,7 +286,29 @@ public class CircleTest {
 	 */
 	@Test
 	public void testIsCollideToKDOP() {
-		fail("Not yet implemented");
+		List<Position> positionList = new ArrayList<Position>();
+		positionList.add(new Position(0, 0));
+		positionList.add(new Position(0, 1));
+		positionList.add(new Position(1, 2));
+		positionList.add(new Position(2, 2));
+		positionList.add(new Position(2, 1));
+		positionList.add(new Position(3, 1));
+		positionList.add(new Position(2, 0));
+		positionList.add(new Position(2, -1));
+		positionList.add(new Position(1, -2));
+		positionList.add(new Position(0, -1));
+
+		KDOP testerKDOP = new KDOP(positionList);
+
+		assertTrue(new Circle(1, 0, 1).isCollideTo(testerKDOP));
+		assertTrue(new Circle(1, 1, 1).isCollideTo(testerKDOP));
+		assertTrue(new Circle(1, -1, 1).isCollideTo(testerKDOP));
+		assertTrue(new Circle(-1, 0, 1).isCollideTo(testerKDOP));
+		assertTrue(new Circle(0, 2, 1).isCollideTo(testerKDOP));
+		assertTrue(new Circle(1, -1, 1).isCollideTo(testerKDOP));
+
+		assertFalse(new Circle(3, 2, 0.9).isCollideTo(testerKDOP));
+		assertFalse(new Circle(3, -1, 0.9).isCollideTo(testerKDOP));
 	}
 
 	/**

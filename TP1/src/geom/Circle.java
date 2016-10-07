@@ -97,100 +97,45 @@ public class Circle extends Shape {
 	public boolean isCollideTo(Shape shape) {
 		if (shape instanceof Circle) {
 			Circle otherCircle = (Circle) shape;
-
-			double radiusSum = this.getRadius() + otherCircle.getRadius();
-			double dx = Math.abs(otherCircle.getPosition().getX() - this.getPosition().getX());
-			double dy = Math.abs(otherCircle.getPosition().getY() - this.getPosition().getY());
-
-			if (dx > radiusSum)
-				return false;
-			if (dy > radiusSum)
-				return false;
-
-			return ((radiusSum * radiusSum) >= ((dx * dx) + dy * dy));
+			return this.vsCircle(otherCircle);
 		} else if (shape instanceof Point) {
 			Point point = (Point) shape;
-			point.isInside(this);
+			return point.isInside(this);
 		} else if (shape instanceof AABB) {
-
 			KDOP kdop = ((AABB) shape).toKDOP();
 			return kdop.pointInside(getPosition()) || kdop.minDistance(getPosition()) <= getRadius();
-
-			// AABB aabb = (AABB) shape;
-			// // TODO Cas simple d'eliminations + A refaire en prenant le point
-			// de
-			// // reference en haut a gauche
-			// Position position;
-			// // x > , y >
-			// if (this.getPosition().getX() > aabb.getPosition().getX()
-			// && this.getPosition().getY() > aabb.getPosition().getY()) {
-			// position = new Position(aabb.getPosition().getX() +
-			// aabb.getWidth() / 2,
-			// aabb.getPosition().getY() + aabb.getHeight() / 2);
-			// }
-			// // x > , y <
-			// else if (this.getPosition().getX() > aabb.getPosition().getX()
-			// && this.getPosition().getY() < aabb.getPosition().getY()) {
-			// position = new Position(aabb.getPosition().getX() +
-			// aabb.getWidth() / 2,
-			// aabb.getPosition().getY() - aabb.getHeight() / 2);
-			// }
-			// // x < , y >
-			// else if (this.getPosition().getX() < aabb.getPosition().getX()
-			// && this.getPosition().getY() > aabb.getPosition().getY()) {
-			// position = new Position(aabb.getPosition().getX() -
-			// aabb.getWidth() / 2,
-			// aabb.getPosition().getY() + aabb.getHeight() / 2);
-			// }
-			// // x < , y <
-			// else {
-			// position = new Position(aabb.getPosition().getX() -
-			// aabb.getWidth() / 2,
-			// aabb.getPosition().getY() - aabb.getHeight() / 2);
-			// }
-			//
-			// return (((position.getX() - this.getPosition().getX()) *
-			// (position.getX() - this.getPosition().getX()))
-			// + ((position.getY() - this.getPosition().getY())
-			// * (position.getY() - this.getPosition().getY())) <
-			// (this.getRadius() * this.getRadius()));
 		} else if (shape instanceof OBB) {
 			KDOP kdop = ((OBB) shape).toKDOP();
 			return kdop.pointInside(getPosition()) || kdop.minDistance(getPosition()) <= getRadius();
-
-			// // TODO A refaire en prenant le point de reference en haut a
-			// gauche
-			// OBB obb = (OBB) shape;
-			// Circle rotateCircle = new Circle(this.getPosition(),
-			// this.getRadius());
-			//
-			// // TODO Delete
-			// // obb.setPosition(0, 0);
-			// // rotateCircle.setPosition(rotateCircle.getPosition().getX() -
-			// // obb.getPosition().getX(),
-			// /// rotateCircle.getPosition().getX() -
-			// obb.getPosition().getX());
-			// obb.setPosition(
-			// (obb.getPosition().getX() * Math.cos(obb.getAngle())
-			// + obb.getPosition().getY() * Math.sin(obb.getAngle())),
-			// (-obb.getPosition().getX() * Math.sin(obb.getAngle())
-			// + obb.getPosition().getY() * Math.cos(obb.getAngle())));
-			//
-			// rotateCircle.setPosition(
-			// (rotateCircle.getPosition().getX() * Math.cos(obb.getAngle())
-			// + rotateCircle.getPosition().getY() * Math.sin(obb.getAngle())),
-			// (-rotateCircle.getPosition().getX() * Math.sin(obb.getAngle())
-			// + rotateCircle.getPosition().getY() * Math.cos(obb.getAngle())));
-			//
-			// rotateCircle.isCollideTo((AABB) obb);
-
 		} else if (shape instanceof KDOP) {
 			KDOP kdop = (KDOP) shape;
 			return kdop.pointInside(getPosition()) || kdop.minDistance(getPosition()) <= getRadius();
 		}
 		throw new UnknownElementException(null, shape);
 	}
-	
+
+	/**
+	 * Test if two circle or colliding
+	 * 
+	 * 
+	 * @param circle
+	 *            The other circle for the collision
+	 * 
+	 * @return True if they are colliding, false if they don't.
+	 */
+	private boolean vsCircle(Circle circle) {
+		double radiusSum = this.getRadius() + circle.getRadius();
+		double dx = Math.abs(circle.getPosition().getX() - this.getPosition().getX());
+		double dy = Math.abs(circle.getPosition().getY() - this.getPosition().getY());
+
+		if (dx > radiusSum)
+			return false;
+		if (dy > radiusSum)
+			return false;
+
+		return ((radiusSum * radiusSum) >= ((dx * dx) + dy * dy));
+	}
+
 	@Override
 	public void moveTo(Position position) {
 		this.position = position;
