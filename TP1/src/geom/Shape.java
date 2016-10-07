@@ -87,6 +87,16 @@ public abstract class Shape {
 		return isCollide;
 	}
 	
+	/**
+	 * Indicate if a shape is collide to one GameObject in list of shapes.
+	 * 
+	 * @param go
+	 *            The list of GameObject that should be tested for the collision.
+	 * 
+	 * @return True of the shape collide with one on the list.
+	 * 
+	 * @see game.GameObject
+	 */
 	public boolean isCollideGo(List<GameObject> go) {
 		boolean isCollide = false;
 		for (Iterator<GameObject> iterator = go.iterator(); iterator.hasNext();) {

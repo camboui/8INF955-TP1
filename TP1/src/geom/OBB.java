@@ -146,7 +146,11 @@ public class OBB extends Shape {
 
 	@Override
 	public boolean isCollideTo(Shape shape) {
-		return toKDOP().isCollideTo(shape);
+		if (shape instanceof Point) {
+			Point point = (Point) shape;
+			return point.isInside(this);
+		} else
+			return toKDOP().isCollideTo(shape);
 	}
 
 	@Override
@@ -160,7 +164,7 @@ public class OBB extends Shape {
 	 * @return The width.
 	 */
 	public double getWidth() {
-		return width;
+		return this.width;
 	}
 
 	/**
@@ -168,8 +172,13 @@ public class OBB extends Shape {
 	 *
 	 * @param width
 	 *            The new width.
+	 * 
+	 * @throws IllegalArgumentException
+	 *             If the width is negative or null.
 	 */
 	public void setWidth(double width) {
+		if (width <= 0)
+			throw new IllegalArgumentException("width is negative or null: " + width);
 		this.width = width;
 	}
 
@@ -187,8 +196,13 @@ public class OBB extends Shape {
 	 *
 	 * @param height
 	 *            The new height.
+	 * 
+	 * @throws IllegalArgumentException
+	 *             If the height is negative or null.
 	 */
 	public void setHeight(double height) {
+		if (height <= 0)
+			throw new IllegalArgumentException("width is negative or null: " + height);
 		this.height = height;
 	}
 

@@ -68,7 +68,6 @@ public class Point extends Shape {
 		} else if (shape instanceof KDOP) {
 			KDOP kdop = (KDOP) shape;
 			return this.isInside(kdop);
-			// return kdop.pointInside(getPosition());
 		}
 		throw new UnknownElementException(null, shape);
 	}
@@ -127,9 +126,6 @@ public class Point extends Shape {
 
 		double newX = obb.getPosition().getX() + X * Math.cos(-obb.getAngle()) - Y * Math.sin(-obb.getAngle());
 		double newY = obb.getPosition().getY() + X * Math.sin(-obb.getAngle()) + Y * Math.cos(-obb.getAngle());
-
-		System.out.println(newX);
-		System.out.println(newY);
 
 		return ((newX <= (obb.getPosition().getX() + obb.getWidth())) && (newX >= (obb.getPosition().getX()))
 				&& (newY >= (obb.getPosition().getY())) && (newY) <= (obb.getPosition().getY() + obb.getHeight()));
