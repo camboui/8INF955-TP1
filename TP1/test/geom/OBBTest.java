@@ -1,6 +1,3 @@
-/**
- * 
- */
 package geom;
 
 import static org.junit.Assert.*;
@@ -10,7 +7,9 @@ import java.util.List;
 import org.junit.Test;
 
 /**
- * @author Quentin MACE
+ * Test class for {@link geom.OBB}
+ * 
+ * @author BRANGER Mathias, CROUZET Matthieu, MACE Quentin.
  *
  */
 public class OBBTest {

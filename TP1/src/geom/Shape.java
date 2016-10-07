@@ -83,15 +83,16 @@ public abstract class Shape {
 			Shape shape = (Shape) iterator.next();
 			isCollide |= this.isCollideTo(shape);
 		}
-		isColliding=isCollide;
+		isColliding = isCollide;
 		return isCollide;
 	}
-	
+
 	/**
 	 * Indicate if a shape is collide to one GameObject in list of shapes.
 	 * 
 	 * @param go
-	 *            The list of GameObject that should be tested for the collision.
+	 *            The list of GameObject that should be tested for the
+	 *            collision.
 	 * 
 	 * @return True of the shape collide with one on the list.
 	 * 
@@ -103,7 +104,7 @@ public abstract class Shape {
 			GameObject gameObject = (GameObject) iterator.next();
 			isCollide |= this.isCollideTo(gameObject.getShape());
 		}
-		isColliding=isCollide;
+		isColliding = isCollide;
 		return isCollide;
 	}
 
@@ -115,7 +116,6 @@ public abstract class Shape {
 	 */
 	public abstract void moveTo(Position position);
 
-	
 	/**
 	 * isColliding getter.
 	 *
@@ -124,7 +124,7 @@ public abstract class Shape {
 	public boolean getIsColliding() {
 		return this.isColliding;
 	}
-	
+
 	/**
 	 * position getter.
 	 *
