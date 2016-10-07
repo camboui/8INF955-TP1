@@ -109,11 +109,11 @@ public class Point extends Shape {
 	// Math.sqrt((x1-x0)*(x1-x0) + (y1-y0)*(y1-y0)) < r
 	public boolean isInside(Circle circle) {
 
-		return (((this.getPosition().getX() - circle.getPosition().getX())
-				* (this.getPosition().getX() - circle.getPosition().getX())
-				+ (this.getPosition().getY() - circle.getPosition().getY())
-						* (this.getPosition().getY() - circle.getPosition().getY())) < (circle.getRadius()
-								* circle.getRadius()));
+		return (((this.getPosition().getX() - circle.getPosition().getX()) * (this.getPosition().getX()
+				- circle.getPosition().getX()) + (this.getPosition().getY()
+				- circle.getPosition().getY()) * (this.getPosition().getY()
+				- circle.getPosition().getY())) <= (circle.getRadius() * circle.getRadius()));
+
 	}
 
 	/**
@@ -179,6 +179,7 @@ public class Point extends Shape {
 	 * 
 	 * @see geom.OBB
 	 */
+	//TODO Remove useless?
 	public boolean isInsideConvexPolygon(KDOP kdop) {
 		double sum = 0;
 		double areaPolygonConvex = 0;

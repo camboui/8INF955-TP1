@@ -2,28 +2,58 @@ package game;
 
 import geom.*;
 
+/**
+ * Used to display objects in the windows.
+ * 
+ * @author BRANGER Mathias, CROUZET Matthieu, MACE Quentin.
+ *
+ */
 public class GameObject {
 
+	/**
+	 * The shape to be displayed.
+	 * 
+	 * @see geom.Shape
+	 */
 	private Shape shape;
 
+	/** The speed of the shape on the x axis. */
 	private float xSpeed;
+	/** The speed of the shape on the y axis. */
 	private float ySpeed;
 
-	public GameObject(Shape s, float xs, float ys) {
-		this.setShape(s);
-		this.setxSpeed(xs);
-		this.setySpeed(ys);
+	/**
+	 * Constructor.
+	 * 
+	 * @param shape
+	 *            The wanted shape.
+	 * 
+	 * @param xSpeed
+	 *            The wanted speed for the x axis.
+	 * 
+	 * @param ySpeed
+	 *            The wanted speed for the y axis.
+	 * 
+	 * @see geom.Shape
+	 */
+	public GameObject(Shape shape, float xSpeed, float ySpeed) {
+		this.setShape(shape);
+		this.setxSpeed(xSpeed);
+		this.setySpeed(ySpeed);
 	}
 
+	/** Move the object in the windows. */
 	public void applyMove() {
 		Position p = new Position(shape.getPosition().getX() + getxSpeed(), shape.getPosition().getY() + getySpeed());
 		shape.moveTo(p);
 	}
 
+	/** Reverse the speed of the x axis. */
 	public void reverseXspeed() {
 		this.xSpeed = -this.xSpeed;
 	}
 
+	/** Reverse the speed of the y axis. */
 	public void reverseYspeed() {
 		this.ySpeed = -this.ySpeed;
 	}

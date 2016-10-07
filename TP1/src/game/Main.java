@@ -62,7 +62,7 @@ public class Main {
 		// entities.add(new GameObject(aabb, 0, 0));
 		//
 		// while window is open
-		while (!w.isActive()) {
+		while (w.isActive()) {
 			start = System.currentTimeMillis();
 
 			// do logic

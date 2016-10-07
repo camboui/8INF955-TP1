@@ -57,7 +57,8 @@ public class KDOP extends Shape {
 	 *
 	 * 
 	 */
-	// TODO 3 points minimum?
+	// TODO 3 points minimum? Heuuuu? Il sert a quoi position ici appart foutre
+	// la merde?
 	public KDOP(List<Position> points, Position position) throws IllegalArgumentException {
 		super(position);
 		if (points.isEmpty())
@@ -71,7 +72,9 @@ public class KDOP extends Shape {
 
 	/**
 	 * 
-	 * @param p
+	 * @param position
+	 *            The wanted position to be tested.
+	 *            
 	 * @return true if the point p is inside the polygon
 	 */
 	public boolean pointInside(Position p) {
@@ -92,6 +95,8 @@ public class KDOP extends Shape {
 	/**
 	 * 
 	 * @param target
+	 *            The wanted position to be tested.
+	 *            
 	 * @return the minimum distance between a point and the polygon edge
 	 */
 	public float minDistance(Position target) {
