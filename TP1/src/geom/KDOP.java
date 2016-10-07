@@ -38,6 +38,8 @@ public class KDOP extends Shape {
 			throw new IllegalArgumentException("Empty list of points");
 		else {
 			this.points = points;
+			if (!this.isConvex())
+				throw new IllegalArgumentException("Polygon is not convex");
 		}
 	}
 
@@ -78,7 +80,7 @@ public class KDOP extends Shape {
 		boolean b = false;
 
 		for (i = 0, j = n - 1; i < n; j = i++) {
-			if (((getPoints().get(i).getY() > p.getY()) != (getPoints().get(j).getY() > p.getY()))
+			if (((getPoints().get(i).getY() >= p.getY()) != (getPoints().get(j).getY() >= p.getY()))
 					&& (p.getX() <= (getPoints().get(j).getX() - getPoints().get(i).getX())
 							* (p.getY() - getPoints().get(i).getY())
 							/ (getPoints().get(j).getY() - getPoints().get(i).getY()) + getPoints().get(i).getX()))
@@ -127,45 +129,10 @@ public class KDOP extends Shape {
 			}
 
 			if (kdop != null) {
-				// https://en.wikipedia.org/wiki/Hyperplane_separation_theorem
-				boolean thisConvex = isConvex();
-				boolean otherConvex = kdop.isConvex();
-				if (thisConvex && otherConvex) {
-					return kdop_kdop(kdop);
-				} else if (!thisConvex && !otherConvex) {
-					List<KDOP> thisPolygons = this.toConvexKDOP();
-
-					List<KDOP> otherPolygons = this.toConvexKDOP();
-					for (KDOP kdop1 : thisPolygons) {
-						for (KDOP kdop2 : otherPolygons) {
-							if (kdop1.kdop_kdop(kdop2))
-								return true;
-						}
-					}
-					return false;
-				} else if (!thisConvex && otherConvex) {
-					List<KDOP> thisPolygons = this.toConvexKDOP();
-					for (KDOP kdop1 : thisPolygons) {
-						if (kdop.kdop_kdop(kdop))
-							return true;
-					}
-					return false;
-				} else if (thisConvex && !otherConvex) {
-					List<KDOP> otherPolygons = this.toConvexKDOP();
-					for (KDOP kdop1 : otherPolygons) {
-						if (kdop_kdop(kdop1))
-							return true;
-					}
-					return false;
-				}
+				return kdop_kdop(kdop);
 			}
 		}
 		return false;
-	}
-
-	public List<KDOP> toConvexKDOP() {
-		//TODO
-		return new ArrayList<KDOP>();
 	}
 
 	public Position[] getAxes() {
@@ -265,9 +232,6 @@ public class KDOP extends Shape {
 				}
 			}
 		}
-		// MTV mtv = new MTV(smallest, overlap);
-		// if we get here then we know that every axis had overlap on it
-		// so we can guarantee an intersection
 		return true;
 	}
 
@@ -291,40 +255,37 @@ public class KDOP extends Shape {
 	 */
 	public boolean isConvex() {
 		// Cas particulier
-		Position A, B, C;
-		for (int i = 0; i < this.points.size() - 2; i++) {
-			A = this.points.get(i); // Dernier point
-			B = this.points.get(i + 1); // Premier point
-			C = this.points.get(i + 2); // Deuxieme point
+		Position A = this.points.get(this.points.size() - 1); // Dernier point
+		Position B = this.points.get(0); // Premier point
+		Position C = this.points.get(1); // Deuxieme point
 
-			if (getAngle(A, B, C) > 180)
+		boolean isClockWise = (crossProduct(A,B,C)) >= 0;
+
+		for (int i = 0; i < this.points.size() - 2; i++) {
+
+			A = this.points.get(i);
+			B = this.points.get(i + 1);
+			C = this.points.get(i + 2);
+
+			if (crossProduct(A,B,C) >= 0 != isClockWise)
 				return false;
 		}
-		// Cas Particulier
-		A = this.points.get(this.points.size() - 2); // Avant-dernier point
-		B = this.points.get(this.points.size() - 1); // Dernier point
-		C = this.points.get(0); // Premier point
-		return !(getAngle(A, B, C) > 180);
+		A = this.points.get(this.points.size() - 2); // Dernier point
+		B = this.points.get(this.points.size() - 1); // Premier point
+		C = this.points.get(0); // Deuxieme point
+
+		return (crossProduct(A,B,C) >= 0) == isClockWise;
 	}
 
 	/**
-	 * Return the angle between a,b,c. B is the middle point.
 	 * 
 	 * @param a
-	 *            The first point.
 	 * @param b
-	 *            The middle point.
 	 * @param c
-	 *            The last point.
-	 * @return The angle between a,b,c.
+	 * @return calculates the cross product between vector ab and bc 
 	 */
-
-	private double getAngle(Position a, Position b, Position c) {
-		double bax = a.getX() - b.getX();
-		double bay = a.getY() - b.getY();
-		double bcx = c.getX() - b.getX();
-		double bcy = c.getY() - b.getY();
-		return (bax * bcx + bay * bcy);
+	public double crossProduct(Position a, Position b, Position c) {
+		return (b.getX() - a.getX()) * (c.getY() - b.getY()) - (b.getY() - a.getY()) * (c.getX() - b.getX());
 	}
 
 	/**
