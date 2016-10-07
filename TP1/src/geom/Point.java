@@ -101,14 +101,13 @@ public class Point extends Shape {
 	 * @see geom.Circle
 	 */
 	// Math.sqrt((x1-x0)*(x1-x0) + (y1-y0)*(y1-y0)) < r
-	private boolean isInside(Circle circle) {
+	public boolean isInside(Circle circle) {
 
 		return (((this.getPosition().getX() - circle.getPosition().getX())
 				* (this.getPosition().getX() - circle.getPosition().getX())
 				+ (this.getPosition().getY() - circle.getPosition().getY())
 						* (this.getPosition().getY() - circle.getPosition().getY())) <= (circle.getRadius()
 								* circle.getRadius()));
-
 	}
 
 	/**
@@ -121,7 +120,7 @@ public class Point extends Shape {
 	 * 
 	 * @see geom.OBB
 	 */
-	private boolean isInside(OBB obb) {
+	public boolean isInside(OBB obb) {
 
 		double X = this.getPosition().getX() - obb.getPosition().getX();
 		double Y = this.getPosition().getY() - obb.getPosition().getY();
@@ -146,7 +145,7 @@ public class Point extends Shape {
 	 * 
 	 * @see geom.AABB
 	 */
-	private boolean isInside(AABB aabb) {
+	public boolean isInside(AABB aabb) {
 		return ((this.getPosition().getX() <= (aabb.getPosition().getX() + aabb.getWidth()))
 				&& (this.getPosition().getX() >= (aabb.getPosition().getX()))
 				&& (this.getPosition().getY() >= (aabb.getPosition().getY()))
@@ -163,7 +162,7 @@ public class Point extends Shape {
 	 * 
 	 * @see geom.AABB
 	 */
-	private boolean isInside(KDOP kdop) {
+	public boolean isInside(KDOP kdop) {
 		int n = kdop.getPoints().size();
 		int i, j;
 		boolean b = false;

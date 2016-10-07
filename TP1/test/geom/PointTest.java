@@ -8,7 +8,9 @@ import java.util.List;
 import org.junit.Test;
 
 /**
- * @author Quentin MACE
+ * Test class for {@link geom.Point}
+ * 
+ * @author BRANGER Mathias, CROUZET Matthieu, MACE Quentin.
  *
  */
 public class PointTest {
@@ -201,6 +203,153 @@ public class PointTest {
 		assertTrue(new Point(2, -1).isCollideTo(tester));
 		assertTrue(new Point(1, -2).isCollideTo(tester));
 		assertTrue(new Point(0, -1).isCollideTo(tester));
+
+	}
+
+	/**
+	 * Test method for {@link geom.Point#isInside(Circle)}.
+	 */
+	@Test
+	public void testIsInsideCircle() {
+		Circle tester = new Circle(1, 0, 1);
+
+		assertTrue(new Point(2, 0).isInside(tester));
+		assertTrue(new Point(0, 0).isInside(tester));
+		assertTrue(new Point(1, 1).isInside(tester));
+		assertTrue(new Point(1, -1).isInside(tester));
+		assertTrue(new Point(1.5, 0.5).isInside(tester));
+		assertTrue(new Point(1.5, -0.5).isInside(tester));
+		assertTrue(new Point(0.5, 0.5).isInside(tester));
+		assertTrue(new Point(0.5, -0.5).isInside(tester));
+		assertTrue(new Point(1, 0).isInside(tester));
+		assertTrue(new Point(1.5, 0).isInside(tester));
+
+		assertFalse(new Point(1.71, 0.71).isInside(tester));
+		assertFalse(new Point(0.29, 0.71).isInside(tester));
+		assertFalse(new Point(1.71, -0.71).isInside(tester));
+		assertFalse(new Point(0.29, -0.71).isInside(tester));
+
+		assertFalse(new Point(1.87, 0.5).isInside(tester));
+		assertFalse(new Point(0.13, 0.5).isInside(tester));
+		assertFalse(new Point(1.87, -0.5).isInside(tester));
+		assertFalse(new Point(0.13, -0.5).isInside(tester));
+
+		assertFalse(new Point(1.51, 0.87).isInside(tester));
+		assertFalse(new Point(0.49, 0.87).isInside(tester));
+		assertFalse(new Point(1.51, -0.87).isInside(tester));
+		assertFalse(new Point(0.49, -0.87).isInside(tester));
+	}
+
+	/**
+	 * Test method for {@link geom.Point#isInside(AABB)}.
+	 */
+	@Test
+	public void testisInsideAABB() {
+
+		AABB tester = new AABB(0, 0, 3, 2);
+
+		assertTrue(new Point(0, 0).isInside(tester));
+		assertTrue(new Point(0, 2).isInside(tester));
+		assertTrue(new Point(3, 2).isInside(tester));
+		assertTrue(new Point(3, 0).isInside(tester));
+
+		assertTrue(new Point(2, 0).isInside(tester));
+		assertTrue(new Point(1, 2).isInside(tester));
+
+		assertTrue(new Point(2, 0.5).isInside(tester));
+		assertTrue(new Point(3, 0.5).isInside(tester));
+		assertTrue(new Point(0.5, 0.5).isInside(tester));
+
+		assertFalse(new Point(-1, 0).isInside(tester));
+		assertFalse(new Point(0, 3).isInside(tester));
+		assertFalse(new Point(1, -2).isInside(tester));
+		assertFalse(new Point(4, 2).isInside(tester));
+		assertFalse(new Point(4, -2).isInside(tester));
+		assertFalse(new Point(0, -1).isInside(tester));
+		assertFalse(new Point(5, 1).isInside(tester));
+		assertFalse(new Point(5, -1).isInside(tester));
+	}
+
+	/**
+	 * Test method for {@link geom.Point#isInside(OBB)}.
+	 */
+	@Test
+	public void testisInsideOBB() {
+
+		OBB tester = new OBB(0, 0, 3, 2, 0);
+
+		assertTrue(new Point(0, 0).isInside(tester));
+		assertTrue(new Point(0, 2).isInside(tester));
+		assertTrue(new Point(3, 2).isInside(tester));
+		assertTrue(new Point(3, 0).isInside(tester));
+
+		assertTrue(new Point(2, 0).isInside(tester));
+		assertTrue(new Point(1, 2).isInside(tester));
+
+		assertTrue(new Point(2, 0.5).isInside(tester));
+		assertTrue(new Point(3, 0.5).isInside(tester));
+		assertTrue(new Point(0.5, 0.5).isInside(tester));
+
+		assertFalse(new Point(-1, 0).isInside(tester));
+		assertFalse(new Point(0, 3).isInside(tester));
+		assertFalse(new Point(1, -2).isInside(tester));
+		assertFalse(new Point(4, 2).isInside(tester));
+		assertFalse(new Point(4, -2).isInside(tester));
+		assertFalse(new Point(0, -1).isInside(tester));
+		assertFalse(new Point(5, 1).isInside(tester));
+		assertFalse(new Point(5, -1).isInside(tester));
+
+		tester = new OBB(0, 0, 3, 1, Math.PI / 4);
+
+		assertTrue(new Point(0, 0).isInside(tester));
+		assertTrue(new Point(1, 1).isInside(tester));
+		assertTrue(new Point(0, 1.41).isInside(tester));
+
+		assertFalse(new Point(1.1, 1).isInside(tester));
+		assertFalse(new Point(Math.cos(-Math.PI / 4) - Math.sin(-Math.PI / 4),
+				Math.cos(-Math.PI / 4) + Math.sin(-Math.PI / 4)).isInside(tester));
+		assertFalse(new Point(0, 1.42).isInside(tester));
+	}
+
+	/**
+	 * Test method for {@link geom.Point#isInside(KDOP)}.
+	 */
+	@Test
+	public void testisInsideKDOP() {
+		List<Position> positionList = new ArrayList<Position>();
+		positionList.add(new Position(0, 0));
+		positionList.add(new Position(0, 1));
+		positionList.add(new Position(1, 2));
+		positionList.add(new Position(2, 2));
+		positionList.add(new Position(2, 1));
+		positionList.add(new Position(3, 1));
+		positionList.add(new Position(2, 0));
+		positionList.add(new Position(2, -1));
+		positionList.add(new Position(1, -2));
+		positionList.add(new Position(0, -1));
+
+		KDOP tester = new KDOP(positionList);
+
+		assertFalse(new Point(0, 2).isInside(tester));
+		assertFalse(new Point(0, 1.5).isInside(tester));
+		assertFalse(new Point(0.5, 2).isInside(tester));
+		assertFalse(new Point(3, 2).isInside(tester));
+		assertFalse(new Point(3, 0).isInside(tester));
+
+		assertTrue(new Point(1.5, 1.5).isInside(tester));
+		assertTrue(new Point(1, 1).isInside(tester));
+		assertTrue(new Point(2.5, 0.5).isInside(tester));
+
+		assertTrue(new Point(0, 0).isInside(tester));
+		assertTrue(new Point(0, 1).isInside(tester));
+		assertTrue(new Point(1, 2).isInside(tester));
+		assertTrue(new Point(2, 2).isInside(tester));
+		assertTrue(new Point(2, 1).isInside(tester));
+		assertTrue(new Point(3, 1).isInside(tester));
+		assertTrue(new Point(2, 0).isInside(tester));
+		assertTrue(new Point(2, -1).isInside(tester));
+		assertTrue(new Point(1, -2).isInside(tester));
+		assertTrue(new Point(0, -1).isInside(tester));
 
 	}
 
