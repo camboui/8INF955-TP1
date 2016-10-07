@@ -305,8 +305,8 @@ public class CircleTest {
 		assertTrue(new Circle(0, 2, 1).isCollideTo(testerKDOP));
 		assertTrue(new Circle(1, -1, 1).isCollideTo(testerKDOP));
 
-		assertFalse(new Circle(3, 2, 0.9).isCollideTo(testerKDOP));
-		assertFalse(new Circle(3, -1, 0.9).isCollideTo(testerKDOP));
+		assertFalse(new Circle(3, 2, 0.5).isCollideTo(testerKDOP));
+		assertFalse(new Circle(3, -1, 0.5).isCollideTo(testerKDOP));
 	}
 
 	/**

@@ -185,8 +185,8 @@ public class PointTest {
 		assertFalse(new Point(0, 1.5).isCollideTo(tester));
 		assertFalse(new Point(0.5, 2).isCollideTo(tester));
 
-		assertTrue(new Point(3, 2).isCollideTo(tester));
-		assertTrue(new Point(3, 0).isCollideTo(tester));
+		assertFalse(new Point(3, 2).isCollideTo(tester));
+		assertFalse(new Point(3, 0).isCollideTo(tester));
 
 		assertTrue(new Point(1.5, 1.5).isCollideTo(tester));
 		assertTrue(new Point(1, 1).isCollideTo(tester));
@@ -331,8 +331,8 @@ public class PointTest {
 		assertFalse(new Point(0, 1.5).isInside(tester));
 		assertFalse(new Point(0.5, 2).isInside(tester));
 
-		assertTrue(new Point(3, 2).isInside(tester));
-		assertTrue(new Point(3, 0).isInside(tester));
+		assertFalse(new Point(3, 2).isInside(tester));
+		assertFalse(new Point(3, 0).isInside(tester));
 
 		assertTrue(new Point(1.5, 1.5).isInside(tester));
 		assertTrue(new Point(1, 1).isInside(tester));

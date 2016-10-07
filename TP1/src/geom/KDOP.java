@@ -290,11 +290,18 @@ public class KDOP extends Shape {
 	}
 
 	/**
+	 * Calculates the cross product between vector ab and bc.
 	 * 
 	 * @param a
+	 *            The first point.
+	 * 
 	 * @param b
+	 *            The middle point.
+	 * 
 	 * @param c
-	 * @return calculates the cross product between vector ab and bc
+	 *            The last point.
+	 * 
+	 * @return The cross product between vector ab and bc.
 	 */
 	public double crossProduct(Position a, Position b, Position c) {
 		return (b.getX() - a.getX()) * (c.getY() - b.getY()) - (b.getY() - a.getY()) * (c.getX() - b.getX());
