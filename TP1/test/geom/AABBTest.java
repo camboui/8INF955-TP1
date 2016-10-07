@@ -1,6 +1,3 @@
-/**
- * 
- */
 package geom;
 
 import static org.junit.Assert.*;
@@ -8,7 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * @author Quentin MACE
+ * Test class for {@link geom.AABB}
+ * 
+ * @author BRANGER Mathias, CROUZET Matthieu, MACE Quentin.
  *
  */
 public class AABBTest {
@@ -118,145 +117,28 @@ public class AABBTest {
 	 */
 	@Test
 	public void testIsCollideToPoint() {
-		AABB tester = new AABB(1, 1, 3, 2);
+		AABB tester = new AABB(0, 0, 3, 2);
 
-		assertTrue(tester.isCollideTo(new Point(1, 1)));
-		assertTrue(tester.isCollideTo(new Point(4, 1)));
-		assertTrue(tester.isCollideTo(new Point(1, -1)));
-		assertTrue(tester.isCollideTo(new Point(4, -1)));
-
-		assertTrue(tester.isCollideTo(new Point(2, 1)));
-		assertTrue(tester.isCollideTo(new Point(1, 0)));
-		assertTrue(tester.isCollideTo(new Point(4, 0)));
-		assertTrue(tester.isCollideTo(new Point(2, -1)));
+		assertTrue(tester.isCollideTo(new Point(0, 0)));
+		assertTrue(tester.isCollideTo(new Point(0, 2)));
+		assertTrue(tester.isCollideTo(new Point(3, 2)));
+		assertTrue(tester.isCollideTo(new Point(3, 0)));
 
 		assertTrue(tester.isCollideTo(new Point(2, 0)));
-		assertTrue(tester.isCollideTo(new Point(3, 0)));
+		assertTrue(tester.isCollideTo(new Point(1, 2)));
+
 		assertTrue(tester.isCollideTo(new Point(2, 0.5)));
-		assertTrue(tester.isCollideTo(new Point(3, -0.5)));
+		assertTrue(tester.isCollideTo(new Point(3, 0.5)));
+		assertTrue(tester.isCollideTo(new Point(0.5, 0.5)));
 
-		assertFalse(tester.isCollideTo((new Point(0, 0))));
-		assertFalse(tester.isCollideTo((new Point(1, 2))));
-		assertFalse(tester.isCollideTo((new Point(1, -2))));
-		assertFalse(tester.isCollideTo((new Point(4, 2))));
-		assertFalse(tester.isCollideTo((new Point(4, -2))));
-		assertFalse(tester.isCollideTo((new Point(0, 1))));
-		assertFalse(tester.isCollideTo((new Point(0, -1))));
-		assertFalse(tester.isCollideTo((new Point(5, 1))));
-		assertFalse(tester.isCollideTo((new Point(5, -1))));
-	}
-
-	/**
-	 * Test method for {@link geom.OBB#isCollideTo(geom.Shape)}.
-	 */
-	@Test
-	public void testIsCollideToAABB() {
-		AABB tester = new AABB(0,0,2,1);
-		
-		assertTrue(tester.isCollideTo(new AABB(2,-1,1,1)));
-		assertTrue(tester.isCollideTo(new AABB(2,1,1,1)));
-		assertTrue(tester.isCollideTo(new AABB(2,2,1,3)));
-		assertTrue(tester.isCollideTo(new AABB(-1,0,1,1)));
-		assertTrue(tester.isCollideTo(new AABB(-1,2,1,1)));
-		assertTrue(tester.isCollideTo(new AABB(-1,2,1,3)));
-		
-		assertTrue(tester.isCollideTo(new AABB(0.5,0.5,0.25,0.25)));
-		assertTrue(tester.isCollideTo(new AABB(0.5,1.5,1,3)));
-		
-		assertFalse(tester.isCollideTo(new AABB(2.1,0,1,1)));
-		assertFalse(tester.isCollideTo(new AABB(2.1,2,1,1)));
-		assertFalse(tester.isCollideTo(new AABB(2.1,2,1,3)));
-		assertFalse(tester.isCollideTo(new AABB(-1.1,0,1,1)));
-		assertFalse(tester.isCollideTo(new AABB(-1.1,2,1,1)));
-		assertFalse(tester.isCollideTo(new AABB(-1.1,2,1,3)));
-		 
-	}
-
-	/**
-	 * Test method for {@link geom.OBB#isCollideTo(geom.Shape)}.
-	 */
-	@Test
-	public void testIsCollideToCircle() {
-		Circle tester = new Circle(1, 0, 1);
-		assertTrue(new AABB(2, 0, 1, 1).isCollideTo(tester));
-		assertTrue(new AABB(2, 1, 1, 1).isCollideTo(tester));
-		assertTrue(new AABB(2, 0, 1, 2).isCollideTo(tester));
-		assertTrue(new AABB(1.5, 0, 1, 2).isCollideTo(tester));
-
-		assertTrue(new AABB(1, 2, 1, 1).isCollideTo(tester));
-		assertTrue(new AABB(0, 2, 1, 1).isCollideTo(tester));
-		assertTrue(new AABB(0, 2, 2, 1).isCollideTo(tester));
-		assertTrue(new AABB(0, 1.5, 2, 1).isCollideTo(tester));
-
-		assertTrue(new AABB(1, 1, 1, 1).isCollideTo(tester));
-		assertTrue(new AABB(0, 1, 1, 1).isCollideTo(tester));
-		assertTrue(new AABB(0, 1, 2, 1).isCollideTo(tester));
-		assertTrue(new AABB(0, 0.5, 2, 1).isCollideTo(tester));
-
-		assertTrue(new AABB(-1, 1, 1, 1).isCollideTo(tester));
-		assertTrue(new AABB(-1, 0, 1, 1).isCollideTo(tester));
-		assertTrue(new AABB(-1, 0, 1, 2).isCollideTo(tester));
-		assertTrue(new AABB(-0.5, 0, 1, 2).isCollideTo(tester));
-
-		assertTrue(new AABB(0, 1, 2, 2).isCollideTo(tester));
-		assertTrue(new AABB(0.5, 0.5, 1, 1).isCollideTo(tester));
-		assertTrue(new AABB(-1, 2, 4, 4).isCollideTo(tester));
-
-		assertFalse(new AABB(2.1, 1, 2, 2).isCollideTo(tester));
-		assertFalse(new AABB(0, 2, 2, 0.9).isCollideTo(tester));
-		assertFalse(new AABB(-1, 1, 0.9, 2).isCollideTo(tester));
-		assertFalse(new AABB(-1.1, 2, 2, 2).isCollideTo(tester));
-
-		assertFalse(new AABB(1.87, 1.5, 2, 1).isCollideTo(tester));
-		assertFalse(new AABB(1.87, -0.5, 2, 1).isCollideTo(tester));
-		assertFalse(new AABB(0, 1.5, 0.13, 1).isCollideTo(tester));
-		assertFalse(new AABB(0, -0.5, 0.13, 1).isCollideTo(tester));
-
-		assertFalse(new AABB(1.71, 1.71, 2, 1).isCollideTo(tester));
-		assertFalse(new AABB(1.71, -0.71, 2, 1).isCollideTo(tester));
-		assertFalse(new AABB(0, 1.71, 0.29, 1).isCollideTo(tester));
-		assertFalse(new AABB(0, -0.71, 0.29, 1).isCollideTo(tester));
-
-		assertFalse(new AABB(1.51, 1.87, 2, 1).isCollideTo(tester));
-		assertFalse(new AABB(1.51, -0.87, 2, 1).isCollideTo(tester));
-		assertFalse(new AABB(0, 1.87, 0.49, 1).isCollideTo(tester));
-		assertFalse(new AABB(0, -0.87, 0.49, 1).isCollideTo(tester));
-	}
-
-	/**
-	 * Test method for {@link geom.OBB#isCollideTo(geom.Shape)}.
-	 */
-	@Test
-	public void testIsCollideToOBB() {
-		
-		AABB tester = new AABB(0,0,2,1);
-		
-		assertTrue(tester.isCollideTo(new OBB(2,-1,1,1,0)));
-		assertTrue(tester.isCollideTo(new OBB(2,1,1,1,0)));
-		assertTrue(tester.isCollideTo(new OBB(2,2,1,3,0)));
-		assertTrue(tester.isCollideTo(new OBB(-1,0,1,1,0)));
-		assertTrue(tester.isCollideTo(new OBB(-1,2,1,1,0)));
-		assertTrue(tester.isCollideTo(new OBB(-1,2,1,3,0)));
-		
-		assertTrue(tester.isCollideTo(new OBB(3,1,1,1,90)));
-		
-		assertTrue(tester.isCollideTo(new OBB(0.5,0.5,0.25,0.25,0)));
-		assertTrue(tester.isCollideTo(new OBB(0.5,1.5,1,3,0)));
-		
-		assertFalse(tester.isCollideTo(new OBB(2.1,0,1,1,0)));
-		assertFalse(tester.isCollideTo(new OBB(2.1,2,1,1,0)));
-		assertFalse(tester.isCollideTo(new OBB(2.1,2,1,3,0)));
-		assertFalse(tester.isCollideTo(new OBB(-1.1,0,1,1,0)));
-		assertFalse(tester.isCollideTo(new OBB(-1.1,2,1,1,0)));
-		assertFalse(tester.isCollideTo(new OBB(-1.1,2,1,3,0)));
-	}
-
-	/**
-	 * Test method for {@link geom.OBB#isCollideTo(geom.Shape)}.
-	 */
-	@Test
-	public void testIsCollideToKDOP() {
-		fail("Not yet implemented");
+		assertFalse(tester.isCollideTo(new Point(-1, 0)));
+		assertFalse(tester.isCollideTo(new Point(0, 3)));
+		assertFalse(tester.isCollideTo(new Point(1, -2)));
+		assertFalse(tester.isCollideTo(new Point(4, 2)));
+		assertFalse(tester.isCollideTo(new Point(4, -2)));
+		assertFalse(tester.isCollideTo(new Point(0, -1)));
+		assertFalse(tester.isCollideTo(new Point(5, 1)));
+		assertFalse(tester.isCollideTo(new Point(5, -1)));
 	}
 
 	/**

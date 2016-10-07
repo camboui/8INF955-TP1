@@ -43,6 +43,9 @@ public class OBB extends Shape {
 	 */
 	public OBB(Position position) {
 		super(position);
+		this.width = 10;
+		this.height = 10;
+		this.angle = 0;
 	}
 
 	/**
@@ -225,22 +228,22 @@ public class OBB extends Shape {
 	public double getArea() {
 		return this.width * this.height;
 	}
-	
-	
+
 	/**
 	 * 
 	 * @return the KDOP corresponding to this OBB
 	 */
 	public KDOP toKDOP() {
 		List<Position> points = new ArrayList<Position>();
-		
-		Position center = new Position(getPosition().getX()+getWidth()/2,getPosition().getY()+getHeight()/2);
-		
+
+		Position center = new Position(getPosition().getX() + getWidth() / 2, getPosition().getY() + getHeight() / 2);
+
 		points.add(new Position(getPosition().rotation(center, getAngle())));
-		points.add(new Position(getPosition().getX()+getWidth(),getPosition().getY()).rotation(center, getAngle()));
-		points.add(new Position(getPosition().getX()+getWidth(),getPosition().getY()+getHeight()).rotation(center, getAngle()));
-		points.add(new Position(getPosition().getX(),getPosition().getY()+getHeight()).rotation(center, getAngle()));
-		
+		points.add(new Position(getPosition().getX() + getWidth(), getPosition().getY()).rotation(center, getAngle()));
+		points.add(new Position(getPosition().getX() + getWidth(), getPosition().getY() + getHeight()).rotation(center,
+				getAngle()));
+		points.add(new Position(getPosition().getX(), getPosition().getY() + getHeight()).rotation(center, getAngle()));
+
 		return new KDOP(points);
 	}
 

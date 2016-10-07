@@ -1,6 +1,3 @@
-/**
- * 
- */
 package geom;
 
 import static org.junit.Assert.*;
@@ -8,7 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * @author Quentin MACE
+ * Test class for {@link geom.Position}
+ * 
+ * @author BRANGER Mathias, CROUZET Matthieu, MACE Quentin.
  *
  */
 public class PositionTest {

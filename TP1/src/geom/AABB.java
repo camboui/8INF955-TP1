@@ -2,8 +2,6 @@ package geom;
 
 import java.awt.Graphics2D;
 
-import javax.lang.model.element.UnknownElementException;
-
 /**
  * A axis-aligned bounding box.
  * 
@@ -90,6 +88,15 @@ public class AABB extends OBB {
 	 */
 	public AABB(double x, double y, double width, double height) throws IllegalArgumentException {
 		super(x, y, width, height, 0);
+	}
+
+	@Override
+	public boolean isCollideTo(Shape shape) {
+		if (shape instanceof Point) {
+			Point point = (Point) shape;
+			return point.isInside(this);
+		} else
+			return super.isCollideTo(shape);
 	}
 
 	@Override
