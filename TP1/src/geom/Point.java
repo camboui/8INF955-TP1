@@ -61,20 +61,14 @@ public class Point extends Shape {
 			return this.isInside(c);
 		} else if (shape instanceof AABB) {
 			AABB aabb = (AABB) shape;
-			// return this.isInside(aabb);
-			return aabb.toKDOP().pointInside(getPosition());
+			return this.isInside(aabb);
 		} else if (shape instanceof OBB) {
 			OBB obb = (OBB) shape;
-			// return this.isInside(obb);
-			return obb.toKDOP().pointInside(getPosition());
+			return this.isInside(obb);
 		} else if (shape instanceof KDOP) {
 			KDOP kdop = (KDOP) shape;
-			// if (kdop.isConvex()) {
-			// return this.isInsideConvexPolygon(kdop);
-			// } else {
-			// // TODO kdop concave
-			// }
-			return kdop.pointInside(getPosition());
+			return this.isInside(kdop);
+			// return kdop.pointInside(getPosition());
 		}
 		throw new UnknownElementException(null, shape);
 	}
@@ -107,53 +101,83 @@ public class Point extends Shape {
 	 * @see geom.Circle
 	 */
 	// Math.sqrt((x1-x0)*(x1-x0) + (y1-y0)*(y1-y0)) < r
-	public boolean isInside(Circle circle) {
+	private boolean isInside(Circle circle) {
 
-		return (((this.getPosition().getX() - circle.getPosition().getX()) * (this.getPosition().getX()
-				- circle.getPosition().getX()) + (this.getPosition().getY()
-				- circle.getPosition().getY()) * (this.getPosition().getY()
-				- circle.getPosition().getY())) <= (circle.getRadius() * circle.getRadius()));
+		return (((this.getPosition().getX() - circle.getPosition().getX())
+				* (this.getPosition().getX() - circle.getPosition().getX())
+				+ (this.getPosition().getY() - circle.getPosition().getY())
+						* (this.getPosition().getY() - circle.getPosition().getY())) <= (circle.getRadius()
+								* circle.getRadius()));
 
 	}
 
 	/**
 	 * Test method to know if a point is inside a OBB.
 	 * 
-	 * @param abcd
+	 * @param obb
 	 *            The wanted OBB to be tested on.
 	 * 
 	 * @return true if the point is in the OBB.
 	 * 
 	 * @see geom.OBB
 	 */
-	public boolean isInside(OBB abcd) {
-		/*
-		 * A------------B | | | | | | D------------C
-		 * 
-		 * P is the current point
-		 */
-		Point A = new Point(abcd.getPosition());
-		Point B = new Point((abcd.getPosition().getX() + abcd.getHeight() * Math.cos(abcd.getAngle())),
-				(abcd.getPosition().getY() + abcd.getHeight() * Math.sin(abcd.getAngle())));
-		Point C = new Point(
-				(abcd.getPosition().getX() + abcd.getDiagLength() * Math.cos(abcd.getAngle() + Math.PI / 2.0)),
-				(abcd.getPosition().getY() + abcd.getDiagLength() * Math.sin(abcd.getAngle() + Math.PI / 2.0)));
-		Point D = new Point((abcd.getPosition().getX() + abcd.getWidth() * Math.cos(abcd.getAngle())),
-				(abcd.getPosition().getY() + abcd.getWidth() * Math.sin(abcd.getAngle())));
-		/* Triangles areas */
-		double areaAPD = (this.distance(A) * this.distance(D) / 2.0);
-		double areaDPC = (this.distance(D) * this.distance(C) / 2.0);
-		double areaCPB = (this.distance(C) * this.distance(B) / 2.0);
-		double areaBPA = (this.distance(B) * this.distance(A) / 2.0);
-		double sum = areaAPD + areaDPC + areaCPB + areaBPA;
-		/* Rectangle area */
-		double areaABCD = abcd.getArea();
+	private boolean isInside(OBB obb) {
 
-		/*
-		 * if the sum of triangles areas is equal to the rectangle area then the
-		 * point is inside the rectangle
-		 */
-		return sum == areaABCD;
+		double X = this.getPosition().getX() - obb.getPosition().getX();
+		double Y = this.getPosition().getY() - obb.getPosition().getY();
+
+		double newX = obb.getPosition().getX() + X * Math.cos(-obb.getAngle()) - Y * Math.sin(-obb.getAngle());
+		double newY = obb.getPosition().getY() + X * Math.sin(-obb.getAngle()) + Y * Math.cos(-obb.getAngle());
+
+		System.out.println(newX);
+		System.out.println(newY);
+
+		return ((newX <= (obb.getPosition().getX() + obb.getWidth())) && (newX >= (obb.getPosition().getX()))
+				&& (newY >= (obb.getPosition().getY())) && (newY) <= (obb.getPosition().getY() + obb.getHeight()));
+	}
+
+	/**
+	 * Test method to know if a point is inside a AABB.
+	 * 
+	 * @param aabb
+	 *            The wanted AABB to be tested on.
+	 * 
+	 * @return true if the point is in the AABB.
+	 * 
+	 * @see geom.AABB
+	 */
+	private boolean isInside(AABB aabb) {
+		return ((this.getPosition().getX() <= (aabb.getPosition().getX() + aabb.getWidth()))
+				&& (this.getPosition().getX() >= (aabb.getPosition().getX()))
+				&& (this.getPosition().getY() >= (aabb.getPosition().getY()))
+				&& (this.getPosition().getY() <= (aabb.getPosition().getY() + aabb.getHeight())));
+	}
+
+	/**
+	 * Test method to know if a point is inside a KDOP.
+	 * 
+	 * @param kdop
+	 *            The wanted KDOP to be tested on.
+	 * 
+	 * @return true if the point is in the KDOP.
+	 * 
+	 * @see geom.AABB
+	 */
+	private boolean isInside(KDOP kdop) {
+		int n = kdop.getPoints().size();
+		int i, j;
+		boolean b = false;
+
+		for (i = 0, j = n - 1; i < n; j = i++) {
+			if (((kdop.getPoints().get(i).getY() >= this.position.getY()) != (kdop.getPoints().get(j)
+					.getY() >= this.position.getY()))
+					&& (this.position.getX() <= (kdop.getPoints().get(j).getX() - kdop.getPoints().get(i).getX())
+							* (position.getY() - kdop.getPoints().get(i).getY())
+							/ (kdop.getPoints().get(j).getY() - kdop.getPoints().get(i).getY())
+							+ kdop.getPoints().get(i).getX()))
+				b = !b;
+		}
+		return b;
 	}
 
 	/**
@@ -167,36 +191,6 @@ public class Point extends Shape {
 	 */
 	public double distance(Point point) {
 		return this.getPosition().distance(point.getPosition());
-	}
-
-	/**
-	 * Test method to know if a point is inside a OBB.
-	 * 
-	 * @param kdop
-	 *            The wanted kdop to be tested on.
-	 * 
-	 * @return true if the point is in the kdop.
-	 * 
-	 * @see geom.OBB
-	 */
-	//TODO Remove useless?
-	public boolean isInsideConvexPolygon(KDOP kdop) {
-		double sum = 0;
-		double areaPolygonConvex = 0;
-		Point O = new Point(kdop.getPoints().get(0));
-		Point A = new Point(kdop.getPoints().get(kdop.getPoints().size() - 1));
-		Point B = new Point(kdop.getPoints().get(0));
-		for (int i = 0; i < kdop.getPoints().size() - 1; i++) {
-			A = B;
-			B.setPosition(kdop.getPoints().get(i + 1));
-			areaPolygonConvex += (O.distance(A) * O.distance(B) / 2.0);
-			sum += (this.distance(A) * this.distance(B) / 2.0);
-		}
-		/*
-		 * if the sum of triangles areas is equal to the polygon's area then the
-		 * point is inside the rectangle
-		 */
-		return sum == areaPolygonConvex;
 	}
 
 	@Override

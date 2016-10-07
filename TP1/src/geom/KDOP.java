@@ -72,7 +72,7 @@ public class KDOP extends Shape {
 	 * 
 	 * @param position
 	 *            The wanted position to be tested.
-	 *            
+	 * 
 	 * @return true if the point p is inside the polygon
 	 */
 	public boolean pointInside(Position position) {
@@ -81,7 +81,7 @@ public class KDOP extends Shape {
 		boolean b = false;
 
 		for (i = 0, j = n - 1; i < n; j = i++) {
-			if (((getPoints().get(i).getY() > position.getY()) != (getPoints().get(j).getY() > position.getY()))
+			if (((getPoints().get(i).getY() >= position.getY()) != (getPoints().get(j).getY() >= position.getY()))
 					&& (position.getX() <= (getPoints().get(j).getX() - getPoints().get(i).getX())
 							* (position.getY() - getPoints().get(i).getY())
 							/ (getPoints().get(j).getY() - getPoints().get(i).getY()) + getPoints().get(i).getX()))
@@ -94,7 +94,7 @@ public class KDOP extends Shape {
 	 * 
 	 * @param target
 	 *            The wanted position to be tested.
-	 *            
+	 * 
 	 * @return the minimum distance between a point and the polygon edge
 	 */
 	public float minDistance(Position target) {
@@ -169,7 +169,7 @@ public class KDOP extends Shape {
 	}
 
 	public List<KDOP> toConvexKDOP() {
-		//TODO
+		// TODO
 		return new ArrayList<KDOP>();
 	}
 
