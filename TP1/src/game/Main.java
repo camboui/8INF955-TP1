@@ -36,10 +36,10 @@ public class Main {
 
 		List<Position> points = new ArrayList<Position>();
 		points.add(new Position(300, 300));
-		points.add(new Position(350, 300));
 		points.add(new Position(340, 340));
 		points.add(new Position(250, 300));
 		points.add(new Position(210, 230));
+		
 		KDOP kdop = new KDOP(points);
 		entities.add(new GameObject(kdop, -1, -1));
 
@@ -54,7 +54,7 @@ public class Main {
 
 		Point point = new Point(70, 100);
 		entities.add(new GameObject(point, -1.1f, -2.5f));
-
+		
 		// Circle c = new Circle(200, 200, 50);
 		// entities.add(new GameObject(c, 0, 0));
 		//
