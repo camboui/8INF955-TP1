@@ -2,6 +2,8 @@ package geom;
 
 import java.awt.Graphics2D;
 
+import javax.lang.model.element.UnknownElementException;
+
 /**
  * A axis-aligned bounding box.
  * 
@@ -67,7 +69,7 @@ public class AABB extends OBB {
 	public AABB(Position position, double width, double height) throws IllegalArgumentException {
 		super(position, width, height, 0);
 	}
-	
+
 	/**
 	 * OBB Constructor.
 	 * 
@@ -90,9 +92,9 @@ public class AABB extends OBB {
 		super(x, y, width, height, 0);
 	}
 
+	@Override
 	public void draw(Graphics2D g) {
-		g.fillRect((int)getPosition().getX(), (int)getPosition().getY(), (int)getWidth(), (int)getHeight());
-
+		g.fillRect((int) getPosition().getX(), (int) getPosition().getY(), (int) getWidth(), (int) getHeight());
 	}
 
 }
