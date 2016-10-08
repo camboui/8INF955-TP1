@@ -58,7 +58,6 @@ public abstract class Shape {
 		this.isColliding = false;
 	}
 
-	// TODO Faudrait trouver un truc simple pour ca
 	/**
 	 * Indicate if a shape is collide to another.
 	 * 

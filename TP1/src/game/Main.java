@@ -1,9 +1,6 @@
 package game;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -12,6 +9,12 @@ import graphics.Window;
 
 public class Main {
 
+	/**
+	 * Main
+	 * 
+	 * @param args
+	 *            Args
+	 */
 	public static void main(String[] args) {
 
 		double start;
@@ -39,7 +42,7 @@ public class Main {
 		points.add(new Position(340, 340));
 		points.add(new Position(250, 300));
 		points.add(new Position(210, 230));
-		
+
 		KDOP kdop = new KDOP(points);
 		entities.add(new GameObject(kdop, -1, -1));
 
@@ -54,7 +57,7 @@ public class Main {
 
 		Point point = new Point(70, 100);
 		entities.add(new GameObject(point, -1.1f, -2.5f));
-		
+
 		// Circle c = new Circle(200, 200, 50);
 		// entities.add(new GameObject(c, 0, 0));
 		//

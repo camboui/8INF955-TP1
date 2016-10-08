@@ -29,44 +29,19 @@ public class KDOP extends Shape {
 	 * 
 	 * 
 	 * @throws IllegalArgumentException
-	 *             If the list of points is empty.
+	 *             If the list of points is empty, or if their is less then 3
+	 *             points
 	 */
-	// TODO 3 points minimum?
 	public KDOP(List<Position> points) throws IllegalArgumentException {
 		super();
 		if (points.isEmpty())
 			throw new IllegalArgumentException("Empty list of points");
+		else if (points.size() < 3)
+			throw new IllegalArgumentException("At least 3 points or needed for a KDOP: " + points.size());
 		else {
 			this.points = points;
 			if (!this.isConvex())
 				throw new IllegalArgumentException("Polygon is not convex");
-		}
-	}
-
-	/**
-	 * KDOP constructor.
-	 * 
-	 * @param points
-	 *            The list of points representing the polytope.
-	 * 
-	 * @param position
-	 *            The wanted position of the KDOP.
-	 * 
-	 * @throws IllegalArgumentException
-	 *             If the list of points is empty.
-	 *
-	 * 
-	 */
-	// TODO 3 points minimum? Heuuuu? Il sert a quoi position ici appart foutre
-	// la merde?
-	public KDOP(List<Position> points, Position position) throws IllegalArgumentException {
-		super(position);
-		if (points.isEmpty())
-			throw new IllegalArgumentException("Empty list of points");
-		else if (points.get(0) != position)
-			throw new IllegalArgumentException("First element of the list is different than the position.");
-		else {
-			this.points = points;
 		}
 	}
 
@@ -303,7 +278,7 @@ public class KDOP extends Shape {
 	 * 
 	 * @return The cross product between vector ab and bc.
 	 */
-	public static double crossProduct(Position a, Position b, Position c) {
+	private double crossProduct(Position a, Position b, Position c) {
 		return (b.getX() - a.getX()) * (c.getY() - b.getY()) - (b.getY() - a.getY()) * (c.getX() - b.getX());
 	}
 

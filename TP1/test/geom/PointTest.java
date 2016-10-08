@@ -178,7 +178,6 @@ public class PointTest {
 		positionList.add(new Position(2, -1));
 		positionList.add(new Position(1, -2));
 		positionList.add(new Position(0, -1));
-
 		KDOP tester = new KDOP(positionList);
 
 		assertFalse(new Point(0, 2).isCollideTo(tester));
