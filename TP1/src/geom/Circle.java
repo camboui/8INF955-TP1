@@ -115,8 +115,7 @@ public class Circle extends Shape {
 	}
 
 	/**
-	 * Test if two circle or colliding
-	 * 
+	 * Test if two circle are colliding.
 	 * 
 	 * @param circle
 	 *            The other circle for the collision

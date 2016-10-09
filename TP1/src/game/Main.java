@@ -7,6 +7,12 @@ import java.util.concurrent.TimeUnit;
 import geom.*;
 import graphics.Window;
 
+/**
+ * Main Class
+ * 
+ * @author BRANGER Mathias, CROUZET Matthieu, MACE Quentin.
+ *
+ */
 public class Main {
 
 	/**
@@ -15,6 +21,7 @@ public class Main {
 	 * @param args
 	 *            Args
 	 */
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 
 		double start;
@@ -86,6 +93,15 @@ public class Main {
 		}
 	}
 
+	/**
+	 * Apply the logic.
+	 * 
+	 * @param go
+	 *            The game object.
+	 * 
+	 * @param walls
+	 *            The walls.
+	 */
 	public static void applyLogic(List<GameObject> go, List<GameObject> walls) {
 		// move every object and check collision with walls
 		for (GameObject current : go) {

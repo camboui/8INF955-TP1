@@ -2,7 +2,6 @@ package geom;
 
 import java.awt.Graphics2D;
 import java.awt.geom.GeneralPath;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -46,11 +45,12 @@ public class KDOP extends Shape {
 	}
 
 	/**
+	 * Indicate if a point is inside a polygon.
 	 * 
 	 * @param position
 	 *            The wanted position to be tested.
 	 * 
-	 * @return true if the point p is inside the polygon
+	 * @return true if the point p is inside the polygon.
 	 */
 	public boolean pointInside(Position position) {
 		int n = this.getPoints().size();
@@ -68,6 +68,7 @@ public class KDOP extends Shape {
 	}
 
 	/**
+	 * Calculate the minimum distance between a point and a polygon edge.
 	 * 
 	 * @param target
 	 *            The wanted position to be tested.
@@ -109,12 +110,17 @@ public class KDOP extends Shape {
 			}
 
 			if (kdop != null) {
-				return kdop_kdop(kdop);
+				return kdopVsKdop(kdop);
 			}
 		}
 		return false;
 	}
 
+	/**
+	 * Calculate the vector's projection axis.
+	 * 
+	 * @return The vector projection axis.
+	 */
 	private Position[] getAxes() {
 
 		Position[] axes = new Position[this.getPoints().size()];
@@ -126,7 +132,6 @@ public class KDOP extends Shape {
 			Position p2 = this.getPoints().get(i + 1 == axes.length ? 0 : i + 1);
 
 			// subtract the two to get the edge vector
-			// TODO SOUSTRACTION de vecteur ?
 			Position edge = new Position(p1.getX() - p2.getX(), p1.getY() - p2.getY());
 			// get either perpendicular vector
 			Position normal = new Position(edge.getY(), -edge.getX());
@@ -136,10 +141,29 @@ public class KDOP extends Shape {
 		return axes;
 	}
 
+	/**
+	 * Operate the dot product.
+	 * 
+	 * @param p1
+	 *            First point for the dot product.
+	 * 
+	 * @param p2
+	 *            Second point for the dot product.
+	 * 
+	 * @return The result of the dot product between p1 and p2.
+	 */
 	private double dot(Position p1, Position p2) {
 		return p1.getX() * p2.getX() + p1.getY() * p2.getY();
 	}
 
+	/**
+	 * Project a KDOP on a axis
+	 * 
+	 * @param axis
+	 *            The wanted axis for the projection.
+	 * 
+	 * @return The position of the projection.
+	 */
 	private Position project(Position axis) {
 		double min = dot(axis, this.getPoints().get(0));
 		double max = min;
@@ -156,18 +180,47 @@ public class KDOP extends Shape {
 		return proj;
 	}
 
+	/**
+	 * Test if two positions are overlapping
+	 * 
+	 * @param p1
+	 *            The first position
+	 * 
+	 * @param p2
+	 *            The second position
+	 * 
+	 * @return True if the positions are overlapping, false if they don't.
+	 */
 	private boolean doesOverlap(Position p1, Position p2) {
 		return (p1.getY() >= p2.getX() || p1.getX() >= p2.getY());
 
 	}
 
+	/**
+	 * Calculate the overlap of two positions.
+	 * 
+	 * @param p1
+	 *            The first position
+	 * 
+	 * @param p2
+	 *            The second position
+	 * 
+	 * @return The overlap of two positions.
+	 */
 	private double getOverlap(Position p1, Position p2) {
 		return (p1.getY() <= p2.getY()) ? p1.getY() - p2.getX() : p2.getY() - p1.getX();
 	}
 
-	private boolean kdop_kdop(KDOP kdop) {
+	/**
+	 * Collision function for two KDOP.
+	 * 
+	 * @param kdop
+	 *            The other KDOP.
+	 * 
+	 * @return True if the two KDOP are colliding.
+	 */
+	private boolean kdopVsKdop(KDOP kdop) {
 		double overlap = Double.POSITIVE_INFINITY;
-		Position smallest = null;
 		Position[] axes1 = kdop.getAxes();
 		Position[] axes2 = getAxes();
 		// loop over the axes1
@@ -187,7 +240,6 @@ public class KDOP extends Shape {
 				if (o < overlap) {
 					// then set this one as the smallest
 					overlap = o;
-					smallest = axis;
 				}
 			}
 		}
@@ -208,7 +260,6 @@ public class KDOP extends Shape {
 				if (o < overlap) {
 					// then set this one as the smallest
 					overlap = o;
-					smallest = axis;
 				}
 			}
 		}

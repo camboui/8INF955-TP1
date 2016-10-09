@@ -120,15 +120,7 @@ public class Point extends Shape {
 	 * @see geom.OBB
 	 */
 	public boolean isInside(OBB obb) {
-
-		double X = this.getPosition().getX() - obb.getPosition().getX();
-		double Y = this.getPosition().getY() - obb.getPosition().getY();
-
-		double newX = obb.getPosition().getX() + X * Math.cos(-obb.getAngle()) - Y * Math.sin(-obb.getAngle());
-		double newY = obb.getPosition().getY() + X * Math.sin(-obb.getAngle()) + Y * Math.cos(-obb.getAngle());
-
-		return ((newX <= (obb.getPosition().getX() + obb.getWidth())) && (newX >= (obb.getPosition().getX()))
-				&& (newY >= (obb.getPosition().getY())) && (newY) <= (obb.getPosition().getY() + obb.getHeight()));
+		return this.isInside(obb.toKDOP());
 	}
 
 	/**

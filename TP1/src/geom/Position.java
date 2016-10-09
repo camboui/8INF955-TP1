@@ -87,7 +87,7 @@ public class Position {
 	 * @param position
 	 *            The position to be tested on.
 	 * 
-	 * @return true if p has the same x and same y
+	 * @return true if p has the same x and same y.
 	 * 
 	 * @see geom.Position
 	 */
@@ -99,9 +99,9 @@ public class Position {
 	 * Calculate the distance between two positions.
 	 * 
 	 * @param position
-	 *            The wanted position for the operation
+	 *            The wanted position for the operation.
 	 * 
-	 * @return The distance between two positions
+	 * @return The distance between two positions.
 	 * 
 	 */
 	public double distance(Position position) {
@@ -109,12 +109,14 @@ public class Position {
 	}
 
 	/**
+	 * Calculate the minimum distance between this position and a segment.
 	 * 
 	 * @param a
-	 *            The first position
+	 *            The first position.
 	 * @param b
-	 *            The second position
-	 * @return the minimum distance between this point and [AB]
+	 *            The second position.
+	 * 
+	 * @return The minimum distance between this point and [AB].
 	 */
 	public double minDistanceToLine(Position a, Position b) {
 		double px = b.getX() - a.getX();
@@ -132,12 +134,15 @@ public class Position {
 	}
 
 	/**
+	 * Rotate this position from a position and on angle.
 	 * 
 	 * @param originRot
-	 *            The origin point of the rotation
+	 *            The origin point of the rotation.
+	 * 
 	 * @param angle
-	 *            The angle of the rotation
-	 * @return the rotated point according to originRot
+	 *            The angle of the rotation.
+	 * 
+	 * @return The rotated point according to originRot.
 	 */
 	public Position rotation(Position originRot, double angle) {
 		Position ret = new Position();

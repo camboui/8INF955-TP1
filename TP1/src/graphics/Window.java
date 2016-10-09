@@ -46,6 +46,7 @@ public class Window extends JFrame {
 	 * @param go
 	 *            list of shapes to draw
 	 */
+	@SuppressWarnings("unchecked")
 	public void drawAll(List<GameObject>... go) {
 
 		JPanel panel = new JPanel() {

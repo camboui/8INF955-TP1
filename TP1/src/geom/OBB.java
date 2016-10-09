@@ -146,10 +146,6 @@ public class OBB extends Shape {
 
 	@Override
 	public boolean isCollideTo(Shape shape) {
-		if (shape instanceof Point) {
-			Point point = (Point) shape;
-			return point.isInside(this);
-		} else
 			return toKDOP().isCollideTo(shape);
 	}
 
@@ -244,6 +240,7 @@ public class OBB extends Shape {
 	}
 
 	/**
+	 * Transform an OBB into a KDOP. 
 	 * 
 	 * @return the KDOP corresponding to this OBB
 	 */
