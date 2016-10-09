@@ -19,8 +19,96 @@ public class KDOPTest {
 	 * Test method for {@link geom.KDOP#isCollideTo(geom.Shape)}.
 	 */
 	@Test
-	public void testIsCollideTo() {
-		fail("Not yet implemented");
+	public void testIsCollideToPoint() {
+		List<Position> positionList = new ArrayList<Position>();
+		positionList.add(new Position(0, 0));
+		positionList.add(new Position(0, 1));
+		positionList.add(new Position(1, 2));
+		positionList.add(new Position(2, 2));
+		positionList.add(new Position(3, 1));
+		positionList.add(new Position(2, -1));
+		positionList.add(new Position(1, -2));
+		positionList.add(new Position(0, -1));
+		KDOP tester = new KDOP(positionList);
+
+		assertFalse(tester.isCollideTo(new Point(0, 2)));
+		assertFalse(tester.isCollideTo(new Point(0, 1.5)));
+		assertFalse(tester.isCollideTo(new Point(0.5, 2)));
+
+		assertFalse(tester.isCollideTo(new Point(3, 2)));
+		assertFalse(tester.isCollideTo(new Point(3, 0)));
+
+		assertTrue(tester.isCollideTo(new Point(1.5, 1.5)));
+		assertTrue(tester.isCollideTo(new Point(1, 1)));
+		assertTrue(tester.isCollideTo(new Point(2.5, 0.5)));
+
+		assertTrue(tester.isCollideTo(new Point(0.5, 0)));
+		assertTrue(tester.isCollideTo(new Point(0.5, 1)));
+		assertTrue(tester.isCollideTo(new Point(1.5, 2)));
+		assertTrue(tester.isCollideTo(new Point(2, 2)));
+		assertTrue(tester.isCollideTo(new Point(2, 1)));
+		assertTrue(tester.isCollideTo(new Point(3, 1)));
+		assertTrue(tester.isCollideTo(new Point(2, 0)));
+		assertTrue(tester.isCollideTo(new Point(2, -1)));
+		assertTrue(tester.isCollideTo(new Point(1, -1)));
+		assertTrue(tester.isCollideTo(new Point(1, 0.5)));
+	}
+
+	/**
+	 * Test method for {@link geom.KDOP#isCollideTo(geom.Shape)}.
+	 */
+	@Test
+	public void testIsCollideToCircle() {
+		List<Position> positionList = new ArrayList<Position>();
+		positionList.add(new Position(0, 0));
+		positionList.add(new Position(0, 1));
+		positionList.add(new Position(1, 2));
+		positionList.add(new Position(2, 2));
+		positionList.add(new Position(3, 1));
+		positionList.add(new Position(2, -1));
+		positionList.add(new Position(1, -2));
+		positionList.add(new Position(0, -1));
+
+		KDOP testerKDOP = new KDOP(positionList);
+
+		assertTrue(testerKDOP.isCollideTo(new Circle(1, 0, 1)));
+		assertTrue(testerKDOP.isCollideTo(new Circle(1, 1, 1)));
+		assertTrue(testerKDOP.isCollideTo(new Circle(1, -1, 1)));
+		assertTrue(testerKDOP.isCollideTo(new Circle(-1, 0, 1)));
+		assertTrue(testerKDOP.isCollideTo(new Circle(0, 2, 1)));
+		assertTrue(testerKDOP.isCollideTo(new Circle(1, -1, 1)));
+
+		assertFalse(testerKDOP.isCollideTo(new Circle(3, 2, 0.5)));
+		assertFalse(testerKDOP.isCollideTo(new Circle(3, -1, 0.5)));
+	}
+
+	/**
+	 * Test method for {@link geom.KDOP#isCollideTo(geom.Shape)}.
+	 */
+	@Test
+	public void testIsCollideToKDOP() {
+		List<Position> positionList = new ArrayList<Position>();
+		positionList.add(new Position(0, 0));
+		positionList.add(new Position(0, 1));
+		positionList.add(new Position(1, 2));
+		positionList.add(new Position(2, 2));
+		positionList.add(new Position(3, 1));
+		positionList.add(new Position(2, -1));
+		positionList.add(new Position(1, -2));
+		positionList.add(new Position(0, -1));
+
+		KDOP testerKDOP = new KDOP(positionList);
+		KDOP tester = new KDOP(positionList);
+
+		assertTrue(testerKDOP.isCollideTo(tester));
+
+		positionList.clear();
+		positionList.add(new Position(0, 0));
+		positionList.add(new Position(-1, 0));
+		positionList.add(new Position(0, -1));
+		tester = new KDOP(positionList);
+		assertTrue(testerKDOP.isCollideTo(tester));
+
 	}
 
 	/**
@@ -69,27 +157,27 @@ public class KDOPTest {
 	/**
 	 * Test method for {@link geom.KDOP#KDOP(java.util.List)}.
 	 */
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testKDOPListOfPositionException1() {
 		List<Position> positionList = new ArrayList<Position>();
 		new KDOP(positionList);
 	}
-	
+
 	/**
 	 * Test method for {@link geom.KDOP#KDOP(java.util.List)}.
 	 */
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testKDOPListOfPositionException2() {
 		List<Position> positionList = new ArrayList<Position>();
 		positionList.add(new Position(0, 0));
 		positionList.add(new Position(0, 1));
 		new KDOP(positionList);
 	}
-	
+
 	/**
 	 * Test method for {@link geom.KDOP#KDOP(java.util.List)}.
 	 */
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testKDOPListOfPositionException3() {
 		List<Position> positionList = new ArrayList<Position>();
 		positionList.add(new Position(0, 0));
@@ -100,7 +188,7 @@ public class KDOPTest {
 		positionList.add(new Position(3, 1));
 		new KDOP(positionList);
 	}
-	
+
 	/**
 	 * Test method for {@link geom.KDOP#KDOP(java.util.List)}.
 	 */
@@ -110,13 +198,13 @@ public class KDOPTest {
 		positionList.add(new Position(0, 0));
 		positionList.add(new Position(0, 1));
 		positionList.add(new Position(1, 2));
-		
+
 		KDOP tester = new KDOP(positionList);
-		
+
 		assertNotNull(tester);
-		
-		assertEquals(3,tester.getPoints().size());
-		
+
+		assertEquals(3, tester.getPoints().size());
+
 		assertEquals(0, tester.getPoints().get(0).getX(), 0);
 		assertEquals(0, tester.getPoints().get(0).getY(), 0);
 
@@ -132,7 +220,38 @@ public class KDOPTest {
 	 */
 	@Test
 	public void testPointInside() {
-		fail("Not yet implemented");
+		List<Position> positionList = new ArrayList<Position>();
+		positionList.add(new Position(0, 0));
+		positionList.add(new Position(0, 1));
+		positionList.add(new Position(1, 2));
+		positionList.add(new Position(2, 2));
+		positionList.add(new Position(3, 1));
+		positionList.add(new Position(2, -1));
+		positionList.add(new Position(1, -2));
+		positionList.add(new Position(0, -1));
+		KDOP tester = new KDOP(positionList);
+
+		assertFalse(tester.pointInside(new Position(0, 2)));
+		assertFalse(tester.pointInside(new Position(0, 1.5)));
+		assertFalse(tester.pointInside(new Position(0.5, 2)));
+
+		assertFalse(tester.pointInside(new Position(3, 2)));
+		assertFalse(tester.pointInside(new Position(3, 0)));
+
+		assertTrue(tester.pointInside(new Position(1.5, 1.5)));
+		assertTrue(tester.pointInside(new Position(1, 1)));
+		assertTrue(tester.pointInside(new Position(2.5, 0.5)));
+
+		assertTrue(tester.pointInside(new Position(0.5, 0)));
+		assertTrue(tester.pointInside(new Position(0.5, 1)));
+		assertTrue(tester.pointInside(new Position(1.5, 2)));
+		assertTrue(tester.pointInside(new Position(2, 2)));
+		assertTrue(tester.pointInside(new Position(2, 1)));
+		assertTrue(tester.pointInside(new Position(3, 1)));
+		assertTrue(tester.pointInside(new Position(2, 0)));
+		assertTrue(tester.pointInside(new Position(2, -1)));
+		assertTrue(tester.pointInside(new Position(1, -1)));
+		assertTrue(tester.pointInside(new Position(1, 0.5)));
 	}
 
 	/**
@@ -140,7 +259,24 @@ public class KDOPTest {
 	 */
 	@Test
 	public void testMinDistance() {
-		fail("Not yet implemented");
+		List<Position> positionList = new ArrayList<Position>();
+		positionList.add(new Position(0, 0));
+		positionList.add(new Position(0, 1));
+		positionList.add(new Position(1, 2));
+		positionList.add(new Position(2, 2));
+		positionList.add(new Position(3, 1));
+		positionList.add(new Position(2, -1));
+		positionList.add(new Position(1, -2));
+		positionList.add(new Position(0, -1));
+		KDOP tester = new KDOP(positionList);
+
+		assertEquals(0.0, tester.minDistance(new Position(1, 2)), 0);
+		assertEquals(0.0, tester.minDistance(new Position(0, 0)), 0);
+		assertEquals(Math.sqrt(2) / 2, tester.minDistance(new Position(3, 2)), 0.00001);
+		assertEquals(2.0, tester.minDistance(new Position(-2, -1)), 0);
+		assertEquals(0.0, tester.minDistance(new Position(2, 2)), 0);
+		assertEquals(Math.sqrt(2) / 2, tester.minDistance(new Position(2, 1)), 0.00001);
+
 	}
 
 }

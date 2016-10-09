@@ -191,17 +191,16 @@ public class PointTest {
 		assertTrue(new Point(1, 1).isCollideTo(tester));
 		assertTrue(new Point(2.5, 0.5).isCollideTo(tester));
 
-		assertTrue(new Point(0, 0).isCollideTo(tester));
-		assertTrue(new Point(0, 1).isCollideTo(tester));
-		assertTrue(new Point(1, 2).isCollideTo(tester));
-		assertTrue(new Point(2, 2).isCollideTo(tester));
-		assertTrue(new Point(2, 1).isCollideTo(tester));
-		assertTrue(new Point(3, 1).isCollideTo(tester));
-		assertTrue(new Point(2, 0).isCollideTo(tester));
-		assertTrue(new Point(2, -1).isCollideTo(tester));
-		assertTrue(new Point(1, -2).isCollideTo(tester));
-		assertTrue(new Point(0, -1).isCollideTo(tester));
-
+		assertTrue(new Point(0.5, 0).isInside(tester));
+		assertTrue(new Point(0.5, 1).isInside(tester));
+		assertTrue(new Point(1.5, 2).isInside(tester));
+		assertTrue(new Point(2, 2).isInside(tester));
+		assertTrue(new Point(2, 1).isInside(tester));
+		assertTrue(new Point(3, 1).isInside(tester));
+		assertTrue(new Point(2, 0).isInside(tester));
+		assertTrue(new Point(2, -1).isInside(tester));
+		assertTrue(new Point(1, -1).isInside(tester));
+		assertTrue(new Point(1, 0.5).isInside(tester));
 	}
 
 	/**
@@ -337,16 +336,16 @@ public class PointTest {
 		assertTrue(new Point(1, 1).isInside(tester));
 		assertTrue(new Point(2.5, 0.5).isInside(tester));
 
-		assertTrue(new Point(0, 0).isInside(tester));
-		assertTrue(new Point(0, 1).isInside(tester));
-		assertTrue(new Point(1, 2).isInside(tester));
+		assertTrue(new Point(0.5, 0).isInside(tester));
+		assertTrue(new Point(0.5, 1).isInside(tester));
+		assertTrue(new Point(1.5, 2).isInside(tester));
 		assertTrue(new Point(2, 2).isInside(tester));
 		assertTrue(new Point(2, 1).isInside(tester));
 		assertTrue(new Point(3, 1).isInside(tester));
 		assertTrue(new Point(2, 0).isInside(tester));
 		assertTrue(new Point(2, -1).isInside(tester));
-		assertTrue(new Point(1, -2).isInside(tester));
-		assertTrue(new Point(0, -1).isInside(tester));
+		assertTrue(new Point(1, -1).isInside(tester));
+		assertTrue(new Point(1, 0.5).isInside(tester));
 
 	}
 
