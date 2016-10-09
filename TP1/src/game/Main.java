@@ -93,6 +93,14 @@ public class Main {
 		}
 	}
 
+	/**
+	 * 
+	 * @param width 
+	 * 		the width of the window
+	 * @param height 
+	 * 		the height of the window
+	 * @return the list of gameObjects describing walls
+	 */
 	public static List<GameObject> createWalls(int width, int height) {
 		List<GameObject> walls = new ArrayList<GameObject>();
 		// 0 and 1 are horizontal
@@ -105,6 +113,10 @@ public class Main {
 		return walls;
 	}
 
+	/**
+	 * 
+	 * @return a list full of gameObject representing different kind of Shape
+	 */
 	public static List<GameObject> createShapes() {
 		List<GameObject> entities = new ArrayList<GameObject>();
 		List<Position> points = new ArrayList<Position>();
