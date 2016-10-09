@@ -20,6 +20,7 @@ public class KDOP extends Shape {
 	 */
 	List<Position> points;
 
+	/** Indicate the way the KDOP is create , clockwise or not */
 	public Boolean isRotationClockwise = null;
 
 	/**
@@ -54,7 +55,7 @@ public class KDOP extends Shape {
 	 * 
 	 * @return true if the point p is inside the polygon.
 	 */
-	public boolean pointInside(Position p) {
+	public boolean pointInside(Position position) {
 		int n = this.getPoints().size();
 		int i;
 		for (i = 0; i < n; i++) {
@@ -65,7 +66,7 @@ public class KDOP extends Shape {
 			else
 				B = this.getPoints().get(i + 1);
 			Position D = new Position(B.getX() - A.getX(), B.getY() - A.getY());
-			Position T = new Position(p.getX() - A.getX(), p.getY() - A.getY());
+			Position T = new Position(position.getX() - A.getX(), position.getY() - A.getY());
 
 			double d = D.getX() * T.getY() - D.getY() * T.getX();
 
