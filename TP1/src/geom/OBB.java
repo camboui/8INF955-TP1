@@ -146,7 +146,7 @@ public class OBB extends Shape {
 
 	@Override
 	public boolean isCollideTo(Shape shape) {
-			return toKDOP().isCollideTo(shape);
+		return toKDOP().isCollideTo(shape);
 	}
 
 	@Override
@@ -222,6 +222,16 @@ public class OBB extends Shape {
 	}
 
 	/**
+	 * add angle to current angle.
+	 *
+	 * @param toAdd
+	 *            The angle to add.
+	 */
+	public void addAngle(double toAdd) {
+		this.angle += toAdd;
+	}
+
+	/**
 	 * Return the diagonal length.
 	 * 
 	 * @return The diagonal length.
@@ -240,7 +250,7 @@ public class OBB extends Shape {
 	}
 
 	/**
-	 * Transform an OBB into a KDOP. 
+	 * Transform an OBB into a KDOP.
 	 * 
 	 * @return the KDOP corresponding to this OBB
 	 */

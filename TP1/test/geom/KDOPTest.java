@@ -231,6 +231,8 @@ public class KDOPTest {
 		positionList.add(new Position(0, -1));
 		KDOP tester = new KDOP(positionList);
 
+		assertTrue(tester.pointInside(new Position(2, -1)));
+
 		assertFalse(tester.pointInside(new Position(0, 2)));
 		assertFalse(tester.pointInside(new Position(0, 1.5)));
 		assertFalse(tester.pointInside(new Position(0.5, 2)));

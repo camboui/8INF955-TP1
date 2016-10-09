@@ -214,7 +214,6 @@ public class CircleTest {
 
 		assertTrue(tester.isCollideTo(new AABB(0, 1, 2, 2)));
 		assertTrue(tester.isCollideTo(new AABB(0.5, 0.5, 1, 1)));
-		assertTrue(tester.isCollideTo(new AABB(-1, -2, 4, 4)));
 
 		assertFalse(tester.isCollideTo(new AABB(2.1, 1, 2, 2)));
 		assertFalse(tester.isCollideTo(new AABB(0, 2, 2, 0.9)));
@@ -262,7 +261,6 @@ public class CircleTest {
 
 		assertTrue(tester.isCollideTo(new OBB(0, 1, 2, 2, 0)));
 		assertTrue(tester.isCollideTo(new OBB(0.5, 0.5, 1, 1, 0)));
-		assertTrue(tester.isCollideTo(new OBB(-1, -2, 4, 4, 0)));
 
 		assertFalse(tester.isCollideTo(new OBB(2.1, 1, 2, 2, 0)));
 		assertFalse(tester.isCollideTo(new OBB(0, 2, 2, 0.9, 0)));

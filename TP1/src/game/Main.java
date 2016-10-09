@@ -33,44 +33,9 @@ public class Main {
 		int width = 500;
 		Window w = new Window(height, width);
 
-		List<GameObject> entities = new ArrayList<GameObject>();
-		List<GameObject> walls = new ArrayList<GameObject>();
+		List<GameObject> walls = createWalls(width, height);
+		List<GameObject> entities = createShapes();
 
-		// 0 and 1 are horizontal
-		walls.add(new GameObject(new AABB(0, 0, width, 3), 0, 0));
-		walls.add(new GameObject(new AABB(0, height - 3, width, 3), 0, 0));
-
-		// 2 and 3 are vertical
-		walls.add(new GameObject(new AABB(width - 3, 0, 3, height), 0, 0));
-		walls.add(new GameObject(new AABB(0, 0, 3, height), 0, 0));
-
-		List<Position> points = new ArrayList<Position>();
-		points.add(new Position(300, 300));
-		points.add(new Position(340, 340));
-		points.add(new Position(250, 300));
-		points.add(new Position(210, 230));
-
-		KDOP kdop = new KDOP(points);
-		entities.add(new GameObject(kdop, -1, -1));
-
-		Circle c = new Circle(300, 190, 70);
-		entities.add(new GameObject(c, 1, 1));
-
-		OBB obb = new OBB(new Position(40, 20), 40, 90, Math.PI / 3);
-		entities.add(new GameObject(obb, 1.2f, -1));
-
-		AABB aabb = new AABB(350, 400, 80, 45);
-		entities.add(new GameObject(aabb, -1.4f, -1.7f));
-
-		Point point = new Point(70, 100);
-		entities.add(new GameObject(point, -1.1f, -2.5f));
-
-		// Circle c = new Circle(200, 200, 50);
-		// entities.add(new GameObject(c, 0, 0));
-		//
-		// AABB aabb = new AABB(250, 150, 50, 50);
-		// entities.add(new GameObject(aabb, 0, 0));
-		//
 		// while window is open
 		while (w.isActive()) {
 			start = System.currentTimeMillis();
@@ -105,7 +70,11 @@ public class Main {
 	public static void applyLogic(List<GameObject> go, List<GameObject> walls) {
 		// move every object and check collision with walls
 		for (GameObject current : go) {
+			if (current.getShape() instanceof OBB) {
+				((OBB) current.getShape()).addAngle(Math.PI / 1000);
+			}
 			current.applyMove();
+
 			if (walls.get(0).getShape().isCollideTo(current.getShape())
 					|| walls.get(1).getShape().isCollideTo(current.getShape())) {
 				current.reverseYspeed();
@@ -122,6 +91,56 @@ public class Main {
 			temp.remove(current);
 			current.getShape().isCollideGo(temp);
 		}
+	}
+
+	public static List<GameObject> createWalls(int width, int height) {
+		List<GameObject> walls = new ArrayList<GameObject>();
+		// 0 and 1 are horizontal
+		walls.add(new GameObject(new AABB(0, 0, width, 3), 0, 0));
+		walls.add(new GameObject(new AABB(0, height - 3, width, 3), 0, 0));
+
+		// 2 and 3 are vertical
+		walls.add(new GameObject(new AABB(width - 3, 0, 3, height), 0, 0));
+		walls.add(new GameObject(new AABB(0, 0, 3, height), 0, 0));
+		return walls;
+	}
+
+	public static List<GameObject> createShapes() {
+		List<GameObject> entities = new ArrayList<GameObject>();
+		List<Position> points = new ArrayList<Position>();
+		points.add(new Position(300, 300));
+		points.add(new Position(340, 340));
+		points.add(new Position(250, 300));
+		points.add(new Position(210, 230));
+
+		KDOP kdop = new KDOP(points);
+		entities.add(new GameObject(kdop, -1, -1));
+
+		List<Position> points2 = new ArrayList<Position>();
+		points2.add(new Position(20, 400));
+		points2.add(new Position(90, 410));
+		points2.add(new Position(110, 440));
+		points2.add(new Position(110, 450));
+		points2.add(new Position(40, 420));
+
+		KDOP kdop2 = new KDOP(points2);
+		entities.add(new GameObject(kdop2, -1, -1));
+
+		Circle c = new Circle(300, 190, 70);
+		entities.add(new GameObject(c, 1, 1));
+
+		Circle c2 = new Circle(100, 190, 10);
+		entities.add(new GameObject(c2, -1.3f, 1.4f));
+
+		OBB obb = new OBB(new Position(40, 20), 40, 90, Math.PI / 3);
+		entities.add(new GameObject(obb, 1.2f, -1));
+
+		AABB aabb = new AABB(350, 400, 80, 45);
+		entities.add(new GameObject(aabb, -1.4f, -1.7f));
+
+		Point point = new Point(70, 300);
+		entities.add(new GameObject(point, -1.1f, -1.9f));
+		return entities;
 	}
 
 }

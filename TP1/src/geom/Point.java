@@ -152,19 +152,22 @@ public class Point extends Shape {
 	 */
 	public boolean isInside(KDOP kdop) {
 		int n = kdop.getPoints().size();
-		int i, j;
-		boolean b = false;
+		int i;
+		for (i = 0; i < n; i++) {
+			Position A = kdop.getPoints().get(i);
+			Position B;
+			if (i == n - 1)
+				B = kdop.getPoints().get(0);
+			else
+				B = kdop.getPoints().get(i + 1);
+			Position D = new Position(B.getX() - A.getX(), B.getY() - A.getY());
+			Position T = new Position(position.getX() - A.getX(), position.getY() - A.getY());
 
-		for (i = 0, j = n - 1; i < n; j = i++) {
-			if (((kdop.getPoints().get(i).getY() >= this.position.getY()) != (kdop.getPoints().get(j)
-					.getY() >= this.position.getY()))
-					&& (this.position.getX() <= (kdop.getPoints().get(j).getX() - kdop.getPoints().get(i).getX())
-							* (position.getY() - kdop.getPoints().get(i).getY())
-							/ (kdop.getPoints().get(j).getY() - kdop.getPoints().get(i).getY())
-							+ kdop.getPoints().get(i).getX()))
-				b = !b;
+			double d = D.getX() * T.getY() - D.getY() * T.getX();
+			if (d < 0 && kdop.isRotationClockwise || (d > 0 && !kdop.isRotationClockwise))
+				return false;
 		}
-		return b;
+		return true;
 	}
 
 	/**

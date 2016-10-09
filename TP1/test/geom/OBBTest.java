@@ -43,15 +43,32 @@ public class OBBTest {
 		assertFalse(tester.isCollideTo(new Point(5, -1)));
 
 		tester = new OBB(0, 0, 3, 1, Math.PI / 4);
+		Position center = new Position(tester.getWidth() / 2, tester.getHeight() / 2);
 
-		assertTrue(tester.isCollideTo(new Point(0, 0)));
-		assertTrue(tester.isCollideTo(new Point(1, 1)));
-		assertTrue(tester.isCollideTo(new Point(0, 1.41)));
+		Point p = new Point(0, 0);
+		p.setPosition(p.getPosition().rotation(center, Math.PI / 4));
+		assertTrue(tester.isCollideTo(p));
 
-		assertFalse(tester.isCollideTo(new Point(1.1, 1)));
-		assertFalse(tester.isCollideTo(new Point(Math.cos(-Math.PI / 4) - Math.sin(-Math.PI / 4),
-				Math.cos(-Math.PI / 4) + Math.sin(-Math.PI / 4))));
-		assertFalse(tester.isCollideTo(new Point(0, 1.42)));
+		p = new Point(3, 0);
+		p.setPosition(p.getPosition().rotation(center, Math.PI / 4));
+		assertTrue(tester.isCollideTo(p));
+
+		p = new Point(0, 1);
+		p.setPosition(p.getPosition().rotation(center, Math.PI / 4));
+		assertTrue(tester.isCollideTo(p));
+
+		p = new Point(3, 1);
+		p.setPosition(p.getPosition().rotation(center, Math.PI / 4));
+		assertTrue(tester.isCollideTo(p));
+
+		p = new Point(center);
+		p.setPosition(p.getPosition().rotation(center, Math.PI / 4));
+		assertTrue(tester.isCollideTo(p));
+
+		assertFalse(tester.isCollideTo(new Point(3, 0)));
+		assertFalse(tester.isCollideTo(new Point(0, 1)));
+		assertFalse(tester.isCollideTo(new Point(3, 1)));
+
 	}
 
 	/**

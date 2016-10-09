@@ -20,6 +20,8 @@ public class KDOP extends Shape {
 	 */
 	List<Position> points;
 
+	public Boolean isRotationClockwise = null;
+
 	/**
 	 * KDOP constructor with a default position of (0,0).
 	 * 
@@ -52,19 +54,25 @@ public class KDOP extends Shape {
 	 * 
 	 * @return true if the point p is inside the polygon.
 	 */
-	public boolean pointInside(Position position) {
+	public boolean pointInside(Position p) {
 		int n = this.getPoints().size();
-		int i, j;
-		boolean b = false;
+		int i;
+		for (i = 0; i < n; i++) {
+			Position A = this.getPoints().get(i);
+			Position B;
+			if (i == n - 1)
+				B = this.getPoints().get(0);
+			else
+				B = this.getPoints().get(i + 1);
+			Position D = new Position(B.getX() - A.getX(), B.getY() - A.getY());
+			Position T = new Position(p.getX() - A.getX(), p.getY() - A.getY());
 
-		for (i = 0, j = n - 1; i < n; j = i++) {
-			if (((getPoints().get(i).getY() >= position.getY()) != (getPoints().get(j).getY() >= position.getY()))
-					&& (position.getX() <= (getPoints().get(j).getX() - getPoints().get(i).getX())
-							* (position.getY() - getPoints().get(i).getY())
-							/ (getPoints().get(j).getY() - getPoints().get(i).getY()) + getPoints().get(i).getX()))
-				b = !b;
+			double d = D.getX() * T.getY() - D.getY() * T.getX();
+
+			if (d < 0 && isRotationClockwise || (d > 0 && !isRotationClockwise))
+				return false;
 		}
-		return b;
+		return true;
 	}
 
 	/**
@@ -292,6 +300,7 @@ public class KDOP extends Shape {
 		double cp = crossProduct(A, B, C);
 		boolean decided = (cp != 0);
 		boolean isPositiv = (cp > 0);
+		isRotationClockwise = isPositiv;
 
 		for (int i = 0; i < this.points.size() - 2; i++) {
 

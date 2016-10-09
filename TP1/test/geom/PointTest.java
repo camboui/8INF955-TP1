@@ -153,15 +153,31 @@ public class PointTest {
 		assertFalse(new Point(5, -1).isCollideTo(tester));
 
 		tester = new OBB(0, 0, 3, 1, Math.PI / 4);
+		Position center = new Position(tester.getWidth() / 2, tester.getHeight() / 2);
 
-		assertTrue(new Point(0, 0).isCollideTo(tester));
-		assertTrue(new Point(1, 1).isCollideTo(tester));
-		assertTrue(new Point(0, 1.41).isCollideTo(tester));
+		Point p = new Point(0, 0);
+		p.setPosition(p.getPosition().rotation(center, Math.PI / 4));
+		assertTrue(p.isInside(tester));
 
-		assertFalse(new Point(1.1, 1).isCollideTo(tester));
-		assertFalse(new Point(Math.cos(-Math.PI / 4) - Math.sin(-Math.PI / 4),
-				Math.cos(-Math.PI / 4) + Math.sin(-Math.PI / 4)).isCollideTo(tester));
-		assertFalse(new Point(0, 1.42).isCollideTo(tester));
+		p = new Point(3, 0);
+		p.setPosition(p.getPosition().rotation(center, Math.PI / 4));
+		assertTrue(p.isInside(tester));
+
+		p = new Point(0, 1);
+		p.setPosition(p.getPosition().rotation(center, Math.PI / 4));
+		assertTrue(p.isInside(tester));
+
+		p = new Point(3, 1);
+		p.setPosition(p.getPosition().rotation(center, Math.PI / 4));
+		assertTrue(p.isInside(tester));
+
+		p = new Point(center);
+		p.setPosition(p.getPosition().rotation(center, Math.PI / 4));
+		assertTrue(p.isInside(tester));
+
+		assertFalse(new Point(3, -0).isInside(tester));
+		assertFalse(new Point(0, 1).isInside(tester));
+		assertFalse(new Point(3, 1).isInside(tester));
 	}
 
 	/**
@@ -297,15 +313,32 @@ public class PointTest {
 		assertFalse(new Point(5, -1).isInside(tester));
 
 		tester = new OBB(0, 0, 3, 1, Math.PI / 4);
+		Position center = new Position(tester.getWidth() / 2, tester.getHeight() / 2);
 
-		assertTrue(new Point(0, 0).isInside(tester));
-		assertTrue(new Point(1, 1).isInside(tester));
-		assertTrue(new Point(0, 1.41).isInside(tester));
+		Point p = new Point(0, 0);
+		p.setPosition(p.getPosition().rotation(center, Math.PI / 4));
+		assertTrue(p.isInside(tester));
 
-		assertFalse(new Point(1.1, 1).isInside(tester));
-		assertFalse(new Point(Math.cos(-Math.PI / 4) - Math.sin(-Math.PI / 4),
-				Math.cos(-Math.PI / 4) + Math.sin(-Math.PI / 4)).isInside(tester));
-		assertFalse(new Point(0, 1.42).isInside(tester));
+		p = new Point(3, 0);
+		p.setPosition(p.getPosition().rotation(center, Math.PI / 4));
+		assertTrue(p.isInside(tester));
+
+		p = new Point(0, 1);
+		p.setPosition(p.getPosition().rotation(center, Math.PI / 4));
+		assertTrue(p.isInside(tester));
+
+		p = new Point(3, 1);
+		p.setPosition(p.getPosition().rotation(center, Math.PI / 4));
+		assertTrue(p.isInside(tester));
+
+		p = new Point(center);
+		p.setPosition(p.getPosition().rotation(center, Math.PI / 4));
+		assertTrue(p.isInside(tester));
+
+		assertFalse(new Point(3, -0).isInside(tester));
+		assertFalse(new Point(0, 1).isInside(tester));
+		assertFalse(new Point(3, 1).isInside(tester));
+
 	}
 
 	/**
